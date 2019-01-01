@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  p.info Please fill the form bellow to search the library catalog.
+  form.search-form
+    input(type='hidden' name='type' value='book')
+    | Book: 
+    input(type='text' name='title' placeholder='Book title')#search-book
+    | ISBN:
+    input(type='text' name='author' placeholder='ISBN')#search-isbn
+    input(type='button' value='Search')#search-button
+    
+  h1 Results
+  .results-output
+    
+  script(src="/javascripts/script.js")
+//- http://localhost:3000/search/search?type=book&title=how
+//- http://localhost:3000/search/search?book=&author=
+//- http://localhost:3000/search?title=&author=asdf

@@ -1,0 +1,25 @@
+doctype html
+html(lang='en')
+  head
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous")
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js")
+
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    title= title
+    meta(name='description', content='PontyBridge University Library Service')
+    meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    
+  body
+    header
+      div.jumbotron.text-center(style="margin-botom:0")
+        h1 PontyBridge University Library Service
+        p Search, loans and loggin
+      nav.navbar.navbar-expand-sm.bg-dark.navbar-dark
+        ul.navbar-nav
+          li.nav-item: a.nav-link(href='/') Home
+          li.nav-item: a.nav-link(href='/search') Search
+          li.nav-item: a.nav-link(href='#') Log In
+        input(type='text' placeholder='Search')
+    block content
