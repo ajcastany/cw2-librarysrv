@@ -57,36 +57,28 @@ $('#search-button').click(function () {
         return res.json()
       })
     .then((response) => {
-        // var jsonString = ('res: ' + JSON.stringify(response));
         console.log(response);
+        // var searchList = $("<li class='search-li-item'></li>")
+        // $('.search-ul').append(searchList);
+        // $('.search-li-item').append(JSON.stringify(response));
+        resultsParser(response);
+
     })
   });
-// $("#search-button").click(function () {
-//   $("input").each(function() {
-//     $.each(this.attributes, function() {
-//       console.log(this);
-//       // this.attributes is not a plain object, but an array
-//       // of attribute nodes, which contain both the name and value
-//       if(this.specified) {
-//         console.log(this.name, this.value);
-//         // alert("searched" + this.name, this.value )
-//
-//       }
-//     });
-//   });
-//   alert()
-//
-// });
 
-// (function(send) {
-//
-//     XMLHttpRequest.prototype.send = function(data) {
-//
-//         // in this case I'm injecting an access token (eg. accessToken) in the request headers before it gets sent
-//         // if(accessToken) this.setRequestHeader('x-access-token', accessToken);
-//         console.log(this.data)
-//         alert()
-//         send.call(this, data);
-//     };
-//
-// })(XMLHttpRequest.prototype.send);
+function resultsParser(results) {
+  results.forEach(function(result, i) {
+    var bookID = result.id;
+    var bookTitle = result.title;
+    var bookisbn = result.isbn;
+    $('.search-ul').append('<div id="results-' + i + '"></div>')
+    $('#results-' +i).append(
+      '<li class=tid> ID: </li>',
+      '<li class="bid">' + bookID + '</li>',
+      '<li class="ttitle"> Title:</li>',
+      '<li class="btitle">' + bookTitle + '</li>',
+      '<li class="tisbn"> ISBN: </li>',
+      '<li class="bisbn">'+ bookisbn + '</li>',
+    )
+})
+};

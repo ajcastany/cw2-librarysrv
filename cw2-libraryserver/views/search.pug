@@ -9,11 +9,13 @@ block content
     | Book: 
     input(type='text' name='title' placeholder='Book title')#search-book
     | ISBN:
-    input(type='text' name='author' placeholder='ISBN')#search-isbn
+    input(type='text' name='isbn' placeholder='ISBN')#search-isbn
     input(type='button' value='Search')#search-button
     
   h1 Results
   .results-output
+    ul.search-ul
+    
     
   script(src="/javascripts/script.js")
 //- http://localhost:3000/search/search?type=book&title=how
