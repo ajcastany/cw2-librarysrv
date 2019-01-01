@@ -46,7 +46,7 @@ console.log("cript loaded")
 // })
 //
 $('#search-button').click(function () {
-  var url = "http://localhost:3000/search/search?";
+  var url = "http://localhost:3000/api/search?";
   var searchQ = url + "type=book&title=" + $('#search-book').val() + "&isbn=" + $('#search-isbn').val();
   //   // console.log(searchQ);
 
@@ -57,11 +57,11 @@ $('#search-button').click(function () {
         return res.json()
       })
     .then((response) => {
-        console.log(response);
+        resultsParser(response);
+        // console.log(response);
         // var searchList = $("<li class='search-li-item'></li>")
         // $('.search-ul').append(searchList);
         // $('.search-li-item').append(JSON.stringify(response));
-        resultsParser(response);
 
     })
   });

@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-const db = require("../data");
-const ret = require("../lib/return");
+const db = require("../../data");
+const ret = require("../../lib/return");
 
 router.get("/", function(req, res) {
     if (req.query.allEntities == "true") {

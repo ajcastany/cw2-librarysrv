@@ -8,13 +8,14 @@ const cors = require("cors");
 const db = require("./data");
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');/*not very useful*/
+var searchServe = require('./routes/search');
 // database variables
-var authorsRouter = require('./routes/authors');
-var booksRouter = require("./routes/books");
-var usersRouter = require("./routes/users");
-var loansRouter = require("./routes/loans");
-var searchRouter = require("./routes/search");
+var usersRouter = require('./routes/api/users');
+var authorsRouter = require('./routes/api/authors');
+var booksRouter = require("./routes/api/books");
+var usersRouter = require("./routes/api/users");
+var loansRouter = require("./routes/api/loans");
+var searchRouter = require("./routes/api/search");
 // var cw2 = require('./server')
 
 var app = express();
@@ -40,12 +41,12 @@ app.use(sassMiddleware({
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/authors', authorsRouter);
-app.use("/books", booksRouter);
-app.use("/users", usersRouter);
-app.use("/loans", loansRouter);
-app.use("/search", searchRouter);
+app.use('/search', searchServe);
+app.use('/api/users', usersRouter);
+app.use('/api/authors', authorsRouter);
+app.use("/api/books", booksRouter);
+app.use("/api/loans", loansRouter);
+app.use("/api/search", searchRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
