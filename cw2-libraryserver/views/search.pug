@@ -6,10 +6,12 @@ block content
   p.info Please fill the form bellow to search the library catalog.
   form.search-form
     input(type='hidden' name='type' value='book')
-    | Book: 
+    | Title: 
     input(type='text' name='title' placeholder='Book title')#search-book
     | ISBN:
     input(type='text' name='isbn' placeholder='ISBN')#search-isbn
+    | Author:
+    input(type='text' name='name' placeholder='Author')#search-author
     input(type='button' value='Search')#search-button
     
   h1 Results
@@ -21,3 +23,9 @@ block content
 //- http://localhost:3000/search/search?type=book&title=how
 //- http://localhost:3000/search/search?book=&author=
 //- http://localhost:3000/search?title=&author=asdf
+//- http://localhost:3000/api/search?type=book&title=how&author=arthur
+
+//- http://localhost:3000/api/search?type=book&title=&isbn=&author=
+
+//- http://localhost:3000/api/search?type=author&name=arthur
+//- http://localhost:3000/api/search?author&name=arthur

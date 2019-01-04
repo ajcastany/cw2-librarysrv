@@ -2,9 +2,10 @@ const express = require("express");
 const router = express.Router();
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
-
 const db = require("../../data");
 const ret = require("../../lib/return");
+
+// API
 
 function getSearchParams(queryParams, modelFields) {
     let searchParams = {};
@@ -33,10 +34,10 @@ function findAll(model, params, res) {
 
 router.get("/", function(req, res) {
     if (req.query.type.toLowerCase() === "book") {
-        findAll(db.Book, getSearchParams(req.query, ["title", "isbn"]), res);
+        findAll(db.Book, getSearchParams(req.query, ["title", "isbn", "id"]), res);
 
     } else if (req.query.type.toLowerCase() === "author") {
-        findAll(db.Author, getSearchParams(req.query, ["name"]), res);
+        findAll(db.Author, getSearchParams(req.query, ["name", "id"]), res);
     } else if (req.query.type.toLowerCase() === "user") {
         findAll(db.User, getSearchParams(req.query, ["name", "barcode", "memberType"]), res);
     } else {
