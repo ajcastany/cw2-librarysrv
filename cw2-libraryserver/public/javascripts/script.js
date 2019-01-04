@@ -76,15 +76,14 @@ function lookupBook(qtype) {
       var bookisbn = result.isbn;
       // console.log(bookID);
       var url = "api/authors/" + bookID;
+      console.log(url);
       var author = $.getJSON(url, function(data) {
         name = data.name
-        console.log(name);
+        // console.log(name);
         return name;
       }).then(res => {
-
-        console.log(bookID);
-        // console.log(name);
-      // console.log(getAuthorById(bookID));
+        // console.log(bookID);
+        console.log(res);
       $('.search-ul').append('<div id="results-' + i + '"></div>')
       $('#results-' +i).append(
         '<li class=tid> ID: </li>',
@@ -94,7 +93,7 @@ function lookupBook(qtype) {
         '<li class="tisbn"> ISBN: </li>',
         '<li class="bisbn">'+ bookisbn + '</li>',
         '<li class="tauthor"> Author: ' + '</li>',
-        '<li class="nauthor">' + name + '</li>',
+        '<li class="nauthor">' + res.name + '</li>',
       )
     })
   });
