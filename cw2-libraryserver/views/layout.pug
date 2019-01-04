@@ -10,7 +10,7 @@ html(lang='en')
     meta(name='description', content='PontyBridge University Library Service')
     meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
     link(rel='stylesheet', href='/stylesheets/style.css')
-    
+
   body
     header
       div.jumbotron.text-center(style="margin-botom:0")
@@ -22,4 +22,17 @@ html(lang='en')
           li.nav-item: a.nav-link(href='/search') Search
           li.nav-item: a.nav-link(href='#') Users
         input(type='text' placeholder='Search')
+  nav
+    ul
+      #title
+        if title == "Search the Library"
+          li: a(href="/search" style={background: 'blue'}) Search
+        else
+          li: a(href="/search" style={}) Search
+
+        if title == "Add Book"
+          li: a(href="/add-book" style={background:'blue'}) Add Book
+        else
+          li: a(href="/add-book") Add Book
+
     block content

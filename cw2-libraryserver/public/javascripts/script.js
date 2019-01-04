@@ -1,7 +1,48 @@
 "use strict";
-const url = "http://localhost:3000/api/";
+const url = "http://localhost:3000/api/";         // our API url;
 
 console.log("cript loaded");    // Debug info.
+
+/* ==================================================================
+   Add Book and Author page:
+   ==================================================================
+
+   The following is for /add-book page.  It contains functions and methods to add new books and authors to the relational database provided using information provided with a form.
+
+   --Method: POST
+
+   /TODO: Event Listeners
+   /TODO: POST function
+   /TODO: Success message
+
+   ------------------------------------------------------------------
+*/
+
+// ------------------------------------------------------------------
+// Add Book and author functions:
+// ==================================================================
+
+
+
+
+/* ==================================================================
+   Search Book and Author page:
+   ==================================================================
+
+   The following is for /search page.  It contains functions and methods to list the books and authors.  If searched for a book title or isbn will also list the author, if the author named is looked up it will return the book associated with it's ID.
+
+   --Method: "GET"
+
+   /TODO: maximum of items listed per 'page'.
+   /TODO: Show list of books written by same author (new DB table?)
+   /TODO: Comment out // Debug lines
+
+   ------------------------------------------------------------------
+*/
+
+//---------------------------------------------------------------------
+// Book functions:
+// ===================================================================
 
 function lookupBook(qtype) {
   var searchQ = url + "search?type=" + qtype +
@@ -53,65 +94,9 @@ function lookupBook(qtype) {
     });
 }
 
-
-
-$('#search-button').click(function () {
-  $(".search-ul").empty();
-    // if ($('#search-author').val()) {
-    // console.log($('#search-author').val())
-  // }
-  var qtype;
-  if ($('#search-book').val()) {
-    qtype = "book";
-    lookupBook(qtype);
-  } else if ($('#search-author').val()){
-    qtype = "author";
-    lookupAuthor(qtype);
-  }
-});
-
-
-function lookupAuthor(qtype) {
-  var searchQ = url + "search?type=" + qtype +
-                "&name=" +
-                $('#search-author').val();
-  console.log(searchQ);
-
-  fetch(searchQ, {
-        method: 'get'
-    })
-    .then(res => {
-      return res.json();
-      })
-    .then((response) => {
-        authorParser(response);
-    });
-  }
-
-
-// Bellow are my attempts at Promises:
+// -------------------------------------------------------------------
+// Search Author functions
 // ==================================================================
-// function getAuthorById(id) {
-//   var searchQ = url + "authors/" + id;
-//   fetch(searchQ, {
-//     method: 'get'
-//   })
-//   .then(res => {
-//     return res.json()
-//   })
-//   .then((response) => {
-//      return String(response.name);
-//      // authorResult(response);
-//   })
-// }
-
-// function authorResult(results) {
-//   results.forEach(function(result, i) {
-//     var author = result.name;
-//     console.log(author);
-//     return String(author);
-//   });
-// }
 
 function authorParser (results, i) {
   results.forEach(function(result,i) {
@@ -140,6 +125,68 @@ function authorParser (results, i) {
     });
   });
 }
+
+function lookupAuthor(qtype) {
+  var searchQ = url + "search?type=" + qtype +
+                "&name=" +
+                $('#search-author').val();
+  console.log(searchQ);
+
+  fetch(searchQ, {
+        method: 'get'
+    })
+    .then(res => {
+      return res.json();
+      })
+    .then((response) => {
+        authorParser(response);
+    });
+  }
+
+// ******************************************************************
+// addEventListener
+// ******************************************************************
+
+$('#search-button').click(function () {
+  $(".search-ul").empty();
+    // if ($('#search-author').val()) {
+    // console.log($('#search-author').val())
+  // }
+  var qtype;
+  if ($('#search-book').val()) {
+    qtype = "book";
+    lookupBook(qtype);
+  } else if ($('#search-author').val()){
+    qtype = "author";
+    lookupAuthor(qtype);
+  }
+});
+
+
+// Bellow are my attempts at Promises:
+// ==================================================================
+// function getAuthorById(id) {
+//   var searchQ = url + "authors/" + id;
+//   fetch(searchQ, {
+//     method: 'get'
+//   })
+//   .then(res => {
+//     return res.json()
+//   })
+//   .then((response) => {
+//      return String(response.name);
+//      // authorResult(response);
+//   })
+// }
+
+// function authorResult(results) {
+//   results.forEach(function(result, i) {
+//     var author = result.name;
+//     console.log(author);
+//     return String(author);
+//   });
+// }
+
   //   $('.search-ul').append('<div id="results-' + i + '"></div>');
   //   $('#results-' +i).append(
   //     '<li class=tid> ID: </li>',

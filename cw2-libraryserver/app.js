@@ -9,6 +9,7 @@ const db = require("./data");
 
 var indexRouter = require('./routes/index');
 var searchServe = require('./routes/search');
+var addBookrouter = require('./routes/add-book');
 // database variables
 var usersRouter = require('./routes/api/users');
 var authorsRouter = require('./routes/api/authors');
@@ -42,6 +43,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/search', searchServe);
+app.use('/add-book', addBookrouter);
 app.use('/api/users', usersRouter);
 app.use('/api/authors', authorsRouter);
 app.use("/api/books", booksRouter);
