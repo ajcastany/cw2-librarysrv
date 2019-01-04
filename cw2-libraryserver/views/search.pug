@@ -13,13 +13,15 @@ block content
     | Author:
     input(type='text' name='name' placeholder='Author')#search-author
     input(type='button' value='Search')#search-button
-    
+
   h1 Results
   .results-output
     ul.search-ul
-    
-    
+
   script(src="/javascripts/script.js")
+
+//- Bellow are examples of api calls.
+
 //- http://localhost:3000/search/search?type=book&title=how
 //- http://localhost:3000/search/search?book=&author=
 //- http://localhost:3000/search?title=&author=asdf
