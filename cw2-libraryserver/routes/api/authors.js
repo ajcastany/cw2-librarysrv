@@ -97,8 +97,7 @@ router.delete("/:authorID", function(req, res) {
             } else {
                 res.end();
             }
-        })
-        .then(function() {
+        }).then(function() {
             res.end();
         });
 });

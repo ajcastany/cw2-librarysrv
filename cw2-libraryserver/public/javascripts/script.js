@@ -7,13 +7,20 @@ console.log("cript loaded");    // Debug info.
    Add Book and Author page:
    ==================================================================
 
-   The following is for /add-book page.  It contains functions and methods to add new books and authors to the relational database provided using information provided with a form.
+   The following is for /add-book page.  It contains functions and methods to add new books and authors to the relational database on /data using information provided with a form.
 
    --Method: POST
 
-   /TODO: Event Listeners
-   /TODO: POST function
-   /TODO: Success message
+   /TODO: PUT methods.
+   /TODO: incorporate authors_books table on this file.
+   /TODO: Before commit to DB, should check if item exists, should check if author exists, if the item exists, refuse to add it, if the author exists append it to the authors_books table.  if the author doesn't exist, add it to db.
+
+
+
+   /DONE: Event Listeners
+   /DONE: POST function
+   /DONE: Success message
+
 
    ------------------------------------------------------------------
 */
@@ -22,8 +29,30 @@ console.log("cript loaded");    // Debug info.
 // Add Book and author functions:
 // ==================================================================
 
+$('#add-button').click(function() {
+  $(".add-status").empty();
+  var addQuery = url + "books";                   // localhost:3000/api/
+  // Values from form.
+  var addTitle = $('#add-book').val();
+  var addIsbn = $('#add-isbn').val();
+  var addAuthor = $('#add-author').val();
 
+  // $.post('/api/books/4/authors/4').then(res => {
+  //   console.log(res);
+  // });
+  // console.log({title: addTitle, isbn: addIsbn});
 
+  $.post(addQuery, {title: addTitle, isbn: addIsbn});
+  $.post(url + "authors/", {name: addAuthor}).then(function() {
+  $('.add-form').each( function() {
+    this.reset();
+  });
+    $('.add-status').append(
+      '<h2 class="success"> Entry Successfully added to the database</h2>'
+    )
+});
+
+});
 
 /* ==================================================================
    Search Book and Author page:
@@ -73,9 +102,9 @@ function lookupBook(qtype) {
       var url = "api/authors/" + bookID;
       console.log(url);
       var author = $.getJSON(url, function(data) {
-        name = data.name;
-        // console.log(name);
-        return name;
+        // let name = data.name;        // extend?
+        // // console.log(name);
+        // return name;
       }).then(res => {
         // console.log(bookID);
         console.log(res);
