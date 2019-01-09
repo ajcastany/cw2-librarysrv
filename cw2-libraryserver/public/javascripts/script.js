@@ -105,22 +105,24 @@ function lookupBook(qtype) {
       console.log(url);
       var author = $.getJSON(url, function(data) {
         data.Authors.forEach(function (authors) {
-          return authors.name;
+          return authors;
         });
         // let name = data.name;        // extend?
         // // console.log(name);
         // return name;
       }).then(res => {
         // console.log(bookID);
-        console.log(res.Authors);
-
+        // console.log(res.Authors);
+        // var authorCheck = res.Authors;
         function authorNames(authors) {
           authors.forEach( function (author, i) {
+            console.log(author.id, res.id);
             $('[id^=results-]' ).append(
               '<li class="nauthors'+ i + '">' + author.name + '</li>',
-            );
+              );
           });
         }
+        // console.log(res);
         $('.search-ul').append('<div id="results-' + i + '"></div>');
         $('#results-' +i).append(
         '<li class=tid> ID: </li>',
@@ -130,12 +132,15 @@ function lookupBook(qtype) {
         '<li class="tisbn"> ISBN: </li>',
         '<li class="bisbn">'+ bookisbn + '</li>',
         '<li class="tauthor"> Author(s): ' + '</li>',
-        // '<li class="nauthor">' + res.name + '</li>', // No longer used.
+          // '<li class="nauthor">' + res.Authors.name + '</li>', // No longer used.
           // authorNames(res.Authors), //Strangely, this appends to the beginig of the bloq (?);
         );
+        // console.log(res.id, res.Authors);
         authorNames(res.Authors); // this appends where it's supponsed to.
+
       });
     });
+
 }
 
 // -------------------------------------------------------------------
