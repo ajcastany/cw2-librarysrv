@@ -27,6 +27,8 @@ console.log("cript loaded");    // Debug info.
 
 // ------------------------------------------------------------------
 // Add Book and author functions:
+// The following assings author id 4 to book id 4 on author_book table
+// $.post("http://localhost:3000/api/authors/4/books/4")
 // ==================================================================
 
 $('#add-button').click(function() {
@@ -37,10 +39,10 @@ $('#add-button').click(function() {
   var addIsbn = $('#add-isbn').val();
   var addAuthor = $('#add-author').val();
 
-  // $.post('/api/books/4/authors/4').then(res => {
-  //   console.log(res);
-  // });
-  // console.log({title: addTitle, isbn: addIsbn});
+  $.post('/api/books/4/authors/4').then(res => {
+    console.log(res);
+  });
+  console.log({title: addTitle, isbn: addIsbn, name: addAuthor});
 
   $.post(addQuery, {title: addTitle, isbn: addIsbn});
   $.post(url + "authors/", {name: addAuthor}).then(function() {
@@ -63,7 +65,7 @@ $('#add-button').click(function() {
    --Method: "GET"
 
    /TODO: maximum of items listed per 'page'.
-   /TODO: Show list of books written by same author (new DB table?)
+   /TODO: search author_books table and return all authors in a book.
    /TODO: Comment out // Debug lines
 
    ------------------------------------------------------------------
@@ -99,15 +101,26 @@ function lookupBook(qtype) {
       var bookTitle = result.title;
       var bookisbn = result.isbn;
       // console.log(bookID);
-      var url = "api/authors/" + bookID;
+      var url = "api/books/" + bookID + "/authors";
       console.log(url);
       var author = $.getJSON(url, function(data) {
+        data.Authors.forEach(function (authors) {
+          return authors.name;
+        });
         // let name = data.name;        // extend?
         // // console.log(name);
         // return name;
       }).then(res => {
         // console.log(bookID);
-        console.log(res);
+        console.log(res.Authors);
+
+        function authorNames(authors) {
+          authors.forEach( function (author, i) {
+            $('[id^=results-]' ).append(
+              '<li class="nauthors'+ i + '">' + author.name + '</li>',
+            );
+          });
+        }
         $('.search-ul').append('<div id="results-' + i + '"></div>');
         $('#results-' +i).append(
         '<li class=tid> ID: </li>',
@@ -116,9 +129,11 @@ function lookupBook(qtype) {
         '<li class="btitle">' + bookTitle + '</li>',
         '<li class="tisbn"> ISBN: </li>',
         '<li class="bisbn">'+ bookisbn + '</li>',
-        '<li class="tauthor"> Author: ' + '</li>',
-        '<li class="nauthor">' + res.name + '</li>',
+        '<li class="tauthor"> Author(s): ' + '</li>',
+        // '<li class="nauthor">' + res.name + '</li>', // No longer used.
+          // authorNames(res.Authors), //Strangely, this appends to the beginig of the bloq (?);
         );
+        authorNames(res.Authors); // this appends where it's supponsed to.
       });
     });
 }

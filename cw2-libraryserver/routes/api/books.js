@@ -16,6 +16,28 @@ router.get("/", function(req, res) {
     }
 });
 
+router.get("/:bookID/authors", function(req, res) {
+  console.log("hello");
+  db.Book.findByPk(req.params.bookID, {include: [db.Author] }).then(function(book) {
+    db.Author.all({ where: {name: req.body.name}}).spread(function(
+      author,
+      created
+    ) {
+      // book.addAuthor(author);   //What's addAuthor?
+      book.reload().then(function (book) {
+      if (book) {
+        console.log(book);
+        console.log("success");
+        ret.json(book, res);
+      } else {
+        console.log("fail");
+        res.end();
+      }
+      });
+    });
+  });
+});
+
 router.get("/:bookID", function(req, res) {
     if (req.query.allEntities == "true") {
         db.Book.findByPk(req.params.bookID, { include: [db.Author] }).then(function(book) {
@@ -41,6 +63,14 @@ router.post("/", function(req, res) {
         ret.json(book, res);
     });
 });
+
+// router.get("/:bookID/authors", function(req, res) {
+//   db.Book.findByPk(req.params.bookID, { include: [db.Author] }).then(function(book) {
+//     if (db.Author.findAll({where: {name: req.body.name } }));
+//   });
+// });
+
+// The following should be  done using a .get()
 
 router.post("/:bookID/authors", function(req, res) {
     db.Book.findByPk(req.params.bookID, { include: [db.Author] }).then(function(book) {
