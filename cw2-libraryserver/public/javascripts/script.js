@@ -75,47 +75,47 @@ $('#add-button').click(function() {
 // Book functions:
 // ===================================================================
 
-function lookupBook(qtype) {
-  var searchQ = url + "search?type=" + qtype +
-                    "&title=" +
-                    $('#search-book').val() +
-                    "&isbn=" +
-                    $('#search-isbn').val();
-    // console.log(searchQ);
+// function lookupBook(qtype) {
+//   var searchQ = url + "search?type=" + qtype +
+//                     "&title=" +
+//                     $('#search-book').val() +
+//                     "&isbn=" +
+//                     $('#search-isbn').val();
+//     // console.log(searchQ);
 
-  fetch(searchQ, {
-        method: 'get'
-    })
-    .then(res => {
-      return res.json();
-      })
-    .then((response) => {
-        resultsParser_2(response);
-    });
-}
+//   fetch(searchQ, {
+//         method: 'get'
+//     })
+//     .then(res => {
+//       return res.json();
+//       })
+//     .then((response) => {
+//         resultsParser_2(response);
+//     });
+// }
 
-function lookupBook_2(qtype) {
-  var searchQ = url + "search?type=" + qtype +
-                    "&title=" +
-                    $('#search-book').val() +
-                    "&isbn=" +
-                    $('#search-isbn').val();
-    // console.log(searchQ);
+// function lookupBook_2(qtype) {
+//   var searchQ = url + "search?type=" + qtype +
+//                     "&title=" +
+//                     $('#search-book').val() +
+//                     "&isbn=" +
+//                     $('#search-isbn').val();
+//     // console.log(searchQ);
 
-  fetch(searchQ, {
-        method: 'get'
-    })
-    .then(res => {
-      return res.json();
-      })
-    .then((response) => {
-      return resultsParser_2(response);
+//   fetch(searchQ, {
+//         method: 'get'
+//     })
+//     .then(res => {
+//       return res.json();
+//       })
+//     .then((response) => {
+//       return resultsParser_2(response);
 
-    })
-    .then( (response) => {
-       getAuthors(response);
-    });
-}
+//     })
+//     .then( (response) => {
+//        getAuthors(response);
+//     });
+// }
 
 function lookupBook_3(qtype) {
   var searchQ = url + "search?type=" + qtype +
@@ -161,97 +161,97 @@ function lookupBook_3(qtype) {
 }
 
 
-  function resultsParser(results) {
-    results.forEach(function(result, i) {
-      // getAuthorById(1)
-      var bookID = result.id;
-      var bookTitle = result.title;
-      var bookisbn = result.isbn;
-      // console.log(bookID);
-      var url = "api/books/" + bookID + "/authors";
-      console.log(url);
-      var author = $.getJSON(url, function (data) {
-        data.Authors.forEach(function (authors) {
-          return authors;
-        });
-        // let name = data.name;        // extend?
-        // // console.log(name);
-        // return name;
-      }).then(res => {
-        // console.log(bookID);
-        // console.log(res.Authors);
-        // var authorCheck = res.Authors;
-        function authorNames(authors) {
-          authors.forEach( function (author, i) {
-            console.log(author.id, res.id);
-            $('[id^=results-]' ).append(
-              '<li class="nauthors'+ i + '">' + author.name + '</li>',
-              );
-          });
-        }
-        // console.log(res);
-        $('.search-ul').append('<div id="results-' + i + '"></div>');
-        $('#results-' +i).append(
-        '<li class=tid> ID: </li>',
-        '<li class="bid">' + bookID + '</li>',
-        '<li class="ttitle"> Title:</li>',
-        '<li class="btitle">' + bookTitle + '</li>',
-        '<li class="tisbn"> ISBN: </li>',
-        '<li class="bisbn">'+ bookisbn + '</li>',
-        '<li class="tauthor"> Author(s): ' + '</li>',
-          // '<li class="nauthor">' + res.Authors.name + '</li>', // No longer used.
-          // authorNames(res.Authors), //Strangely, this appends to the beginig of the bloq (?);
-        );
-        // console.log(res.id, res.Authors);
-        authorNames(res.Authors); // this appends where it's supponsed to.
+  // function resultsParser(results) {
+  //   results.forEach(function(result, i) {
+  //     // getAuthorById(1)
+  //     var bookID = result.id;
+  //     var bookTitle = result.title;
+  //     var bookisbn = result.isbn;
+  //     // console.log(bookID);
+  //     var url = "api/books/" + bookID + "/authors";
+  //     console.log(url);
+  //     var author = $.getJSON(url, function (data) {
+  //       data.Authors.forEach(function (authors) {
+  //         return authors;
+  //       });
+  //       // let name = data.name;        // extend?
+  //       // // console.log(name);
+  //       // return name;
+  //     }).then(res => {
+  //       // console.log(bookID);
+  //       // console.log(res.Authors);
+  //       // var authorCheck = res.Authors;
+  //       function authorNames(authors) {
+  //         authors.forEach( function (author, i) {
+  //           console.log(author.id, res.id);
+  //           $('[id^=results-]' ).append(
+  //             '<li class="nauthors'+ i + '">' + author.name + '</li>',
+  //             );
+  //         });
+  //       }
+  //       // console.log(res);
+  //       $('.search-ul').append('<div id="results-' + i + '"></div>');
+  //       $('#results-' +i).append(
+  //       '<li class=tid> ID: </li>',
+  //       '<li class="bid">' + bookID + '</li>',
+  //       '<li class="ttitle"> Title:</li>',
+  //       '<li class="btitle">' + bookTitle + '</li>',
+  //       '<li class="tisbn"> ISBN: </li>',
+  //       '<li class="bisbn">'+ bookisbn + '</li>',
+  //       '<li class="tauthor"> Author(s): ' + '</li>',
+  //         // '<li class="nauthor">' + res.Authors.name + '</li>', // No longer used.
+  //         // authorNames(res.Authors), //Strangely, this appends to the beginig of the bloq (?);
+  //       );
+  //       // console.log(res.id, res.Authors);
+  //       authorNames(res.Authors); // this appends where it's supponsed to.
 
-      });
-    });
+  //     });
+  //   });
 
-  }
-function getAuthors (response) {
-  console.log(response);
-  var bookID = response;
-  var url = "api/books/" + bookID + "/authors";
-  var author = $.getJSON(url, function (data) {
-    var authorNamess = data.Authors[0].name;
-    console.log(authorNamess);
-    $('[id^=results-]' ).append(
-      '<li class="nauthors'+ i + '">' + authorNamess + '</li>',);
-  });
-}
+  // }
+// function getAuthors (response) {
+//   console.log(response);
+//   var bookID = response;
+//   var url = "api/books/" + bookID + "/authors";
+//   var author = $.getJSON(url, function (data) {
+//     var authorNamess = data.Authors[0].name;
+//     console.log(authorNamess);
+//     $('[id^=results-]' ).append(
+//       '<li class="nauthors'+ i + '">' + authorNamess + '</li>',);
+//   });
+// }
 
 
-function resultsParser_2(results) {
-  var bookID = results.id;
-  console.log(results)
-  results.forEach(function(result, i) {
-    // getAuthorById(1)
-    var bookID = result.id;
-    var bookTitle = result.title;
-    var bookisbn = result.isbn;
-    // console.log(bookID);
-    var url = "api/books/" + bookID + "/authors";
-    console.log(url);
-    // console.log(res);
-    $('.search-ul').append('<div id="results-' + i + '"></div>');
-    $('#results-' +i).append(
-      '<li class=tid> ID: </li>',
-      '<li class="bid">' + bookID + '</li>',
-      '<li class="ttitle"> Title:</li>',
-      '<li class="btitle">' + bookTitle + '</li>',
-      '<li class="tisbn"> ISBN: </li>',
-      '<li class="bisbn">'+ bookisbn + '</li>',
-      '<li class="tauthor"> Author(s): ' + '</li>',
-    );
+// function resultsParser_2(results) {
+//   var bookID = results.id;
+//   console.log(results)
+//   results.forEach(function(result, i) {
+//     // getAuthorById(1)
+//     var bookID = result.id;
+//     var bookTitle = result.title;
+//     var bookisbn = result.isbn;
+//     // console.log(bookID);
+//     var url = "api/books/" + bookID + "/authors";
+//     console.log(url);
+//     // console.log(res);
+//     $('.search-ul').append('<div id="results-' + i + '"></div>');
+//     $('#results-' +i).append(
+//       '<li class=tid> ID: </li>',
+//       '<li class="bid">' + bookID + '</li>',
+//       '<li class="ttitle"> Title:</li>',
+//       '<li class="btitle">' + bookTitle + '</li>',
+//       '<li class="tisbn"> ISBN: </li>',
+//       '<li class="bisbn">'+ bookisbn + '</li>',
+//       '<li class="tauthor"> Author(s): ' + '</li>',
+//     );
 
-      // getAuthors();             //
-        // console.log(res.id, res.Authors);
-        // authorNames(res.Authors); // this appends where it's supponsed to.
+//       // getAuthors();             //
+//         // console.log(res.id, res.Authors);
+//         // authorNames(res.Authors); // this appends where it's supponsed to.
 
-  });
-  return bookID;
-  };
+//   });
+//   return bookID;
+//   };
 
 // -------------------------------------------------------------------
 // Search Author functions
