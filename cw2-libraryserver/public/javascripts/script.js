@@ -149,9 +149,9 @@ function lookupBook_3(qtype) {
             '<li class="bisbn">'+ bookIsbn + '</li>',
             '<li class="tauthor"> Author(s): ' + '</li>',
           );
-          authorList.forEach( function (authors, i) {
+          authorList.forEach( function (authors, e) {
             console.log(i, authors.name);
-            $('.search-ul').append('<li class="bauthor-' + i + '">' +
+            $('#results-' +i).append('<li class="bauthor-' + e + '">' +
                                    authors.name + '</li>');
           });
             // console.log(bookID, bookTitle, bookIsbn, authorList);
