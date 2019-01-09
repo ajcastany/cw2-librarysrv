@@ -44,12 +44,12 @@ $('#add-button').click(function() {
 
   $.post(addQuery, {title: addTitle, isbn: addIsbn});
   $.post(url + "authors/", {name: addAuthor}).then(function() {
+    // this should return a JSON with both IDs?
   $('.add-form').each( function() {
     this.reset();
-  });
+  });                           // TODO: post to /:bookID/authors/ID
     $('.add-status').append(
-      '<h2 class="success"> Entry Successfully added to the database</h2>'
-    )
+      '<h2 class="success"> Entry Successfully added to the database</h2>');
 });
 
 });
