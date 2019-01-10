@@ -39,10 +39,10 @@ $('#add-button').click(function() {
   var addIsbn = $('#add-isbn').val();
   var addAuthor = $('#add-author').val();
 
-  $.post('/api/books/4/authors/4').then(res => {
-    console.log(res);
-  });
-  console.log({title: addTitle, isbn: addIsbn, name: addAuthor});
+  // $.post('/api/books/4/authors/4').then(res => {
+  //   console.log(res);
+  // });
+  // console.log({title: addTitle, isbn: addIsbn, name: addAuthor});
 
   $.post(addQuery, {title: addTitle, isbn: addIsbn});
   $.post(url + "authors/", {name: addAuthor}).then(function() {
@@ -214,9 +214,7 @@ function lookupAuthor_2(qtype) {
 
 $('#search-button').click(function () {
   $(".search-ul").empty();
-    // if ($('#search-author').val()) {
-    // console.log($('#search-author').val())
-  // }
+  // TODO: Search by ISBN not implemented.
   var qtype;
   if ($('#search-book').val()) {
     qtype = "book";
