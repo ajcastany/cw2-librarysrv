@@ -45,6 +45,7 @@ $('#add-button').click(function() {
   var addTitle = $('#add-book').val();
   var addIsbn = $('#add-isbn').val();
   var addAuthor = $('#add-author').val();
+  // var authorList should include all data present in the .add-another-*.
 
   // $.post('/api/books/4/authors/4').then(res => {
   //   console.log(res);
@@ -52,6 +53,7 @@ $('#add-button').click(function() {
   // console.log({title: addTitle, isbn: addIsbn, name: addAuthor});
 
   $.post(addQuery, {title: addTitle, isbn: addIsbn});
+  // for loop should come here
   $.post(url + "authors/", {name: addAuthor}).then(function(response) {
     console.log(response.id);
     console.log(url + "authors/" + response.id + "/books");
