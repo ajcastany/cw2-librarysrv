@@ -64,13 +64,6 @@ router.post("/", function(req, res) {
     });
 });
 
-// router.get("/:bookID/authors", function(req, res) {
-//   db.Book.findByPk(req.params.bookID, { include: [db.Author] }).then(function(book) {
-//     if (db.Author.findAll({where: {name: req.body.name } }));
-//   });
-// });
-
-// The following should be  done using a .get()
 
 router.post("/:bookID/authors", function(req, res) {
     db.Book.findByPk(req.params.bookID, { include: [db.Author] }).then(function(book) {

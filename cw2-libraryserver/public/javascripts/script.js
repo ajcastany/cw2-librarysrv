@@ -72,50 +72,9 @@ $('#add-button').click(function() {
 */
 
 //---------------------------------------------------------------------
-// Book functions:
+// Search book functions:
 // ===================================================================
 
-// function lookupBook(qtype) {
-//   var searchQ = url + "search?type=" + qtype +
-//                     "&title=" +
-//                     $('#search-book').val() +
-//                     "&isbn=" +
-//                     $('#search-isbn').val();
-//     // console.log(searchQ);
-
-//   fetch(searchQ, {
-//         method: 'get'
-//     })
-//     .then(res => {
-//       return res.json();
-//       })
-//     .then((response) => {
-//         resultsParser_2(response);
-//     });
-// }
-
-// function lookupBook_2(qtype) {
-//   var searchQ = url + "search?type=" + qtype +
-//                     "&title=" +
-//                     $('#search-book').val() +
-//                     "&isbn=" +
-//                     $('#search-isbn').val();
-//     // console.log(searchQ);
-
-//   fetch(searchQ, {
-//         method: 'get'
-//     })
-//     .then(res => {
-//       return res.json();
-//       })
-//     .then((response) => {
-//       return resultsParser_2(response);
-
-//     })
-//     .then( (response) => {
-//        getAuthors(response);
-//     });
-// }
 
 function lookupBook_3(qtype) {
   var searchQ = url + "search?type=" + qtype +
@@ -160,6 +119,119 @@ function lookupBook_3(qtype) {
     });
 }
 
+
+
+// -------------------------------------------------------------------
+// Search Author functions
+// ==================================================================
+
+function authorParser (results, i) {
+  results.forEach(function(result,i) {
+    var authorID = result.id;
+    var name = result.name;
+    var url = "api/search?type=book&id=" + authorID;
+    console.log(url);
+    var book = $.getJSON(url, function(result) {
+    var bookID = result.id;
+    var bookTitle = result.title;
+    var bookisbn = result.isbn;
+
+    }).then(res => {
+      console.log(res);
+      $('.search-ul').append('<div id="results-' + i + '"></div>');
+      $('#results-' +i).append(
+        '<li class=tid> ID: </li>',
+        '<li class="bid">' + res[0].id + '</li>',
+        '<li class="ttitle"> Title:</li>',
+        '<li class="btitle">' + res[0].title + '</li>',
+        '<li class="tisbn"> ISBN: </li>',
+        '<li class="bisbn">'+ res[0].isbn + '</li>',
+        '<li class="tauthor"> Author: ' + '</li>',
+        '<li class="nauthor">' + name + '</li>',
+      );
+    });
+  });
+}
+
+function lookupAuthor(qtype) {
+  var searchQ = url + "search?type=" + qtype +
+                "&name=" +
+                $('#search-author').val();
+  console.log(searchQ);
+
+  fetch(searchQ, {
+        method: 'get'
+    })
+    .then(res => {
+      return res.json();
+      })
+    .then((response) => {
+        authorParser(response);
+    });
+  }
+
+// ******************************************************************
+// addEventListener
+// ******************************************************************
+
+$('#search-button').click(function () {
+  $(".search-ul").empty();
+    // if ($('#search-author').val()) {
+    // console.log($('#search-author').val())
+  // }
+  var qtype;
+  if ($('#search-book').val()) {
+    qtype = "book";
+    lookupBook_3(qtype);
+  } else if ($('#search-author').val()){
+    qtype = "author";
+    lookupAuthor(qtype);
+  }
+});
+
+
+// Deprecated functions which has been refactored
+// function lookupBook(qtype) {
+//   var searchQ = url + "search?type=" + qtype +
+//                     "&title=" +
+//                     $('#search-book').val() +
+//                     "&isbn=" +
+//                     $('#search-isbn').val();
+//     // console.log(searchQ);
+
+//   fetch(searchQ, {
+//         method: 'get'
+//     })
+//     .then(res => {
+//       return res.json();
+//       })
+//     .then((response) => {
+//         resultsParser_2(response);
+//     });
+// }
+
+// function lookupBook_2(qtype) {
+//   var searchQ = url + "search?type=" + qtype +
+//                     "&title=" +
+//                     $('#search-book').val() +
+//                     "&isbn=" +
+//                     $('#search-isbn').val();
+//     // console.log(searchQ);
+
+//   fetch(searchQ, {
+//         method: 'get'
+//     })
+//     .then(res => {
+//       return res.json();
+//       })
+//     .then((response) => {
+//       return resultsParser_2(response);
+
+//     })
+//     .then( (response) => {
+//        getAuthors(response);
+//     });
+// }
 
   // function resultsParser(results) {
   //   results.forEach(function(result, i) {
@@ -252,74 +324,6 @@ function lookupBook_3(qtype) {
 //   });
 //   return bookID;
 //   };
-
-// -------------------------------------------------------------------
-// Search Author functions
-// ==================================================================
-
-function authorParser (results, i) {
-  results.forEach(function(result,i) {
-    var authorID = result.id;
-    var name = result.name;
-    var url = "api/search?type=book&id=" + authorID;
-    console.log(url);
-    var book = $.getJSON(url, function(result) {
-    var bookID = result.id;
-    var bookTitle = result.title;
-    var bookisbn = result.isbn;
-
-    }).then(res => {
-      console.log(res);
-      $('.search-ul').append('<div id="results-' + i + '"></div>');
-      $('#results-' +i).append(
-        '<li class=tid> ID: </li>',
-        '<li class="bid">' + res[0].id + '</li>',
-        '<li class="ttitle"> Title:</li>',
-        '<li class="btitle">' + res[0].title + '</li>',
-        '<li class="tisbn"> ISBN: </li>',
-        '<li class="bisbn">'+ res[0].isbn + '</li>',
-        '<li class="tauthor"> Author: ' + '</li>',
-        '<li class="nauthor">' + name + '</li>',
-      );
-    });
-  });
-}
-
-function lookupAuthor(qtype) {
-  var searchQ = url + "search?type=" + qtype +
-                "&name=" +
-                $('#search-author').val();
-  console.log(searchQ);
-
-  fetch(searchQ, {
-        method: 'get'
-    })
-    .then(res => {
-      return res.json();
-      })
-    .then((response) => {
-        authorParser(response);
-    });
-  }
-
-// ******************************************************************
-// addEventListener
-// ******************************************************************
-
-$('#search-button').click(function () {
-  $(".search-ul").empty();
-    // if ($('#search-author').val()) {
-    // console.log($('#search-author').val())
-  // }
-  var qtype;
-  if ($('#search-book').val()) {
-    qtype = "book";
-    lookupBook_3(qtype);
-  } else if ($('#search-author').val()){
-    qtype = "author";
-    lookupAuthor(qtype);
-  }
-});
 
 
 // Bellow are my attempts at Promises:
