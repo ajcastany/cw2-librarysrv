@@ -31,6 +31,13 @@ console.log("cript loaded");    // Debug info.
 // $.post("http://localhost:3000/api/authors/4/books/4")
 // ==================================================================
 
+$('#more-authors').click( function () {
+  var count = $(this).data("count") || 0; // count the clicks
+  $(this).data("count", ++count);
+  console.log(count);                     // print the clicks.
+  $('.add-form').append('<input type="text" name="name" placeholder="Another Author" class="add-another-' + count + '">');
+})
+
 $('#add-button').click(function() {
   $(".add-status").empty();
   var addQuery = url + "books";                   // localhost:3000/api/
