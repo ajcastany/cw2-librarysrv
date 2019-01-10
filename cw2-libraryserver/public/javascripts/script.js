@@ -170,6 +170,44 @@ function lookupAuthor(qtype) {
     });
   }
 
+function lookupAuthor_2(qtype) {
+  var searchQ = url + "search?type=" + qtype +
+                "&name=" +
+                $('#search-author').val();
+  console.log(searchQ);
+
+  fetch(searchQ, {
+        method: 'get'
+    })
+    .then(res => {
+      return res.json();
+      })
+    .then((response) => {
+      response.forEach( function (data, i) {
+        var authorID = data.id;
+        $.getJSON(url + "authors/" + authorID + "/books", function (data) {
+          var authorID = data.id;
+          var authorName = data.name;
+          var bookList = data.Books;
+          console.log(authorID, authorName, bookList);
+          $('.search-ul').append('<div id="results-' + i + '"' + '"></div>');
+          $('#results-' +i).append(
+            '<li class=tid> ID: </li>',
+            '<li class="aid">' + authorID + '</li>',
+            '<li class="tauthor"> Name:</li>',
+            '<li class="bauthor">' + authorName + '</li>',
+            '<li class="btitle"> Book(s) authored: ' + '</li>',
+          );
+          bookList.forEach( function ( books, e) {
+            console.log(i, books.title);
+            $('#results-' + i).append('<li class="btitle-' + e + '">' + books.title + '</li>');
+          });
+        });
+        // console.log(authorID);
+      });
+    });
+  }
+
 // ******************************************************************
 // addEventListener
 // ******************************************************************
@@ -185,12 +223,14 @@ $('#search-button').click(function () {
     lookupBook_3(qtype);
   } else if ($('#search-author').val()){
     qtype = "author";
-    lookupAuthor(qtype);
+    lookupAuthor_2(qtype);
   }
 });
 
 
 // Deprecated functions which has been refactored
+// ==================================================================
+
 // function lookupBook(qtype) {
 //   var searchQ = url + "search?type=" + qtype +
 //                     "&title=" +

@@ -36,6 +36,27 @@ router.get("/:authorID", function(req, res) {
     }
 });
 
+// ==================================================================
+// NEW
+
+router.get("/:authorID/books", function(req, res) {
+    db.Author.findByPk(req.params.authorID, { include: [db.Book] }).then(function(author) {
+        if (author) {
+            db.Book.all({
+                where: { title: req.body.bookTitle, isbn: req.body.bookISBN }
+            }).spread(function(book, created) {
+              // author.addBook(book);            // no addBook
+                author.reload().then(function(author) {
+                    ret.json(author, res);
+                });
+            });
+        } else {
+            res.end();
+        }
+    });
+});
+
+
 router.post("/", function(req, res) {
     db.Author.create({ name: req.body.name }).then(function(author) {
         ret.json(author, res);
