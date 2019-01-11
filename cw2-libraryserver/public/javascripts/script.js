@@ -55,17 +55,19 @@ $('#add-button').click(function() {
   // $.post('/api/books/4/authors/4').then(res => {
   //   console.log(res);
   // });
-  console.log({title: addTitle, isbn: addIsbn, name: addAuthor});
 
-  $.post(bookUrl, {title: addTitle, isbn: addIsbn}).then( res => {
-    console.log(res)
-  });
+
+  // $.post(bookUrl, {title: addTitle, isbn: addIsbn}).then( res => {
+  //   console.log(res)
+  // });
   // for loop should come here
   $.post(url + "authors/", {name: addAuthor}).then(function(response) {
     console.log(response.id);
     console.log(url + "authors/" + response.id + "/books");
-    // $.post(url + "authors/" + response.id + "/books", {title: addTitle, isbn: addIsbn})
-    // });
+    console.log({title: addTitle, isbn: addIsbn, name: addAuthor});
+    $.post(url + "authors/" + response.id + "/books", {bookTitle: addTitle, bookISBN: addIsbn});
+  });
+
     // this should return a JSON with both IDs?
   $('.add-form').each( function() {
     this.reset();
@@ -73,7 +75,7 @@ $('#add-button').click(function() {
     $('.add-status').append(
       '<h2 class="success"> Entry Successfully added to the database</h2>');
   });
-});
+
 
 
 /* ==================================================================
