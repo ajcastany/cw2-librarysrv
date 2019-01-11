@@ -45,9 +45,11 @@ $('#add-button').click(function() {
   var addTitle = $('#add-book').val();
   var addIsbn = $('#add-isbn').val();
   var authorList = $('[class^="add-author-"]').map( function (i, data) {
+    var re = /\w+/;
     var authorName = ($(data).val());
-    console.log(typeof(authorName.length));
-    if ($(data).val().length > 3) {
+    // console.log(typeof(authorName.length));
+    console.log(re.test(authorName));
+    if (re.test(authorName)) {
       return {name: $(data).val()} ;
     }
   });
