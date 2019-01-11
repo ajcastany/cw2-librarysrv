@@ -11,8 +11,8 @@ console.log("cript loaded");    // Debug info.
 
    --Method: POST
 
-
-   /TODO: Post to authors_books db when adding books.
+   /TODO: Are you sure? alert?
+   /TODO: Improve RegExp pattern for authorList
    /TODO: Before commit to DB, should check if item exists, should check if author exists, if the item exists, refuse to add it, if the author exists append it to the authors_books table.  if the author doesn't exist, add it to db.
 
    /DONE: incorporate authors_books table on this file.
@@ -20,7 +20,7 @@ console.log("cript loaded");    // Debug info.
    /DONE: Event Listeners
    /DONE: POST function
    /DONE: Success message
-
+   /DONE: Post to authors_books db when adding books.
 
    ------------------------------------------------------------------
 */
@@ -34,7 +34,7 @@ console.log("cript loaded");    // Debug info.
 $('#more-authors').click( function () {
   var count = $(this).data("count") || 0; // count the clicks
   $(this).data("count", ++count);
-  console.log(count);                     // print the clicks.
+  // console.log(count);                     // print the clicks.
   $('.add-form').append('<input type="text" name="name" placeholder="Another Author" class="add-author-' + count + '">');
 })
 
@@ -45,7 +45,7 @@ $('#add-button').click(function() {
   var addTitle = $('#add-book').val();
   var addIsbn = $('#add-isbn').val();
   var authorList = $('[class^="add-author-"]').map( function (i, data) {
-    var re = /\w+/;
+    var re = /\w+/;             // Checks for string not null.  TODO: Improve?
     var authorName = ($(data).val());
     // console.log(typeof(authorName.length));
     console.log(re.test(authorName));
