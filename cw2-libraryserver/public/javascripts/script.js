@@ -11,12 +11,12 @@ console.log("cript loaded");    // Debug info.
 
    --Method: POST
 
-   /TODO: PUT methods.
-   /TODO: incorporate authors_books table on this file.
+
+   /TODO: Post to authors_books db when adding books.
    /TODO: Before commit to DB, should check if item exists, should check if author exists, if the item exists, refuse to add it, if the author exists append it to the authors_books table.  if the author doesn't exist, add it to db.
 
-
-
+   /DONE: incorporate authors_books table on this file.
+   /DONE: PUT methods.
    /DONE: Event Listeners
    /DONE: POST function
    /DONE: Success message
@@ -27,7 +27,7 @@ console.log("cript loaded");    // Debug info.
 
 // ------------------------------------------------------------------
 // Add Book and author functions:
-// The following assings author id 4 to book id 4 on author_book table
+// The following assigns author id 4 to book id 4 on author_book table
 // $.post("http://localhost:3000/api/authors/4/books/4")
 // ==================================================================
 
@@ -45,6 +45,11 @@ $('#add-button').click(function() {
   var addTitle = $('#add-book').val();
   var addIsbn = $('#add-isbn').val();
   var addAuthor = $('#add-author').val();
+  var authorList = {};
+  $("class^=add-another").each( function () {
+    authorList[$(this).attr(name)] = $(this).val();
+  });
+  console.log(authorList);
   // var authorList should include all data present in the .add-another-*.
 
   // $.post('/api/books/4/authors/4').then(res => {
@@ -135,7 +140,7 @@ function lookupBook_3(qtype) {
 
 // -------------------------------------------------------------------
 // Search Author functions
-// ==================================================================
+// ===================================================================
 
 
 function lookupAuthor_2(qtype) {
