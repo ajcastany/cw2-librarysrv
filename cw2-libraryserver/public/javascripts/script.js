@@ -51,14 +51,17 @@ $('#add-button').click(function() {
   //   console.log(authorList);
   // } else {console.log("This is what i want");}
   // for loop should come here
-  authorList.each( function ( i, data) {
-    console.log(data);
+  authorList.each( function ( index, data) {
+    var addAuthor = JSON.stringify(data.name);
+    console.log(addAuthor);
 
-  $.post(url + "authors/", {name: data.name}).then(function(response) {
+  $.post(url + "authors/", {name: addAuthor}).then(function(response) {
     console.log(response.id);
     console.log(url + "authors/" + response.id + "/books");
     console.log({title: addTitle, isbn: addIsbn, name: data.name});
-    $.post(url + "authors/" + response.id + "/books", {bookTitle: addTitle, bookISBN: addIsbn});
+    $.post(url + "authors/" + response.id + "/books", {bookTitle: addTitle, bookISBN: addIsbn}).then( res => {
+      console.log(res);
+    });
     });
   });
   $('.add-form').each( function() {
