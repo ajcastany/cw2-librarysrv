@@ -45,12 +45,12 @@ $('#add-button').click(function() {
   var addTitle = $('#add-book').val();
   var addIsbn = $('#add-isbn').val();
   var addAuthor = $('#add-author').val();
-  var authorList = {};
-  $("class^=add-another").each( function () {
-    authorList[$(this).attr(name)] = $(this).val();
+  var authorList = $('[class^="add-another-"]').map( function (i, data) {
+    return {name: $(data).val()};
   });
-  console.log(authorList);
-  // var authorList should include all data present in the .add-another-*.
+  if (authorList.lenght > 0){
+    console.log(authorList);
+  } else {console.log("This is what i want");}
 
   // $.post('/api/books/4/authors/4').then(res => {
   //   console.log(res);
