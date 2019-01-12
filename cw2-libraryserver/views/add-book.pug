@@ -19,19 +19,40 @@ block navigation
 
 
 block content
-  h1= title
-  p.info Fill the form bellow to add books to the Library Database
-  div.form-container
-    form.add-form
-      input(type="hidden" name="type" value="book")
-      | Title:
-      input(type="text" name="title" placeholder="Book title")#add-book
-      | ISBN:
-      input(type="text" name="isbn" placeholder="ISBN")#add-isbn
-      | Author:
-      input(type="text" name="name" placeholder="Author").add-author-0
-      input(type="button" value="Add")#add-button
-    button#more-authors Add another author
-  .add-status
+  div.page-wrapper
+    h1= title
+    p.info Fill the form bellow to add books to the Library Database
+    div.input-group.col-md-4.d-flex.flex-column.col-centered.author-list
+      div.d-flex.flex-row
+        div(class="input-group-prepend")
+          span.input-group-text#inputGroup-sizing Book Title:
+        input(type="text" name="title" class="form-control" id="add-book" aria-label="default" aria-describedby="inputGroup-sizing-md")
+      div.d-flex.flex-row
+        div(class="input-group-prepend")
+          span.input-group-text#inputGroup-sizing ISBN:
+        input(type="text" name="isbn" class="form-control" id="add-isbn" aria-label="default" aria-describedby="inputGroup-sizing-md")
+      div.d-flex.flex-row
+        div(class="input-group-prepend")
+          span.input-group-text#inputGroup-sizing Author:
+        input(type="text" name="name" class="add-author-0 form-control" aria-label="Medium" aria-describedby="inputGroup-sizing-md")
+      div.new-authors.input-group.col-md-4.d-flex.flex-column.col-centered
+        .more-container
+      button.justify-content-md-center#more-authors Add another author
+    div.d-flex.flex-row.justify-content-md-end
+      input(type='button' value='Add book' class="btn btn-primary btn-success" id="add-button")
+    .add-status
+
+  //- div.form-container
+  //-   form.add-form
+  //-     input(type="hidden" name="type" value="book")
+  //-     | Title:
+  //-     input(type="text" name="title" placeholder="Book title")#add-book
+  //-     | ISBN:
+  //-     input(type="text" name="isbn" placeholder="ISBN")#add-isbn
+  //-     | Author:
+  //-     input(type="text" name="name" placeholder="Author").add-author-0
+  //-     input(type="button" value="Add")#add-button
+  //-   button#more-author Add another authors
+  //-   //- missing an S above^
 
   script(src="/javascripts/script.js")

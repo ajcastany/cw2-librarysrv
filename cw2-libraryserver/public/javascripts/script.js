@@ -38,7 +38,8 @@ $('#more-authors').click( function () {
   var count = $(this).data("count") || 0; // count the clicks
   $(this).data("count", ++count);
   // console.log(count);                     // print the clicks.
-  $('.add-form').append('<input type="text" name="name" placeholder="Another Author" class="add-author-' + count + '">');
+  $('.author-list').append(
+    '<div class="d-flex flex-row"><div class="input-group-prepend"><span class="input-group-text" id="inputGroup-sizing">Author #' + (count + 1) + ':</span></div><input type="text" name="name" placeholder="Another Author" aria-label="Medium" aria-describedby="inputGroup-sizing-md" class="add-author-' + count + ' form control"></div>');
 })
 
 $('#add-button').click(function() {
@@ -50,7 +51,8 @@ $('#add-button').click(function() {
   var authorList = $('[class^="add-author-"]').map( function (i, data) {
     var re = /\w+/;             // Checks for string not null.  TODO: Improve?
     var authorName = ($(data).val());
-    // console.log(typeof(authorName.length));
+
+    console.log(typeof(authorName.length));
     console.log(re.test(authorName));
     if (re.test(authorName)) {
       return {name: $(data).val()} ;
@@ -61,7 +63,7 @@ $('#add-button').click(function() {
   // } else {console.log("This is what i want");}
   // for loop should come here
   authorList.each( function ( index, data) {
-    var addAuthor = JSON.stringify(data.name);
+    var addAuthor = data.name;
     console.log(addAuthor);
 
   $.post(url + "authors/", {name: addAuthor}).then(function(response) {

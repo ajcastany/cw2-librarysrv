@@ -19,20 +19,27 @@ block navigation
           li.nav-item: a(href="/delete-book" class="nav-link") Delete Entry
 
 block content
-  h1= title
-  p Welcome to #{title}
-  p.info Please fill the form bellow to search the library catalog.
-  form.search-form
-    input(type='hidden' name='type' value='book')
-    | Title: 
-    input(type='text' name='title' placeholder='Book title')#search-book
-    | ISBN:
-    input(type='text' name='isbn' placeholder='ISBN')#search-isbn
-    | Author:
-    input(type='text' name='name' placeholder='Author')#search-author
-    input(type='button' value='Search')#search-button
+  div.page-wrapper
+    h1= title
+    p Welcome to #{title}
+    p.info Please fill the form bellow to search the library catalog.
+    div.input-group.col-md-4.d-flex.column.col-centered
+      div.d-flex.flex-row
+        div(class="input-group-prepend")
+          span.input-group-text#inputGroup-sizing Book Title:
+        input(type="text" class="form-control" id="search-book" aria-label="default" aria-describedby="inputGroup-sizing-md")
+      div.d-flex.flex-row
+        div(class="input-group-prepend")
+          span.input-group-text#inputGroup-sizing ISBN: 
+        input(type="text" class="form-control" id="search-isbn" aria-label="default" aria-describedby="inputGroup-sizing-md")
+      div.d-flex.flex-row
+        div(class="input-group-prepend")
+          span.input-group-text#inputGroup-sizing Author: 
+        input(type="text" class="form-control" id="search-author" aria-label="default" aria-describedby="inputGroup-sizing-md")
+      div.d-flex.flex-row
+        input(type='button' value='Search' class="btn btn-primary")#search-button
 
-  h1 Results
+    h1 Results
   .results-output
     ul.search-ul
 
@@ -49,3 +56,13 @@ block content
 
 //- http://localhost:3000/api/search?type=author&name=arthur
 //- http://localhost:3000/api/search?author&name=arthur
+  //- From a time before Bootstrap:
+  //- form.search-form
+  //-   input(type='hidden' name='type' value='book')
+  //-   | Title: 
+  //-   input(type='text' name='title' placeholder='Book title')#search-book
+  //-   | ISBN:
+  //-   input(type='text' name='isbn' placeholder='ISBN')#search-isbn
+  //-   | Author:
+  //-   input(type='text' name='name' placeholder='Author')#search-author
+  //-   input(type='button' value='Search')#search-button

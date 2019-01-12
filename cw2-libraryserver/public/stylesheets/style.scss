@@ -1,15 +1,61 @@
+@import url('https://fonts.googleapis.com/css?family=Quattrocento|Quattrocento+Sans');
 // @import 'reset';                // Not very nice ATM
+
+$bcolor: #00B7FF;
+$title-font: 'Quattrocento Sans', sans-serif;
+$body-font: 'Quattrocento', serif;
 
 html, body {
     padding: 0;
     margin: 0;
+    font-family: $body-font;
 }
 
-body{
-  padding: 0;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  color:red;
+.page-wrapper {
+    margin: 3em 10vw 1em 10vw;
+    /* justify-content: center; */
+    @media screen and (max-width: 719) {
+        margin: 0;
+}
+}
+
+h1 {
+    font-family: $title-font;
+}
+
+p {
+    margin-left: 5vh;
 }
 a{
-  color: #00B7FF;
+    color: $bcolor;
+}
+
+.d-flex {
+    margin-left: 0;
+}
+
+.btn-primary {
+    background-color: $bcolor;
+    border-color: #00B7FF;
+}
+
+span {
+    width: 7em;
+}
+
+.input-group-text {
+    justify-content: flex-end;
+}
+
+.col-centered {
+    float: none;
+    margin: auto;
+}
+
+.justify-content-md-end {
+    margin-top: 3em;
+    margin-right: 25vw;
+    @media screen and (max-width: 720px) {
+        margin: 3em 26vw;
+    }
 }
