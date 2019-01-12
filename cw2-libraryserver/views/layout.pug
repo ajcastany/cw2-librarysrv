@@ -23,24 +23,7 @@ html(lang='en')
           li.nav-item: a.nav-link(href='/users') Users
           li.nav-item: a.nav-link(href='/loans') Loans
         input(type='text' placeholder='Search')
-  nav
-    ul
-      #title
-        if title == "Search the Library"
-          li: a(href="/search" style={background: 'blue'}) Search
-        else
-          li: a(href="/search" style={}) Search
 
-        if title == "Add Book"
-          li: a(href="/add-book" style={background:'blue'}) Add Book
-        else
-          li: a(href="/add-book") Add Book
-
-        if title == "Delete Entry"
-          li: a(href="/delete-book" style={background: 'blue'}) Delete Entry
-        else
-          li: a(href="/delete-book" style={}) Delete Entry
-
-
+  block navigation
   section
     block content
