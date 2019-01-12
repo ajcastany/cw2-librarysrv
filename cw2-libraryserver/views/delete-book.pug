@@ -12,10 +12,13 @@ block content
     input(type='text' name='isbn' placeholder='ISBN')#search-isbn
     | Author:
     input(type='text' name='name' placeholder='Author')#search-author
-    input(type='button' value='Search')#search-button
+    input(type='button' value='Search')#search-del-button
 
   h1 Results
   .results-output
     ul.search-ul
+            //- Perhaps what's bellow should appear after search?
+  h1 Delete Entry
+  input(type='button' value='Delete')#delete-entry
 
   script(src="/javascripts/script.js")

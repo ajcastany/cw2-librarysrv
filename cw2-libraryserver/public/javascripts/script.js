@@ -80,6 +80,49 @@ $('#add-button').click(function() {
       '<h2 class="success"> Entry Successfully added to the database</h2>');
   });
 
+/*==================================================================
+  Delete entries from database.
+  ==================================================================
+
+  Contains the functions for deleting entries from the DB.
+
+  Method: "POST"
+
+  /DONE: Add search
+  /DONE: Add radio button
+  /DONE: Add delete functions.
+
+  //TODO: Delete authors?
+
+  ******************************************************************
+  */
+$('#delete-entry').click( function () {
+  var bookList = [];
+  var authorList = [];
+  $('input:checked').parent().children('li.bid').each( function () {
+    bookList.push($(this).html());
+  });
+  $('input:checked').parent().children('li.aid').each( function() {
+    authorList.push($(this).html());
+
+  });
+  var deleteBookMsg = confirm("Are you sure you want to delete " + bookList.length + " items?");
+  if (deleteBookMsg == true) {
+    bookList.forEach( function (bookID, i) {
+      console.log(bookID);
+      $.ajax({
+        url: url + "books/" + bookID,
+        type: 'DELETE',
+        success: function(result) {
+          console.log(result);
+        }
+      });
+    });
+    authorList.forEach( function (authorID, i) {
+      console.log(authorID);    // Not implemented
+    });
+  }
+});
 
 
 /* ==================================================================
@@ -96,6 +139,122 @@ $('#add-button').click(function() {
 
    ------------------------------------------------------------------
 */
+
+//---------------------------------------------------------------------
+// Search book functions:
+// ===================================================================
+
+
+function lookupBook_del(qtype) {
+  var searchQ = url + "search?type=" + qtype +
+                    "&title=" +
+                    $('#search-book').val() +
+                    "&isbn=" +
+                    $('#search-isbn').val();
+  // console.log(searchQ);
+  fetch(searchQ, {
+        method: 'get'
+    })
+    .then(res => {
+      return res.json();
+      })
+    .then((response) => {
+      response.forEach(function (data, i) {
+        var bookID = data.id;
+        $.getJSON(url + "books/" + bookID + "/authors", function (data) {
+          var bookID = data.id;
+          var bookTitle = data.title;
+          var bookIsbn = data.isbn;
+          var authorList = data.Authors;
+          console.log(bookID, bookTitle, i);
+          $('.search-ul').append('<div id="results-' + i + '"></div>');
+          $('#results-' +i).append(
+            '<input type="checkbox" class="del-checkbox-'+ i + 'name="Delete entry" value="delete">',
+            '<li class=tid> ID: </li>',
+            '<li class="bid">' + bookID + '</li>',
+            '<li class="ttitle"> Title:</li>',
+            '<li class="btitle">' + bookTitle + '</li>',
+            '<li class="tisbn"> ISBN: </li>',
+            '<li class="bisbn">'+ bookIsbn + '</li>',
+            '<li class="tauthor"> Author(s): ' + '</li>',
+          );
+          authorList.forEach( function (authors, e) {
+            console.log(i, authors.name);
+            $('#results-' +i).append('<li class="bauthor-' + e + '">' +
+                                     authors.name + '</li>',
+                                     '<li class="aid">' +
+                                     authors.id + '</li>',
+                                    );
+          });
+            // console.log(bookID, bookTitle, bookIsbn, authorList);
+        });
+      });
+    });
+}
+
+
+
+// -------------------------------------------------------------------
+// Search Author functions
+// ===================================================================
+
+
+function lookupAuthor_del(qtype) {
+  var searchQ = url + "search?type=" + qtype +
+                "&name=" +
+                $('#search-author').val();
+  console.log(searchQ);
+
+  fetch(searchQ, {
+        method: 'get'
+    })
+    .then(res => {
+      return res.json();
+      })
+    .then((response) => {
+      response.forEach( function (data, i) {
+        var authorID = data.id;
+        $.getJSON(url + "authors/" + authorID + "/books", function (data) {
+          var authorID = data.id;
+          var authorName = data.name;
+          var bookList = data.Books;
+          // console.log(authorID, authorName, bookList);
+          $('.search-ul').append('<div id="results-' + i + '"' + '"></div>');
+          $('#results-' +i).append(
+            '<input type="checkbox" id="del-checkbox" name="Delete" value="delete-book">',
+
+            '<li class="aid">' + authorID + '</li>',
+            '<li class="tauthor"> Name:</li>',
+            '<li class="bauthor">' + authorName + '</li>',
+            '<li class="btitle"> Book(s) authored: ' + '</li>',
+          );
+          bookList.forEach( function ( books, e) {
+            // console.log(i, books.title);
+            $('#results-' + i).append('<li class="btitle-' + e + '">' + books.title + '</li>');
+          });
+        });
+        // console.log(authorID);
+      });
+    });
+  }
+
+// ******************************************************************
+// addEventListener
+// ******************************************************************
+
+$('#search-del-button').click(function () {
+  $(".search-ul").empty();
+  // TODO: Search by ISBN not implemented.
+  var qtype;
+  if ($('#search-book').val()) {
+    qtype = "book";
+    lookupBook_del(qtype);
+  } else if ($('#search-author').val()){
+    qtype = "author";
+    lookupAuthor_del(qtype);
+  }
+});
+
 
 //---------------------------------------------------------------------
 // Search book functions:
