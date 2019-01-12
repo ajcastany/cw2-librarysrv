@@ -11,6 +11,8 @@ var indexRouter = require('./routes/index');
 var searchServe = require('./routes/search');
 var addBookrouter = require('./routes/add-book');
 var delBookrouter = require("./routes/delete-book");
+var userRouter = require('./routes/users');
+var loanRouter = require('./routes/loans');
 // database variables
 var usersRouter = require('./routes/api/users');
 var authorsRouter = require('./routes/api/authors');
@@ -47,6 +49,8 @@ app.use('/', indexRouter);
 app.use('/search', searchServe);
 app.use('/add-book', addBookrouter);
 app.use("/delete-book", delBookrouter);
+app.use('/users', userRouter);
+app.use('/loans', loanRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/authors', authorsRouter);
 app.use("/api/books", booksRouter);
