@@ -11,7 +11,9 @@ console.log("cript loaded");    // Debug info.
 
    --Method: POST
 
-   /TODO: Show info added to the database.
+   /TODO: Show info added to the database when entry added.
+   /TODO: Check that all values are not nil when adding entry to db.
+   /TODO: add Delete book.
    /TODO: Are you sure? alert?
    /TODO: Improve RegExp pattern for authorList
    /TODO: Before commit to DB, should check if item exists, should check if author exists, if the item exists, refuse to add it, if the author exists append it to the authors_books table.  if the author doesn't exist, add it to db.

@@ -19,7 +19,7 @@ html(lang='en')
       nav.navbar.navbar-expand-sm.bg-dark.navbar-dark
         ul.navbar-nav
           li.nav-item: a.nav-link(href='/') Home
-          li.nav-item: a.nav-link(href='/search') Search
+          li.nav-item: a.nav-link(href='/search') Books
           li.nav-item: a.nav-link(href='#') Users
         input(type='text' placeholder='Search')
   nav
@@ -34,6 +34,12 @@ html(lang='en')
           li: a(href="/add-book" style={background:'blue'}) Add Book
         else
           li: a(href="/add-book") Add Book
+
+        if title == "Delete Entry"
+          li: a(href="/delete-book" style={background: 'blue'}) Delete Entry
+        else
+          li: a(href="/delete-book" style={}) Delete Entry
+
 
   section
     block content

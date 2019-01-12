@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  p.info Please fill the form bellow to delete an entry from the library catalog.
+  form.search-form
+    input(type='hidden' name='type' value='book')
+    | Title:
+    input(type='text' name='title' placeholder='Book title')#search-book
+    | ISBN:
+    input(type='text' name='isbn' placeholder='ISBN')#search-isbn
+    | Author:
+    input(type='text' name='name' placeholder='Author')#search-author
+    input(type='button' value='Search')#search-button
+
+  h1 Results
+  .results-output
+    ul.search-ul
+
+  script(src="/javascripts/script.js")
