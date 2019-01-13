@@ -277,7 +277,7 @@ function lookupBook_3(qtype) {
       return res.json();
       })
     .then((response) => {
-      $('.results-output').prepend('<h1>Results</h1>');
+      $('.results-output').prepend('<h1 class="result-title">Results</h1>');
       response.forEach(function (data, i) {
         var bookID = data.id;
         $.getJSON(url + "books/" + bookID + "/authors", function (data) {
@@ -333,6 +333,7 @@ function lookupAuthor_2(qtype) {
       return res.json();
       })
     .then((response) => {
+      $('.results-output').prepend('<h1 class="result-title">Results</h1>');
       response.forEach( function (data, i) {
         var authorID = data.id;
         $.getJSON(url + "authors/" + authorID + "/books", function (data) {
@@ -340,21 +341,30 @@ function lookupAuthor_2(qtype) {
           var authorName = data.name;
           var bookList = data.Books;
           // console.log(authorID, authorName, bookList);
-          $('.search-ul').append('<div id="results-' + i + '"' + '"></div>');
+          $('.search-ul').append('<div class="card" id="results-' + i + '"' + '"></div>');
           $('#results-' +i).append(
-            '<li class=tid> ID: </li>',
-            '<li class="aid">' + authorID + '</li>',
-            '<li class="tauthor"> Name:</li>',
-            '<li class="bauthor">' + authorName + '</li>',
-            '<li class="btitle"> Book(s) authored: ' + '</li>',
+            '<div class="card-body"><h4 class="card-title">' + authorName + '</h4><h6 class="card-subtitle">Author</h6><h5 class="card-title">Book(s): </h5></div>'
+            // '<li class=tid> ID: </li>',
+            // '<li class="aid">' + authorID + '</li>',
+            // '<li class="tauthor"> Name:</li>',
+            // '<li class="bauthor">' + authorName + '</li>',
+            // '<li class="btitle"> Book(s) authored: ' + '</li>',
           );
           bookList.forEach( function ( books, e) {
             // console.log(i, books.title);
-            $('#results-' + i).append('<li class="btitle-' + e + '">' + books.title + '</li>');
+            $('#results-' + i).append(
+              '<p class="card-text">' + books.title + '</p>'
+              // '<li class="btitle-' + e + '">' + books.title + '</li>
+              // '
+            );
           });
         });
         // console.log(authorID);
       });
+      $([document.documentElement, document.body]).animate({
+        scrollTop: $('.results-output').offset().top
+      }, 700);
+
     });
   }
 
@@ -363,6 +373,7 @@ function lookupAuthor_2(qtype) {
 // ******************************************************************
 
 $('#search-button').click(function () {
+  $('.result-title').empty();
   $(".search-ul").empty();
   // TODO: Search by ISBN not implemented.
   var qtype;

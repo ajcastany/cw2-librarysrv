@@ -62,6 +62,15 @@ span {
 
 .results-output h1 {
     margin: 2em 3em 1em 3em;
+    @media screen and (max-width: 720px) {
+        margin: 2em 1em 1em 1em;
+    }
+}
+
+@media screen and (max-width: 720px) {
+    .search-ul {
+        padding:0;
+    }
 }
 
 .card-body {
