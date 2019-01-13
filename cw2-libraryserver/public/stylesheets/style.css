@@ -70,4 +70,11 @@ h5.card-title {
 .bid, .aid {
   display: none; }
 
+#add-button {
+  width: 4.5em; }
+  @media screen and (max-width: 720px) {
+    #add-button {
+      width: 3em;
+      padding-left: 0.5em; } }
+
 /*# sourceMappingURL=style.css.map */

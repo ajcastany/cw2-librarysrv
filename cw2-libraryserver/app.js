@@ -13,11 +13,13 @@ var addBookrouter = require('./routes/add-book');
 var delBookrouter = require("./routes/delete-book");
 var userRouter = require('./routes/users');
 var loanRouter = require('./routes/loans');
+var navigationView = require('./routes/navigation'); // Not working;
+var addUserRouter = require('./routes/add-user');
+var delUserRouter = require('./routes/delete-user');
 // database variables
 var usersRouter = require('./routes/api/users');
 var authorsRouter = require('./routes/api/authors');
 var booksRouter = require("./routes/api/books");
-var usersRouter = require("./routes/api/users");
 var loansRouter = require("./routes/api/loans");
 var searchRouter = require("./routes/api/search");
 
@@ -47,15 +49,20 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/search', searchServe);
+app.use('/navigation', navigationView);
 app.use('/add-book', addBookrouter);
 app.use("/delete-book", delBookrouter);
 app.use('/users', userRouter);
 app.use('/loans', loanRouter);
+app.use('/add-user', addUserRouter);
+app.use('/delete-user', delUserRouter);
+// Api starts here
 app.use('/api/users', usersRouter);
 app.use('/api/authors', authorsRouter);
 app.use("/api/books", booksRouter);
 app.use("/api/loans", loansRouter);
 app.use("/api/search", searchRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

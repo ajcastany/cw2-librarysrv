@@ -21,7 +21,7 @@ block content
     h1= title
     p Welcome to User Search
     p.info Please fill the form bellow to search the library user catalog.
-    div.input-group.col-md-4.d-flex.column.col-centered
+    div.input-group.col-md-3.d-flex.column.col-centered
       div.d-flex.flex-row
         div(class="input-group-prepend")
           span.input-group-text#inputGroup-sizing User Name
@@ -39,7 +39,6 @@ block content
           option(value="Librarian") Librarian
         //- input(type="text" class="form-control" id="search-author" aria-label="default" aria-describedby="inputGroup-sizing-md")
       div.d-flex.flex-row
-        input(type='button' value='Search' class="btn btn-primary")#search-user-button
+        input(type='button' value='Add' class="btn btn-primary btn-success flex-grow-1" id="add-button")
 
-    .results-output
-      ul.search-ul
+      .add-status
