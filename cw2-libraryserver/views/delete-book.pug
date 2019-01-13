@@ -20,24 +20,41 @@ block navigation
 
 
 block content
-  h1= title
-  p Welcome to #{title}
-  p.info Please fill the form bellow to delete an entry from the library catalog.
-  form.search-form
-    input(type='hidden' name='type' value='book')
-    | Title:
-    input(type='text' name='title' placeholder='Book title')#search-book
-    | ISBN:
-    input(type='text' name='isbn' placeholder='ISBN')#search-isbn
-    | Author:
-    input(type='text' name='name' placeholder='Author')#search-author
-    input(type='button' value='Search')#search-del-button
+  div.page-wrapper
+    h1= title
+    p Welcome to #{title}
+    p.info Please fill the form bellow to delete an entry from the library catalog.
+    div.input-group.col-md-4.d-flex.column.col-centered
+      div.d-flex.flex-row
+        div(class="input-group-prepend")
+          span.input-group-text#inputGroup-sizing Book Title:
+        input(type="text" class="form-control" id="search-book" aria-label="default" aria-describedby="inputGroup-sizing-md")
+      div.d-flex.flex-row
+        div(class="input-group-prepend")
+          span.input-group-text#inputGroup-sizing ISBN:
+        input(type="text" class="form-control" id="search-isbn" aria-label="default" aria-describedby="inputGroup-sizing-md")
+      div.d-flex.flex-row
+        div(class="input-group-prepend")
+          span.input-group-text#inputGroup-sizing Author:
+        input(type="text" class="form-control" id="search-author" aria-label="default" aria-describedby="inputGroup-sizing-md")
+      div.d-flex.flex-row
+        input(type='button' value='Search' class="btn btn-primary")#search-del-button
+    h1 Delete Entry
+    input(type='button' class="btn btn-danger" value='Delete')#delete-entry
 
-  h1 Results
-  .results-output
-    ul.search-ul
+    .results-output
+      ul.search-ul
             //- Perhaps what's bellow should appear after search?
-  h1 Delete Entry
-  input(type='button' value='Delete')#delete-entry
+
 
   script(src="/javascripts/script.js")
+
+  //- form.search-form
+  //-   input(type='hidden' name='type' value='book')
+  //-   | Title:
+  //-   input(type='text' name='title' placeholder='Book title')#search-book
+  //-   | ISBN:
+  //-   input(type='text' name='isbn' placeholder='ISBN')#search-isbn
+  //-   | Author:
+  //-   input(type='text' name='name' placeholder='Author')#search-author
+  //-   input(type='button' value='Search')#search-del-button

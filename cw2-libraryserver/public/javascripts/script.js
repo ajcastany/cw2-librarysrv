@@ -169,21 +169,22 @@ function lookupBook_del(qtype) {
           var bookIsbn = data.isbn;
           var authorList = data.Authors;
           console.log(bookID, bookTitle, i);
-          $('.search-ul').append('<div id="results-' + i + '"></div>');
+          $('.search-ul').append('<div class="card" id="results-' + i + '"></div>');
           $('#results-' +i).append(
-            '<input type="checkbox" class="del-checkbox-'+ i + 'name="Delete entry" value="delete">',
-            '<li class=tid> ID: </li>',
-            '<li class="bid">' + bookID + '</li>',
-            '<li class="ttitle"> Title:</li>',
-            '<li class="btitle">' + bookTitle + '</li>',
-            '<li class="tisbn"> ISBN: </li>',
-            '<li class="bisbn">'+ bookIsbn + '</li>',
-            '<li class="tauthor"> Author(s): ' + '</li>',
+            '<div class="input-group"><div class="input-group-prepend"><div class="input-group-text"><input type="checkbox" aria-label="Delete entries"class="del-checkbox-"'+ i + '></div></div><div class="card-body"><h4 class="card-title">' + bookTitle + '</h4><h6 class="card-subtitle">ISBN: ' + bookIsbn + '</h6><h5 class="card-title">Author(s): </h5></div></div>',
+            '<li class="bid">' + bookID + '</li>'
+            // '<input type="checkbox" class="del-checkbox-'+ i + 'name="Delete entry" value="delete">',
+            // '<li class=tid> ID: </li>',
+            // '<li class="bid">' + bookID + '</li>',
+            // '<li class="ttitle"> Title:</li>',
+            // '<li class="btitle">' + bookTitle + '</li>',
+            // '<li class="tisbn"> ISBN: </li>',
+            // '<li class="bisbn">'+ bookIsbn + '</li>',
+            // '<li class="tauthor"> Author(s): ' + '</li>',
           );
           authorList.forEach( function (authors, e) {
             console.log(i, authors.name);
-            $('#results-' +i).append('<li class="bauthor-' + e + '">' +
-                                     authors.name + '</li>',
+            $('#results-' +i + " .card-body").append('<p class="card-text">' + authors.name + '</p>',
                                      '<li class="aid">' +
                                      authors.id + '</li>',
                                     );
