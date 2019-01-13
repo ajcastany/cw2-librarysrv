@@ -277,6 +277,7 @@ function lookupBook_3(qtype) {
       return res.json();
       })
     .then((response) => {
+      $('.results-output').prepend('<h1>Results</h1>');
       response.forEach(function (data, i) {
         var bookID = data.id;
         $.getJSON(url + "books/" + bookID + "/authors", function (data) {
@@ -285,24 +286,30 @@ function lookupBook_3(qtype) {
           var bookIsbn = data.isbn;
           var authorList = data.Authors;
           console.log(bookID, bookTitle, i)
-          $('.search-ul').append('<div id="results-' + i + '"></div>');
+          $('.search-ul').append('<div class="card" id="results-' + i + '"></div>');
           $('#results-' +i).append(
-            '<li class=tid> ID: </li>',
-            '<li class="bid">' + bookID + '</li>',
-            '<li class="ttitle"> Title:</li>',
-            '<li class="btitle">' + bookTitle + '</li>',
-            '<li class="tisbn"> ISBN: </li>',
-            '<li class="bisbn">'+ bookIsbn + '</li>',
-            '<li class="tauthor"> Author(s): ' + '</li>',
+            '<div class="card-body"><h4 class="card-title">' + bookTitle + '</h4><h6 class="card-subtitle">ISBN: ' + bookIsbn + '</h6><h5 class="card-title">Author(s): </h5></div>'
+            // '<li class=tid> ID: </li>',
+            // '<li class="bid">' + bookID + '</li>',
+            // '<li class="ttitle"> Title:</li>',
+            // '<li class="btitle">' + bookTitle + '</li>',
+            // '<li class="tisbn"> ISBN: </li>',
+            // '<li class="bisbn">'+ bookIsbn + '</li>',
+            // '<li class="tauthor"> Author(s): ' + '</li>',
           );
           authorList.forEach( function (authors, e) {
             console.log(i, authors.name);
-            $('#results-' +i).append('<li class="bauthor-' + e + '">' +
-                                   authors.name + '</li>');
+            $('#results-' +i).append(
+              '<p class="card-text">' + authors.name + '</p>'
+            );
+              // '<li class="bauthor-' + e + '">' + authors.name + '</li>'
           });
             // console.log(bookID, bookTitle, bookIsbn, authorList);
         });
       });
+      $([document.documentElement, document.body]).animate({
+        scrollTop: $('.results-output').offset().top
+      }, 700);
     });
 }
 
