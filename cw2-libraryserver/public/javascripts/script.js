@@ -91,20 +91,41 @@ $('#add-button').click(function() {
     var addAuthor = data.name;
     console.log(addAuthor);
     // We need to check if the author exists, and put it instead of post.
-  $.post(url + "authors/", {name: addAuthor}).then(function(response) {
-    console.log(response.id);
+    var encode = encodeURIComponent(addAuthor);
+    $.get(url + "search?type=author&name=" + encode).then(res => {
+      console.log(res.length);
+      if (res.length < 1) {
+      $.post(url + "authors/", {name: addAuthor}).then(function(response) {
+        console.log(response.id);
     // console.log(url + "authors/" + response.id + "/books");
     // console.log({title: addTitle, isbn: addIsbn, name: data.name});
     $.post(url + "authors/" + response.id + "/books", {bookTitle: addTitle, bookISBN: addIsbn}).then( res => {
       console.log(res);
     });
+      });
+      } else {
+        console.log(res[0]);
+        $.post(url + "authors/" + res[0].id + "/books", {bookTitle: addTitle, bookISBN: addIsbn}).then( res => {
+      console.log(res);
     });
-  });
+      };
+    });
+    // })// .then(
+    //   $.post(url + "authors/", {name: addAuthor}).then(function(response) {
+    //     console.log(response.id);
+    // // console.log(url + "authors/" + response.id + "/books");
+    // // console.log({title: addTitle, isbn: addIsbn, name: data.name});
+    // $.post(url + "authors/" + response.id + "/books", {bookTitle: addTitle, bookISBN: addIsbn}).then( res => {
+    //   console.log(res);
+    // });
+    //   }));
   $('.add-form').each( function() {
     this.reset();
   });
     $('.add-status').append(
       '<h2 class="success"> Entry Successfully added to the database</h2>');
+
+    });
   });
 
 /*==================================================================
