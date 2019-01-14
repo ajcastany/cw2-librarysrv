@@ -90,7 +90,7 @@ $('#add-button').click(function() {
   authorList.each( function ( index, data) {
     var addAuthor = data.name;
     console.log(addAuthor);
-
+    // We need to check if the author exists, and put it instead of post.
   $.post(url + "authors/", {name: addAuthor}).then(function(response) {
     console.log(response.id);
     // console.log(url + "authors/" + response.id + "/books");
