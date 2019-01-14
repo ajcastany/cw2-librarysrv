@@ -3,17 +3,17 @@ extends layout
 block navigation
   nav.navigation
     ul.nav.nav-tabs
-        if title == "Search the Library"
-          li.nav-item: a(href="/search" class="nav-link active") Search
-        else
-          li.nav-item: a(href="/search" class="nav-link") Search
+      if title == "Search the Library"
+        li.nav-item: a(href="/search" class="nav-link active") Search
+      else
+        li.nav-item: a(href="/search" class="nav-link") Search
 
-        if title == "Add Book"
-          li.nav-item: a(href="/add-book" class="nav-link active") Add Book
-        else
-          li.nav-item: a(href="/add-book" class="nav-link") Add Book
+      if title == "Add Book"
+        li.nav-item: a(href="/add-book" class="nav-link active") Add Book
+      else
+        li.nav-item: a(href="/add-book" class="nav-link") Add Book
 
-        if title == "Delete Entry"
-          li.nav-item: a(href="/delete-book" class="nav-link active") Delete Entry
-        else
-          li.nav-item: a(href="/delete-book" class="nav-link") Delete Entry
+      if title == "Delete Entry"
+        li.nav-item: a(href="/delete-book" class="nav-link active") Delete Entry
+      else
+        li.nav-item: a(href="/delete-book" class="nav-link") Delete Entry

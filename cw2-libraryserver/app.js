@@ -49,7 +49,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/search', searchServe);
-app.use('/navigation', navigationView);
+app.use('/', navigationView);
 app.use('/add-book', addBookrouter);
 app.use("/delete-book", delBookrouter);
 app.use('/users', userRouter);

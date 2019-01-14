@@ -36,7 +36,7 @@ a{
 
 .btn-primary {
     background-color: $bcolor;
-    border-color: #00B7FF;
+    border-color: $bcolor;
 }
 
 span {
@@ -50,6 +50,7 @@ span {
 .col-centered {
     float: none;
     margin: auto;
+    padding:0;
 }
 
 .justify-content-md-end {
@@ -95,10 +96,5 @@ h5.card-title {
 }
 
 #add-button {
-    width: 4.5em;
-
-    @media screen and (max-width: 720px) {
-        width: 3em;
-        padding-left: 0.5em;
-    }
+    width: 4.4em;
 }

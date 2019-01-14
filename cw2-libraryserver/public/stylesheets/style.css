@@ -35,7 +35,8 @@ span {
 
 .col-centered {
   float: none;
-  margin: auto; }
+  margin: auto;
+  padding: 0; }
 
 .justify-content-md-end {
   margin-top: 3em;
@@ -71,10 +72,6 @@ h5.card-title {
   display: none; }
 
 #add-button {
-  width: 4.5em; }
-  @media screen and (max-width: 720px) {
-    #add-button {
-      width: 3em;
-      padding-left: 0.5em; } }
+  width: 4.4em; }
 
 /*# sourceMappingURL=style.css.map */

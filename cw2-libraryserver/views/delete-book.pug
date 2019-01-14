@@ -1,6 +1,6 @@
 extends layout
 
-block navigation
+block content
   nav
     ul.nav.nav-tabs
         if title == "Search the Library"
@@ -18,8 +18,6 @@ block navigation
         else
           li.nav-item: a(href="/delete-book" class="nav-link") Delete Entry
 
-
-block content
   div.page-wrapper
     h1= title
     p Welcome to #{title}

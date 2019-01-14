@@ -6,7 +6,7 @@ block content
       if title == "Users"
         li.nav-item: a(href="/users" class="nav-link active") Search Users
       else
-        li.nav-item: a(href="/users" class="nav-link") Search
+        li.nav-item: a(href="/users" class="nav-link") Search Users
 
       if title == "Add User"
         li.nav-item: a(href="/add-user" class="nav-link active") Add User
@@ -37,7 +37,6 @@ block content
           option(value="Staff") Staff
           option(value="Student") Student
           option(value="Librarian") Librarian
-        //- input(type="text" class="form-control" id="search-author" aria-label="default" aria-describedby="inputGroup-sizing-md")
       div.d-flex.flex-row
         input(type='button' value='Search' class="btn btn-primary")#search-user-button
     h1 Delete Entry
