@@ -169,7 +169,6 @@ $('#delete-entry').click( function () {
         type: 'DELETE',
         success: function() {
           console.log("Deleted book ID:" + bookID);
-
         }
       });
     });
@@ -180,6 +179,9 @@ $('#delete-entry').click( function () {
         type: 'DELETE',
         success: function() {
           console.log("Deleted author ID:" + authorID);
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          console.log("Author not found");
         }
     });
     });
