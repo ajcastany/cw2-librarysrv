@@ -13,11 +13,11 @@ console.log("cript loaded");    // Debug info.
 
    /TODO: Show info added to the database when entry added.
    /TODO: Check that all values are not nil when adding entry to db.
-   /TODO: add Delete book.
-   /TODO: Are you sure? alert?
    /TODO: Improve RegExp pattern for authorList
-   /TODO: Before commit to DB, should check if item exists, should check if author exists, if the item exists, refuse to add it, if the author exists append it to the authors_books table.  if the author doesn't exist, add it to db.
+   /TODO: Fix duplicated authors.
 
+   /DONE: Are you sure? Confirm/alert
+   /DONE: add Delete book.
    /DONE: incorporate authors_books table on this file.
    /DONE: PUT methods.
    /DONE: Event Listeners
@@ -51,14 +51,13 @@ $('#add-button').click(function() {
   var authorList = $('[class^="add-author-"]').map( function (i, data) {
     var re = /\w+/;             // Checks for string not null.  TODO: Improve?
     var authorName = ($(data).val());
-
-    console.log(typeof(authorName.length));
-    console.log(re.test(authorName));
+    // console.log(typeof(authorName.length));
+    // console.log(re.test(authorName));
     if (re.test(authorName)) {
       return {name: $(data).val()} ;
     }
-  });
-  console.log(authorList);
+});
+  // console.log(authorList);
   // if (authorList.lenght > 0){
   //   console.log(authorList);
   // } else {console.log("This is what i want");}
@@ -68,9 +67,9 @@ $('#add-button').click(function() {
     console.log(addAuthor);
 
   $.post(url + "authors/", {name: addAuthor}).then(function(response) {
-    console.log(response.id);
-    console.log(url + "authors/" + response.id + "/books");
-    console.log({title: addTitle, isbn: addIsbn, name: data.name});
+    // console.log(response.id);
+    // console.log(url + "authors/" + response.id + "/books");
+    // console.log({title: addTitle, isbn: addIsbn, name: data.name});
     $.post(url + "authors/" + response.id + "/books", {bookTitle: addTitle, bookISBN: addIsbn}).then( res => {
       console.log(res);
     });
@@ -142,7 +141,7 @@ $('#delete-entry').click( function () {
 });
 
 /* ==================================================================
-   Search Book and Author page:
+   Delete Search Book and Author page:
    ==================================================================
 
    The following is for /search page.  It contains functions and methods to list the books and authors.  If searched for a book title or isbn will also list the author, if the author named is looked up it will return the book associated with it's ID.
@@ -157,7 +156,7 @@ $('#delete-entry').click( function () {
 */
 
 //---------------------------------------------------------------------
-// Search book functions:
+// Delete Search book functions:
 // ===================================================================
 
 
@@ -212,7 +211,7 @@ function lookupBook_del(qtype) {
 
 
 // -------------------------------------------------------------------
-// Search Author functions
+// Delete Search Author functions
 // ===================================================================
 
 
@@ -268,7 +267,7 @@ function lookupAuthor_del(qtype) {
   }
 
 // ******************************************************************
-// addEventListener
+// Delete addEventListener
 // ******************************************************************
 
 $('#search-del-button').click(function () {
