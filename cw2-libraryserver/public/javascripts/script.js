@@ -58,6 +58,7 @@ $('#add-button').click(function() {
       return {name: $(data).val()} ;
     }
   });
+  console.log(authorList);
   // if (authorList.lenght > 0){
   //   console.log(authorList);
   // } else {console.log("This is what i want");}
@@ -109,24 +110,36 @@ $('#delete-entry').click( function () {
     authorList.push($(this).html());
 
   });
-  var deleteBookMsg = confirm("Are you sure you want to delete " + bookList.length + " items?");
+  function itemsLength() {
+    if (bookList > 0) {
+      return bookList.length;
+    } else if (authorList > 0) {return authorList.length;}
+  }
+  var deleteBookMsg = confirm("Are you sure you want to delete " + itemsLength() + " items?");
   if (deleteBookMsg == true) {
     bookList.forEach( function (bookID, i) {
       console.log(bookID);
       $.ajax({
         url: url + "books/" + bookID,
         type: 'DELETE',
-        success: function(result) {
-          console.log(result);
+        success: function() {
+          console.log("Deleted book ID:" + bookID);
+
         }
       });
     });
     authorList.forEach( function (authorID, i) {
       console.log(authorID);    // Not implemented
+      $.ajax({
+        url: url + "authors/" + authorID,
+        type: 'DELETE',
+        success: function() {
+          console.log("Deleted author ID:" + authorID);
+        }
+    });
     });
   }
 });
-
 
 /* ==================================================================
    Search Book and Author page:
@@ -222,20 +235,32 @@ function lookupAuthor_del(qtype) {
           var authorID = data.id;
           var authorName = data.name;
           var bookList = data.Books;
-          // console.log(authorID, authorName, bookList);
-          $('.search-ul').append('<div id="results-' + i + '"' + '"></div>');
+           $('.search-ul').append('<div class="card" id="results-' + i + '"' + '"></div>');
           $('#results-' +i).append(
-            '<input type="checkbox" id="del-checkbox" name="Delete" value="delete-book">',
-
+            '<div class="input-group"><div class="input-group-prepend"><div class="input-group-text"><input type="checkbox" name="Delete" aria-label="Delete entries" class="checkbox-del"></div></div><div class="card-body"><h4 class="card-title">' + authorName + '</h4><h6 class="card-subtitle">Author</h6><h5 class="card-title">Book(s): </h5></div>',
             '<li class="aid">' + authorID + '</li>',
-            '<li class="tauthor"> Name:</li>',
-            '<li class="bauthor">' + authorName + '</li>',
-            '<li class="btitle"> Book(s) authored: ' + '</li>',
           );
           bookList.forEach( function ( books, e) {
             // console.log(i, books.title);
-            $('#results-' + i).append('<li class="btitle-' + e + '">' + books.title + '</li>');
+            $('#results-' + i + " .card-body").append(
+              '<p class="card-text">' + books.title + '</p>',
+              '<li class="bid">' + books.id + '</li>'
+            );
           });
+          console.log(authorID, authorName, bookList);
+          // $('.search-ul').append('<div id="results-' + i + '"' + '"></div>');
+          // $('#results-' +i).append(
+          //   '<input type="checkbox" id="del-checkbox" name="Delete" value="delete-book">',
+
+          //   '<li class="aid">' + authorID + '</li>',
+          //   '<li class="tauthor"> Name:</li>',
+          //   '<li class="bauthor">' + authorName + '</li>',
+          //   '<li class="btitle"> Book(s) authored: ' + '</li>',
+          // );
+          // bookList.forEach( function ( books, e) {
+          //   // console.log(i, books.title);
+          //   $('#results-' + i).append('<li class="btitle-' + e + '">' + books.title + '</li>');
+          // });
         });
         // console.log(authorID);
       });
