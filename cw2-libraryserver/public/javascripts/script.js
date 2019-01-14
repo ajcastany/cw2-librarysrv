@@ -4,6 +4,31 @@ const url = "http://localhost:3000/api/";         // our API url;
 console.log("cript loaded");    // Debug info.
 
 /* ==================================================================
+   Extending jQuery
+   ==================================================================
+   I got this content from an answer made by user Stepan Suvorov on StackOverflown:
+   https://stackoverflow.com/questions/2153917/how-to-send-a-put-delete-request-in-jquery on 01-04-2014, accessed on 14-01-2019.
+******************************************************************/
+
+jQuery.each( [ "put", "delete" ], function( i, method ) {
+  jQuery[ method ] = function( url, data, callback, type ) {
+    if ( jQuery.isFunction( data ) ) {
+      type = type || callback;
+      callback = data;
+      data = undefined;
+    }
+
+    return jQuery.ajax({
+      url: url,
+      type: method,
+      dataType: type,
+      data: data,
+      success: callback
+    });
+  };
+});
+
+/* ==================================================================
    Add Book and Author page:
    ==================================================================
 
@@ -67,7 +92,7 @@ $('#add-button').click(function() {
     console.log(addAuthor);
 
   $.post(url + "authors/", {name: addAuthor}).then(function(response) {
-    // console.log(response.id);
+    console.log(response.id);
     // console.log(url + "authors/" + response.id + "/books");
     // console.log({title: addTitle, isbn: addIsbn, name: data.name});
     $.post(url + "authors/" + response.id + "/books", {bookTitle: addTitle, bookISBN: addIsbn}).then( res => {
