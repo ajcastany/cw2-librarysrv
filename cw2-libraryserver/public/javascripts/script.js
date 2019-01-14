@@ -101,10 +101,11 @@ $('#add-button').click(function() {
 $('#delete-entry').click( function () {
   var bookList = [];
   var authorList = [];
-  $('input:checked').parent().children('li.bid').each( function () {
+  // console.log($('input[type=checkbox]:checked').parent().parent().parent().parent().children('li.bid').html()); // Don't do this again.  use closest() or parents()
+  $('input[type=checkbox]:checked').closest("[id^=results-]").children('li.bid').each( function () {
     bookList.push($(this).html());
   });
-  $('input:checked').parent().children('li.aid').each( function() {
+  $('input[type=checkbox]:checked').closest("[id^=results-]").children('li.aid').each( function() {
     authorList.push($(this).html());
 
   });
@@ -171,7 +172,7 @@ function lookupBook_del(qtype) {
           console.log(bookID, bookTitle, i);
           $('.search-ul').append('<div class="card" id="results-' + i + '"></div>');
           $('#results-' +i).append(
-            '<div class="input-group"><div class="input-group-prepend"><div class="input-group-text"><input type="checkbox" aria-label="Delete entries"class="del-checkbox-"'+ i + '></div></div><div class="card-body"><h4 class="card-title">' + bookTitle + '</h4><h6 class="card-subtitle">ISBN: ' + bookIsbn + '</h6><h5 class="card-title">Author(s): </h5></div></div>',
+            '<div class="input-group"><div class="input-group-prepend"><div class="input-group-text"><input type="checkbox" name="Delete" aria-label="Delete entries" class="checkbox-del"></div></div><div class="card-body"><h4 class="btitle card-title">' + bookTitle + '</h4><h6 class="bisbn card-subtitle">ISBN: ' + bookIsbn + '</h6><h5 class="card-title">Author(s): </h5></div></div>',
             '<li class="bid">' + bookID + '</li>'
             // '<input type="checkbox" class="del-checkbox-'+ i + 'name="Delete entry" value="delete">',
             // '<li class=tid> ID: </li>',
