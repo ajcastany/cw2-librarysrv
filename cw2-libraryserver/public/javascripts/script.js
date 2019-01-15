@@ -247,7 +247,7 @@ function lookupBook_del(qtype) {
           );
 
           // This was taken from a post by user ahren on StackOverflown: https://stackoverflow.com/questions/10889408/change-background-color-of-div-when-checkbox-is-clicked on 4-06-2014, accessed on 15-01-2019:
-          // rgba has been added to change the opacity without affecting children.
+          // I've chosen to use 'closest()' instead of parent() rgba has been added to change the opacity without affecting children.
           $('input[type=checkbox]').change(function() {
             if($(this).is(":checked")){
               $(this).closest("div.card").addClass("redBackground");
