@@ -67,6 +67,8 @@ $('#more-authors').click( function () {
     '<div class="d-flex flex-row"><div class="input-group-prepend"><span class="input-group-text" id="inputGroup-sizing">Author #' + (count + 1) + ':</span></div><input type="text" name="name" placeholder="Another Author" aria-label="Medium" aria-describedby="inputGroup-sizing-md" class="add-author-' + count + ' form control"></div>');
 })
 
+
+
 $('#add-button').click(function() {
   $(".add-status").empty();
   var bookUrl = url + "books";                   // localhost:3000/api/
@@ -243,6 +245,24 @@ function lookupBook_del(qtype) {
             // '<li class="bisbn">'+ bookIsbn + '</li>',
             // '<li class="tauthor"> Author(s): ' + '</li>',
           );
+
+          // This was taken from a post by user ahren on StackOverflown: https://stackoverflow.com/questions/10889408/change-background-color-of-div-when-checkbox-is-clicked on 4-06-2014, accessed on 15-01-2019:
+          // rgba has been added to change the opacity without affecting children.
+          $('input[type=checkbox]').change(function() {
+            if($(this).is(":checked")){
+              $(this).closest("div.card").addClass("redBackground");
+            } else {              $(this).closest("div.card").removeClass("redBackground");
+            }
+          });
+          // Its better with add/removeClass
+          // $('input[type=checkbox]').change(function() {
+          //   if($(this).is(":not(:checked)")){
+          //     $(this).closest("div.card").css({"background-color":"#fff}"});
+          //   } else {
+          //     $(this).closest("div.card").css({"background-color":"#fff}"});
+          //   }
+          // });
+
           authorList.forEach( function (authors, e) {
             console.log(i, authors.name);
             $('#results-' +i + " .card-body").append('<p class="card-text">' + authors.name + '</p>',

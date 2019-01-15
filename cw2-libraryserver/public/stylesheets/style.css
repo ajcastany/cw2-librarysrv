@@ -74,4 +74,8 @@ h5.card-title {
 #add-button {
   width: 4.4em; }
 
+.redBackground {
+  background-color: rgba(255, 0, 0, 0.8);
+  transition: 0.3s; }
+
 /*# sourceMappingURL=style.css.map */
