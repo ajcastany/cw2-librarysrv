@@ -78,11 +78,13 @@ var encode = encodeURIComponent($('#search-select').val());
         var userCode = data.barcode;
         var memberType = data.memberType;
         console.log(userName, userCode, memberType);
-        console.log(query);
-        $('.search-ul').append('<div class="card" id="results-' + i + '"' + '"></div>');
+        // Create a stack with the results.
+        if (query == memberType || query == " ") { $('.search-ul').append('<div class="card" id="results-' + i + '"' + '"></div>');
         $('#results-' +i).append(
           '<div class="card-body"><h4 class="card-title">' + userName + '</h4><h6 class="card-subtitle">' + memberType + '</h6><h5 class="card-title">Barcode: ' + userCode + '</h5></div>'
-        );
+        );} else {$('.results-output').append(
+          '<div class="card-body"><h4 class="card-title">Sorry!</h4><h5 class="card-title">No Results found!</h5></div>'
+        );}
       });
     });
 }
@@ -102,8 +104,9 @@ $('#search-user-button').click(function () {
   } else if ($('#search-barcode').val()) {
     lookupBarcode(query);
   }else if ($('option').val()) {
-    var query = $('option').val();
-    lookupMember(query);
+    var optionValue = $('select').val();
+    console.log(optionValue);
+    lookupMember(optionValue);
   }
 });
 
