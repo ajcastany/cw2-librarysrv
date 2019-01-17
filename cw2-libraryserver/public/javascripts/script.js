@@ -78,49 +78,46 @@ $('#add-button').click(function() {
   var authorList = $('[class^="add-author-"]').map( function (i, data) {
     var re = /\w+/;             // Checks for string not null.  TODO: Improve?
     var authorName = ($(data).val());
-    // console.log(typeof(authorName.length));
-    // console.log(re.test(authorName));
     if (re.test(authorName)) {
       return {name: $(data).val()} ;
     }
-});
-  // console.log(authorList);
-  // if (authorList.lenght > 0){
-  //   console.log(authorList);
-  // } else {console.log("This is what i want");}
-  // for loop should come here
+  });
+  function addnewAuthor(addAuthor) {
+    $.post(url + "authors/", {name: addAuthor}).then(res => {
+      return res;
+    });
+  }
+
+  function addAuthorBooks(response){
+    setTimeout(function() {
+      $.post(url + "authors/" + response.id + "/books", {bookTitle: addTitle, bookISBN: addIsbn}).then(res => {
+        console.log(res);
+        return res;
+      });
+    }, 2000);
+
+  }
+
+
   authorList.each( function ( index, data) {
     var addAuthor = data.name;
     console.log(addAuthor);
-    // We need to check if the author exists, and put it instead of post.
     var encode = encodeURIComponent(addAuthor);
     $.get(url + "search?type=author&name=" + encode).then(res => {
       console.log(res.length);
       if (res.length < 1) {
-      $.post(url + "authors/", {name: addAuthor}).then(function(response) {
-        console.log(response.id);
-    // console.log(url + "authors/" + response.id + "/books");
-    // console.log({title: addTitle, isbn: addIsbn, name: data.name});
-    $.post(url + "authors/" + response.id + "/books", {bookTitle: addTitle, bookISBN: addIsbn}).then( res => {
-      console.log(res);
-    });
-      });
+        $.post(url + "authors/", {name: addAuthor}).then(response => {
+          console.log(response);
+          addAuthorBooks(response);
+          alert("finished loading");
+        });
       } else {
         console.log(res[0]);
-        $.post(url + "authors/" + res[0].id + "/books", {bookTitle: addTitle, bookISBN: addIsbn}).then( res => {
-      console.log(res);
-    });
+        $.post(url + "authors/" + res[0].id + "/books", {bookTitle: addTitle, bookISBN: addIsbn});
       };
     });
-    // })// .then(
-    //   $.post(url + "authors/", {name: addAuthor}).then(function(response) {
-    //     console.log(response.id);
-    // // console.log(url + "authors/" + response.id + "/books");
-    // // console.log({title: addTitle, isbn: addIsbn, name: data.name});
-    // $.post(url + "authors/" + response.id + "/books", {bookTitle: addTitle, bookISBN: addIsbn}).then( res => {
-    //   console.log(res);
-    // });
-    //   }));
+    });;
+
   $('.add-form').each( function() {
     this.reset();
   });
@@ -128,7 +125,6 @@ $('#add-button').click(function() {
       '<h2 class="success"> Entry Successfully added to the database</h2>');
 
     });
-  });
 
 /*==================================================================
   Delete entries from database.
