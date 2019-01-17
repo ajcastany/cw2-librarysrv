@@ -8,6 +8,7 @@ console.log("cript loaded");    // Debug info.
    ==================================================================
    I got this content from an answer made by user Stepan Suvorov on StackOverflown:
    https://stackoverflow.com/questions/2153917/how-to-send-a-put-delete-request-in-jquery on 01-04-2014, accessed on 14-01-2019.
+   //not used at all.
 ******************************************************************/
 
 jQuery.each( [ "put", "delete" ], function( i, method ) {

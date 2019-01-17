@@ -34,12 +34,13 @@ block content
         div(class="input-group-prepend")
           span.input-group-text#inputGroup-sizing Member:
         select.custom-select#search-select
-          option(value="Staff") Staff
+          option(value=" ") Any...
           option(value="Student") Student
-          option(value="Librarian") Librarian
+          option(value="Staff") Staff
         //- input(type="text" class="form-control" id="search-author" aria-label="default" aria-describedby="inputGroup-sizing-md")
       div.d-flex.flex-row
         input(type='button' value='Search' class="btn btn-primary")#search-user-button
 
     .results-output
       ul.search-ul
+  script(src="/javascripts/users-script.js")
