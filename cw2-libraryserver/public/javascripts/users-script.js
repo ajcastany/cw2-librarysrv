@@ -77,12 +77,13 @@ var encode = encodeURIComponent($('#search-select').val());
         var userName = data.name;
         var userCode = data.barcode;
         var memberType = data.memberType;
+        console.log(data);
         console.log(userName, userCode, memberType);
         // Create a stack with the results.
         if (query == memberType || query == " ") { $('.search-ul').append('<div class="card" id="results-' + i + '"' + '"></div>');
         $('#results-' +i).append(
           '<div class="card-body"><h4 class="card-title">' + userName + '</h4><h6 class="card-subtitle">' + memberType + '</h6><h5 class="card-title">Barcode: ' + userCode + '</h5></div>'
-        );} else {$('.results-output').append(
+        );} else if (data == []) {$('.results-output').append(
           '<div class="card-body"><h4 class="card-title">Sorry!</h4><h5 class="card-title">No Results found!</h5></div>'
         );}
       });
