@@ -2,7 +2,7 @@
 
 const url = "http://localhost:3000/api/";
 
-console.log("uses-script loaded");
+console.log("users-script loaded");
 
 /*******************************************************************
 Search user functions
@@ -113,3 +113,65 @@ $('#search-user-button').click(function () {
 /*******************************************************************
 Add User Functions
 *******************************************************************/
+
+$('#add-user-button').click(function () {
+  $('.add-status').empty();
+  var userUrl = url + "users";
+  var addUName = $('#user-name').val();
+  var addBarcode = $('#add-user-barcode').val();
+  var userType = $('select').val();
+  var reName = /\w+/;           // string not null
+  var rebar = /^\d{6}$/;        // 6 digits.
+  var reType = /^Staff$|^Student$/;          // Staff or Student;
+
+  function checkUserdDuplicate(name) {
+    /*This function is not used, it should check if items exists in db and return True or False.*/
+    let encode = encodeURIComponent(name);
+    $.getJSON(url + "search?type=user&name=" + encode).then(res =>{
+      console.log(res);
+      if (res.name == addUName) {
+        console.log("true");
+        return true;
+      } else {
+        console.log("false");
+        return false;
+      }
+    });
+  }
+
+  if (reName.test(addUName) && rebar.test(addBarcode) && reType.test(userType)){
+    console.log("ok");
+    $.post(userUrl, {name: addUName, barcode: addBarcode, memberType: userType})
+      .then( res => {
+        console.log(res);
+        let uName = res.name;
+        let uCode = res.barcode;
+        let uType = res.memberType;
+        $('.add-status').append(
+          '<div class="card far-away"><h3 class="card-header">Entry Successfully Added to Database</h3><div class="card-body"><h4 class="card-title">' + uName + '</h4><h5 class="card-subtitle">' + uType + '</h5><h4 class="card-title">Barcode: ' + uCode + '</h4><div></div>',
+        );
+      }
+
+      );
+  }
+  else {
+    console.log("not ok");
+    alert("Please fill all fields");
+  }
+});
+
+/*******************************************************************
+Delete User
+******************************************************************/
+
+// function lookupDelUser() {
+//   console.log("ok");
+// }
+
+
+/*******************************************************************
+Delete addEvent Listener
+*******************************************************************/
+$('#search-del-user-button').click(function() {
+  console.log("hi");
+});

@@ -40,8 +40,8 @@ jQuery.each( [ "put", "delete" ], function( i, method ) {
    /TODO: Show info added to the database when entry added.
    /TODO: Check that all values are not nil when adding entry to db.
    /TODO: Improve RegExp pattern for authorList
-   /TODO: Fix duplicated authors.
 
+   /DONE: Fix duplicated authors.
    /DONE: Are you sure? Confirm/alert
    /DONE: add Delete book.
    /DONE: incorporate authors_books table on this file.

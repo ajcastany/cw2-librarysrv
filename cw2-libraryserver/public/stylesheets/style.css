@@ -74,8 +74,14 @@ h5.card-title {
 #add-button {
   width: 4.4em; }
 
+input:checked {
+  color: red; }
+
 .redBackground {
   background-color: rgba(255, 0, 0, 0.8);
   transition: 0.3s; }
+
+.add-status {
+  padding-top: 5em; }
 
 /*# sourceMappingURL=style.css.map */
