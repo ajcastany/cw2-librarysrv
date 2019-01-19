@@ -218,6 +218,9 @@ $('#search-del-user-button').click(function() {
 
 /*******************************************************************
 Delete functions
+==================================================================
+
+      /TODO: search by barcode, delete by barcode.
 *******************************************************************/
 
 $('#delete-entry').click( function() {
@@ -239,5 +242,104 @@ $('#delete-entry').click( function() {
         }
       });
     });
+  }
+});
+
+/*******************************************************************
+Update User Search functions
+==================================================================
+
+/TODO: Add search
+/TODO: Add update
+
+******************************************************************/
+
+function lookupUpdate(query){
+    var encode = encodeURIComponent($('#search-user').val());
+  var searchQ = url + "search?type=" + query + "&name=" + encode;
+  console.log(searchQ);
+
+  fetch(searchQ, {
+    method: 'GET',
+  })
+    .then(res => {
+      return res.json();
+    })
+    .then(response => {
+      $('.results-output').prepend("<h1 class=result-title>Results:</h1>");
+      response.forEach(function(data,i){
+        var userName = data.name;
+        var userCode = data.barcode;
+        var memberType = data.memberType;
+        var userID = data.id;
+        console.log(userID, userName, userCode, memberType);
+        $('.search-ul').append('<div class="card" id="results-' + i + '"></div>' );
+        $('#results-' + i).append(
+          '<div class="input-group"><div class="input-group-prepend"><div class="input-group-text"><input type="checkbox" name="Delete" aria-label="Delete entries" class="checkbox-del"></div></div><div class="card-body"><h4 class="card-title">' + userName + '</h4><h6 class="card-subtitle">' + memberType + '</h6><h5 class="card-title">Barcode: ' + userCode + '</h5></div><li class="userID">' + userID + '</li>',
+        );
+        $([document.documentElement, document.body]).animate({
+          scrollTop: $('.results-output').offset().top
+        }, 700);
+        $('input[type=checkbox]').change(function() {
+          if($(this).is(":checked")){
+            $(this).closest("div.card").addClass("blueBackground");
+            $(this).closest("div.card").find('.card-body').append(
+              '<button type="button" id="update-button" class="btn btn-outline-success">Update</button>');
+            // Swap elements
+            var updateName = $(this).closest('div.card').find('h4.card-title').html();
+            var updateBarcode = $(this).closest('div.card').find('h5.card-title').html();
+            var updateMember = $(this).closest('div.card').find('h6.card-subtitle').html();
+            var updatedID = $(this).closest('div.card').find('li.userID').val();
+            console.log(updateName, updateBarcode.slice(9), updateMember, updatedID);
+            $(this).closest('div.card').find('h4.card-title').replaceWith(
+              '<input class="form-control name" type="text" placeholder="' + updateName + '">' );
+            $(this).closest('div.card').find('h6.card-subtitle').replaceWith(
+              '<input class="form-control member" type="text" placeholder="' + updateMember + '">' );
+$(this).closest('div.card').find('h5.card-title').replaceWith(
+  '<input class="form-control code" type="text" placeholder="' + updateBarcode.slice(9) + '">' );
+            // AddEventlistener
+            $('#update-button').click(function() {
+              var newName = $(this).closest(div.card).find('input.name').attr("placeholder");
+              var newCode = $('input.code').attr("placeholder");
+              var newMember = $('input.member').attr("placeholder");
+
+              if ($("input.name").val() != "") { // is not empty
+                newName = $('input.name').val();
+              }
+              if ($("input.code").val() != "") { // is not empty)
+                newCode = $('input.code').val();
+              }
+              if ($('input.member').val() != ""){
+                newMember = $('input.member').val();
+              }
+              console.log(newName, newCode, newMember, updatedID);
+              // $.ajax({
+              //   url: url + "users/" +
+              //   method: "PUT",
+              //   data: {name: newName, barcode:newCode, memberType:newMember},
+              //   success: function(data) {
+              //     console.log(data);
+              //   }
+              // })
+
+              });
+          } else {
+            $(this).closest("div.card").removeClass("redBackground");
+                 }
+        });
+      });
+    });
+}
+
+/******************************************************************
+Update User Add Event Listener
+******************************************************************/
+
+$('#search-update').click(function() {
+  $('.result-title').empty();
+  $('.search-ul').empty();
+  var query = "user";
+  if ($('#search-user').val()){
+    lookupUpdate(query);
   }
 });

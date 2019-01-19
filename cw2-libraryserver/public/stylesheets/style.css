@@ -84,4 +84,8 @@ input:checked {
 .add-status {
   padding-top: 5em; }
 
+.blueBackground {
+  background-color: rgba(63, 63, 191, 0.3);
+  transition: 0.3s; }
+
 /*# sourceMappingURL=style.css.map */
