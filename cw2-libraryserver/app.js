@@ -16,6 +16,7 @@ var loanRouter = require('./routes/loans');
 var navigationView = require('./routes/navigation'); // Not working;
 var addUserRouter = require('./routes/add-user');
 var delUserRouter = require('./routes/delete-user');
+var updateUserRouter = require('./routes/update-user');
 // database variables
 var usersRouter = require('./routes/api/users');
 var authorsRouter = require('./routes/api/authors');
@@ -56,6 +57,7 @@ app.use('/users', userRouter);
 app.use('/loans', loanRouter);
 app.use('/add-user', addUserRouter);
 app.use('/delete-user', delUserRouter);
+app.use('/update-user', updateUserRouter);
 // Api starts here
 app.use('/api/users', usersRouter);
 app.use('/api/authors', authorsRouter);

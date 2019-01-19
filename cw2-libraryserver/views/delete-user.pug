@@ -16,6 +16,10 @@ block content
         li.nav-item: a(href="/delete-user" class="nav-link active") Delete User
       else
         li.nav-item: a(href="/delete-user" class="nav-link") Delete User
+      if title == "Update Users"
+        li.nav-item: a(href="/update-user" class="nav-link active") Update User
+      else
+        li.nav-item: a(href="/update-user" class="nav-link") Update User
 
   div.page-wrapper
     h1= title

@@ -17,34 +17,38 @@ block content
       else
         li.nav-item: a(href="/delete-user" class="nav-link") Delete User
       if title == "Update Users"
-        li.nav-item: a(href="/update-user" class="nav-link active") Update User
+        li.nav-item: a(href="/update-user" class="nav-link active") Update Users
       else
-        li.nav-item: a(href="/update-user" class="nav-link") Update User
+        li.nav-item: a(href="/update-user" class="nav-link") Update Users
 
   div.page-wrapper
     h1= title
-    p Welcome to #{title}
-    p.info Please fill the form bellow to add a new user to the library user catalog.
-    div.input-group.col-md-3.d-flex.column.col-centered
+    p Update User
+    p.info Please fill the form bellow to search the library user catalog.
+    div.input-group.col-md-4.d-flex.column.col-centered
       div.d-flex.flex-row
         div(class="input-group-prepend")
           span.input-group-text#inputGroup-sizing User Name
-        input(type="text" class="form-control" id="user-name" aria-label="default" aria-describedby="inputGroup-sizing-md")
+        input(type="text" class="form-control" id="search-user" aria-label="default" aria-describedby="inputGroup-sizing-md")
       div.d-flex.flex-row
         div(class="input-group-prepend")
           span.input-group-text#inputGroup-sizing Barcode:
-        input(type="text" class="form-control" id="add-user-barcode" aria-label="default" aria-describedby="inputGroup-sizing-md")
+        input(type="text" class="form-control" id="search-barcode" aria-label="default" aria-describedby="inputGroup-sizing-md")
       div.d-flex.flex-row
         div(class="input-group-prepend")
           span.input-group-text#inputGroup-sizing Member:
         select.custom-select#search-select
-          option(selected) Select...
+          option(value=" ") Any...
           option(value="Student") Student
           option(value="Staff") Staff
-        //- input(type="text" class="form-control" id="search-author" aria-label="default" aria-describedby="inputGroup-sizing-md")
       div.d-flex.flex-row
-        input(type='button' value='Add' class="btn btn-primary btn-success flex-grow-1" id="add-user-button")
+        input(type='button' value='Search' class="btn btn-primary")#search-del-user-button
+    h1 Update Entry
+    input(type='button' class="btn btn-outline-success" value='Update')#update-entry
 
-    .add-status
+    .results-output
+      ul.search-ul
+            //- Perhaps what's bellow should appear after search?
+
 
   script(src="/javascripts/users-script.js")
