@@ -68,7 +68,7 @@ h5.card-title {
 .card {
   padding-bottom: 0; }
 
-.bid, .aid {
+.bid, .aid, .userID {
   display: none; }
 
 #add-button {

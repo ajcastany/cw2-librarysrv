@@ -249,7 +249,7 @@ function lookupBook_del(qtype) {
             if($(this).is(":checked")){
               $(this).closest("div.card").addClass("redBackground");
             } else {              $(this).closest("div.card").removeClass("redBackground");
-            }
+                   }
           });
           // Its better with add/removeClass
           // $('input[type=checkbox]').change(function() {

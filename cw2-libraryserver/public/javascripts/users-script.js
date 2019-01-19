@@ -35,7 +35,7 @@ function lookupUser(query) {
 }
 
 function lookupBarcode(query) {
-var encode = encodeURIComponent($('#search-barcode').val());
+  var encode = encodeURIComponent($('#search-barcode').val());
   var searchQ = url + "search?type=" + query + "&barcode=" + encode;
   console.log(searchQ);
 
@@ -165,14 +165,79 @@ $('#add-user-button').click(function () {
 Delete User
 ******************************************************************/
 
-// function lookupDelUser() {
-//   console.log("ok");
-// }
+function lookupDelUser(query) {
+  console.log("ok");
+  var encode = encodeURIComponent($('#search-user').val());
+  var searchQ = url + "search?type=" + query + "&name=" + encode;
+  console.log(searchQ);
+
+  fetch(searchQ, {
+    method: 'GET',
+  })
+    .then(res => {
+      return res.json();
+    })
+    .then(response => {
+      $('.results-output').prepend("<h1 class=result-title>Results:</h1>");
+      response.forEach(function(data,i){
+        var userName = data.name;
+        var userCode = data.barcode;
+        var memberType = data.memberType;
+        var userID = data.id;
+        console.log(userID, userName, userCode, memberType);
+        $('.search-ul').append('<div class="card" id="results-' + i + '"></div>' );
+        $('#results-' + i).append(
+          '<div class="input-group"><div class="input-group-prepend"><div class="input-group-text"><input type="checkbox" name="Delete" aria-label="Delete entries" class="checkbox-del"></div></div><div class="card-body"><h4 class="card-title">' + userName + '</h4><h6 class="card-subtitle">' + memberType + '</h6><h5 class="card-title">Barcode: ' + userCode + '</h5></div><li class="userID">' + userID + '</li>',
+        );
+        $([document.documentElement, document.body]).animate({
+          scrollTop: $('.results-output').offset().top
+        }, 700);
+        $('input[type=checkbox]').change(function() {
+          if($(this).is(":checked")){
+            $(this).closest("div.card").addClass("redBackground");
+          } else {              $(this).closest("div.card").removeClass("redBackground");
+                 }
+        });
+      });
+    });
+}
 
 
 /*******************************************************************
 Delete addEvent Listener
 *******************************************************************/
 $('#search-del-user-button').click(function() {
-  console.log("hi");
+  $('.result-title').empty();
+  $('.search-ul').empty();
+  var query = "user";
+  if ($('#search-user').val()){
+    lookupDelUser(query);
+  }
+
+});
+
+/*******************************************************************
+Delete functions
+*******************************************************************/
+
+$('#delete-entry').click( function() {
+  var userList = [];
+  var barList = [];
+
+  $('input[type=checkbox]:checked').closest("[id^=results-]").children(".input-group").children(".userID").each(function () {
+    userList.push($(this).html());
+  });
+  console.log(userList);
+  var deleteUserMsg = confirm("Are you sure you want to delete " + userList.length + " items?");
+  if (deleteUserMsg == true){
+    userList.forEach( function (userID, i) {
+      $.ajax({
+        url: url + "users/" + userID,
+        type: "DELETE",
+        success: function() {
+          alert("Entries deleted");
+        }
+      });
+    });
+  }
 });
