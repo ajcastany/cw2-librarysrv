@@ -280,17 +280,24 @@ function lookupUpdate(query){
         $([document.documentElement, document.body]).animate({
           scrollTop: $('.results-output').offset().top
         }, 700);
+      });
         $('input[type=checkbox]').change(function() {
           if($(this).is(":checked")){
+            console.log($(this).length);
             $(this).closest("div.card").addClass("blueBackground");
-            $(this).closest("div.card").find('.card-body').append(
-              '<button type="button" id="update-button" class="btn btn-outline-success">Update</button>');
+            if ($('#update-button').length === 0){
+              $(this).closest("div.card").find('.card-body').append(
+                '<button type="button" id="update-button" class="btn btn-outline-success">Update</button>');
+            }
+
             // Swap elements
             var updateName = $(this).closest('div.card').find('h4.card-title').html();
             var updateBarcode = $(this).closest('div.card').find('h5.card-title').html();
             var updateMember = $(this).closest('div.card').find('h6.card-subtitle').html();
-            var updatedID = $(this).closest('div.card').find('li.userID').val();
-            console.log(updateName, updateBarcode.slice(9), updateMember, updatedID);
+            var updatedID = $(this).closest('div.card').find('li.userID').html();
+            console.log(updateName);
+            console.log(updateBarcode);
+            // console.log(updateName, updateBarcode.slice(9), updateMember, updatedID);
             $(this).closest('div.card').find('h4.card-title').replaceWith(
               '<input class="form-control name" type="text" placeholder="' + updateName + '">' );
             $(this).closest('div.card').find('h6.card-subtitle').replaceWith(
@@ -299,10 +306,10 @@ $(this).closest('div.card').find('h5.card-title').replaceWith(
   '<input class="form-control code" type="text" placeholder="' + updateBarcode.slice(9) + '">' );
             // AddEventlistener
             $('#update-button').click(function() {
-              var newName = $(this).closest(div.card).find('input.name').attr("placeholder");
+              var newName = $(this).closest("div.card").find('input.name').attr("placeholder");
               var newCode = $('input.code').attr("placeholder");
               var newMember = $('input.member').attr("placeholder");
-
+              var updatedID = $(this).closest('div.card').find('li.userID').html();
               if ($("input.name").val() != "") { // is not empty
                 newName = $('input.name').val();
               }
@@ -313,21 +320,23 @@ $(this).closest('div.card').find('h5.card-title').replaceWith(
                 newMember = $('input.member').val();
               }
               console.log(newName, newCode, newMember, updatedID);
-              // $.ajax({
-              //   url: url + "users/" +
-              //   method: "PUT",
-              //   data: {name: newName, barcode:newCode, memberType:newMember},
-              //   success: function(data) {
-              //     console.log(data);
-              //   }
-              // })
+              $.ajax({
+                url: url + "users/" + updatedID,
+                method: "PUT",
+                data: {name: newName, barcode:newCode, memberType:newMember},
+                success: function(data) {
+                  console.log(data);
+                  alert("Updated entry ID: " + updatedID + ", Name: " + data.name + ", Barcode: "+ data.barcode +", " +  data.memberType);
+                  location.reload();
+                }
+              });
 
               });
           } else {
-            $(this).closest("div.card").removeClass("redBackground");
+            $(this).closest("div.card").removeClass("blueBackground");
                  }
         });
-      });
+
     });
 }
 
