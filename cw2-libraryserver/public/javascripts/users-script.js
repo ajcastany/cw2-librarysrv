@@ -361,15 +361,62 @@ Loans Search Book functions
 /TODO: Search Book Function
 ******************************************************************/
 
+function lookUpBooktoLoan(qtype) {
+  var encode = encodeURIComponent($('#loans-title').val());
+  var encodeISBN = encodeURIComponent($('#loans-isbn').val());
+  var searchQ = url+ "search?type=" + qtype +
+      "&title=" + encode + "&isbn=" + encodeISBN;
+  console.log(searchQ);
 
-/******************************************************************************
+  fetch(searchQ, {
+    method: "GET"
+  })
+    .then(res=> {
+      return res.json();
+    })
+    .then(response => {
+      $('.results-output').prepend('<h1 class="result-title">Results</h1>');
+      response.forEach(function(data, i) {
+        var loanBookID = data.id;
+        $.getJSON(url + "books/" + loanBookID + "/authors", function(data) {
+          var loanBookTitle = data.title;
+          var loanBookISBN = data.isbn;
+          var loanAuthorList = data.Authors;
+          console.log(loanBookID, loanBookTitle, loanBookISBN, loanAuthorList);
+          $('.search-ul').append('<div class="card" id="results-' + i +'"></div>');
+          $('#results-' +i).append(
+            '<div class="card-body"><h4 class="card-title">' + loanBookTitle + '</h4><h6 class="card-subtitle">ISBN: ' + loanBookISBN + '</h6><h5 class="card-title">Author(s): </h5><li class=loanbookid>' + loanBookID + '</li></div>'
+          );
+          loanAuthorList.forEach(function (authors, e) {
+            $('#results-' +i).append(
+              '<p class="card-text">' + authors.name + '</p>'
+            );
+          });
+          $('#results-' +i).append(
+            '<button type="button" class="btn btn-info">Loan</button>'
+
+          );
+        });
+
+
+    });
+  });
+}
+
+/*****************************************************************
 Loans AddEventListener
 ==================================================================
 /TODO:
-*****************************************************************************/
+******************************************************************/
 
 $("#search-loan-book").click(function() {
   $('.result-title').empty();
   $('.search-ul').empty();
-  console.log("ok");
+  var qtype;
+  if ($('#loans-title').val() || $('#loans-isbn').val()) {
+    qtype = "book";
+    lookUpBooktoLoan(qtype);
+  } else if ($('#loans-author')) {
+    console.log("Authors not implemented");
+  }
 })

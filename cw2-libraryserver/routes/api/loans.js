@@ -9,6 +9,18 @@ router.get("/", function(req, res) {
         ret.json(loans, res);
     });
 });
+// **New Working
+router.get("/:BookId/books", function(req, res) {
+  db.Loan.all({ where:{BookId:req.params.BookId}}).then(function(loan) {
+    if (loan) {
+      console.log("success");
+      ret.json(loan, res);
+    } else {
+      console.log("fail");
+      res.end()
+    }
+  });
+})
 
 router.get("/:loanID", function(req, res) {
     db.Loan.findByPk(req.params.loanID).then(function(loan) {
