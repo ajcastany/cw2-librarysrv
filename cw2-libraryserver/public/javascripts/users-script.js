@@ -392,10 +392,19 @@ function lookUpBooktoLoan(qtype) {
               '<p class="card-text">' + authors.name + '</p>'
             );
           });
-          $('#results-' +i).append(
-            '<button type="button" class="btn btn-info">Loan</button>'
+          $.getJSON(url + "loans/" +loanBookID + "/books", function (data) {
+            console.log(data.length);
+            if (data.length === 0) {
+              $('#results-' +i).append(
+                '<button type="button" class="loan-book btn btn-info">Loan</button>'
+              );
+            } else {
+              $('#results-' +i).append(
+                '<button type="button" class="return-book btn btn-danger">Book on Loan, click to return the book.</button>'
+              );
+            }
+          });
 
-          );
         });
 
 
