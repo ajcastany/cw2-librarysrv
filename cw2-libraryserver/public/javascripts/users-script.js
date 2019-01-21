@@ -368,6 +368,25 @@ function lookUpBooktoLoan(qtype) {
       "&title=" + encode + "&isbn=" + encodeISBN;
   console.log(searchQ);
 
+  function loanEvent(i){
+    $('#loanBook-' + i).click(function(userID, bookID, dDate) {
+      console.log("click");
+      var divResults = $(document.createElement('div'));
+      divResults.append(
+        '<div class="modal" id="searchUser-loan" tabindex="-1" role="dialog"><div class="modal-dialog modal-dialog-centered" role="document"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="exampleModalCenteredLabel">Search User</h5><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body"><div class="card-body"><h4 class="card-title">Search User</h4></div>',
+        '<div class="input-group input-group-md><div class="input-group-prepend"><span class="input-group-text" id="inputGroup-sizing-md">Search User: </span></div><input type="text" class="form-control" aria-label="Medium" aria-describedby="inputGroup-sizing-sm"></div> <div class="modal-footer"><button type="button" class="btn btn-info" id="search-user-loan-btn">Search</button></div>',
+        '<div class="user-search-res"></div></div>',
+      );
+      divResults.dialog();
+      // $.post(url + "users/" + userID + "loans/" + bookID, {dueDate: dDate})
+      //   .then(res => {
+      //     console.log(res);
+      //   });
+    }
+
+    );
+  }
+
   fetch(searchQ, {
     method: "GET"
   })
@@ -395,14 +414,15 @@ function lookUpBooktoLoan(qtype) {
           $.getJSON(url + "loans/" +loanBookID + "/books", function (data) {
             if (data.length === 0) {
               $('#results-' +i).append(
-                '<button type="button" class="loan-book btn btn-info">Loan This Book</button>'
+                '<button type="button" id="loanBook-' + i + '" class="loan-book btn btn-info" data-toggle="modal" data-target="#searchUser-loan">Loan This Book</button>'
               );
+              loanEvent(i);
             } else {
               // console.log(data[0].id);
               var userLoanID = data[0].id;
               var dueDate = data[0].dueDate;
               $('#results-' +i).append(
-                '<div class="loans-container d-flex"><p class="card-text alert alert-danger">Book on Loan. Due Date: ' + dueDate +'</p><button type="button" class="return-book btn btn-danger">Return This Book?</button></div>'
+                '<div class="loans-container d-flex"><p class="card-text alert alert-danger">Book on Loan. Due Date: ' + dueDate +'</p><button type="button" class="return-book btn btn-danger">Return This Book?</button><button type="button" class="extend-date btn btn-info">Extend due Date</button></div>'
               );
               $('.return-book').click(function() {
                 $.getJSON(url + "loans/" + userLoanID).then(res => {
