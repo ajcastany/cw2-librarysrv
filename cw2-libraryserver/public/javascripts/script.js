@@ -95,7 +95,7 @@ $('#add-button').click(function() {
         console.log(res);
         return res;
       });
-    }, 2000);
+    }, 3000);
 
   }
 
