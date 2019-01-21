@@ -61,7 +61,7 @@ function lookupBarcode(query) {
 }
 
 function lookupMember(query){
-var encode = encodeURIComponent($('#search-select').val());
+  var encode = encodeURIComponent($('#search-select').val());
   var searchQ = url + "search?type=user&memberType=" + encode;
   console.log(searchQ);
 
@@ -125,10 +125,10 @@ $('#add-user-button').click(function () {
   var rebar = /^\d{6}$/;        // 6 digits.
   var reType = /^Staff$|^Student$/;          // Staff or Student;
 
-  function checkUserdDuplicate(name) {
+  function checkUserdDuplicate(name, barcode) {
     /*This function is not used, it should check if items exists in db and return True or False.*/
     let encode = encodeURIComponent(name);
-    $.getJSON(url + "search?type=user&name=" + encode).then(res =>{
+    $.getJSON(url + "search?type=user&name=" + encode + "&barcode=").then(res =>{
       console.log(res);
       if (res.name == addUName) {
         console.log("true");
@@ -373,11 +373,41 @@ function lookUpBooktoLoan(qtype) {
       console.log("click");
       var divResults = $(document.createElement('div'));
       divResults.append(
-        '<div class="modal" id="searchUser-loan" tabindex="-1" role="dialog"><div class="modal-dialog modal-dialog-centered" role="document"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="exampleModalCenteredLabel">Search User</h5><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body"><div class="card-body"><h4 class="card-title">Search User</h4></div>',
-        '<div class="input-group input-group-md><div class="input-group-prepend"><span class="input-group-text" id="inputGroup-sizing-md">Search User: </span></div><input type="text" class="form-control" aria-label="Medium" aria-describedby="inputGroup-sizing-sm"></div> <div class="modal-footer"><button type="button" class="btn btn-info" id="search-user-loan-btn">Search</button></div>',
+        '<div class="modal" id="searchUser-loan" tabindex="-1" role="dialog"><div class="modal-dialog modal-dialog-centered" role="document"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="exampleModalCenteredLabel">Search User or Barcode</h5><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body"><div class="card-body"><h4 class="card-title">Search User or Barcode</h4></div>',
+        '<div class="input-group input-group-md><div class="input-group-prepend"><span class="input-group-text" id="inputGroup-sizing-md">User or Code</span></div><input type="text" id="user-or-barcode" class="form-control" aria-label="Medium" aria-describedby="inputGroup-sizing-sm"></div> <div class="modal-footer"><button type="button" class="btn btn-info" id="search-user-loan-btn">Search</button></div>',
         '<div class="user-search-res"></div></div>',
       );
       divResults.dialog();
+      $('#search-user-loan-btn').click(function() {
+        var searchQ = $('#user-or-barcode').val();
+        var encode = encodeURIComponent(searchQ);
+        var reBarcode =  /^\d{6}$/;        // 6 digits.
+
+        function renderUserResults(response, index) {
+          var results = $(document.createElement('div.renderUserDialog'));
+          console.log(response.name, response.id);
+          var renderUserContent = '<div>';
+        }
+
+        if (reBarcode.test(encode)) {
+          $.getJSON(url + "search?type=user&barcode=" + encode).then(res => {
+            res.forEach(function(data, i) {
+              renderUserResults(data, i);
+            });
+          });
+          divResults.remove();
+        } else {
+          $.getJSON(url + "search?type=user&name=" + encode).then(res => {
+            res.forEach(function(data,i) {
+              renderUserResults(data, i);
+            });
+          });
+          divResults.remove();
+        }
+
+      });
+
+
       // $.post(url + "users/" + userID + "loans/" + bookID, {dueDate: dDate})
       //   .then(res => {
       //     console.log(res);
