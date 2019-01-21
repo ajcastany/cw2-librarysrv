@@ -393,23 +393,37 @@ function lookUpBooktoLoan(qtype) {
             );
           });
           $.getJSON(url + "loans/" +loanBookID + "/books", function (data) {
-            console.log(data.length);
             if (data.length === 0) {
               $('#results-' +i).append(
-                '<button type="button" class="loan-book btn btn-info">Loan</button>'
+                '<button type="button" class="loan-book btn btn-info">Loan This Book</button>'
               );
             } else {
+              // console.log(data[0].id);
+              var userLoanID = data[0].id;
+              var dueDate = data[0].dueDate;
               $('#results-' +i).append(
-                '<button type="button" class="return-book btn btn-danger">Book on Loan, click to return the book.</button>'
+                '<div class="loans-container d-flex"><p class="card-text alert alert-danger">Book on Loan. Due Date: ' + dueDate +'</p><button type="button" class="return-book btn btn-danger">Return This Book?</button></div>'
               );
+              $('.return-book').click(function() {
+                $.getJSON(url + "loans/" + userLoanID).then(res => {
+                  console.log(res);
+                  var returned = confirm("Book Returned by User: " + res.name);
+                  if (returned === true) {
+                    $.ajax({
+                      url: url + "loans/" + userLoanID,
+                      method: "DELETE",
+                      success: function() {
+                        alert("Book returned")
+                      }
+                    });
+                  }
+                });
+              });
             }
           });
-
         });
-
-
+      });
     });
-  });
 }
 
 /*****************************************************************
@@ -429,3 +443,5 @@ $("#search-loan-book").click(function() {
     console.log("Authors not implemented");
   }
 })
+
+// __EOF__

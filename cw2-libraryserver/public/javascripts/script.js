@@ -1,7 +1,7 @@
 "use strict";
 const url = "http://localhost:3000/api/";         // our API url;
 
-console.log("cript loaded");    // Debug info.
+console.log("cript loaded");    // Debug info.  Yes, a cript.
 
 /* ==================================================================
    Extending jQuery
@@ -37,6 +37,7 @@ jQuery.each( [ "put", "delete" ], function( i, method ) {
 
    --Method: POST
 
+   /CRITICAL: timeOut not working propperly?
    /TODO: Show info added to the database when entry added.
    /TODO: Check that all values are not nil when adding entry to db.
    /TODO: Improve RegExp pattern for authorList
