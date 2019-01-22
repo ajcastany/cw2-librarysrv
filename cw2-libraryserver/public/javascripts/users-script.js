@@ -383,23 +383,35 @@ function lookUpBooktoLoan(qtype) {
         var encode = encodeURIComponent(searchQ);
         var reBarcode =  /^\d{6}$/;        // 6 digits.
 
-        function renderUserResults(response, index) {
-          var results = $(document.createElement('div.renderUserDialog'));
-          console.log(response.name, response.id);
-          var renderUserContent = '<div>';
-        }
-
         if (reBarcode.test(encode)) {
           $.getJSON(url + "search?type=user&barcode=" + encode).then(res => {
             res.forEach(function(data, i) {
-              renderUserResults(data, i);
+              // renderUserResults(data, i);
             });
           });
           divResults.remove();
         } else {
           $.getJSON(url + "search?type=user&name=" + encode).then(res => {
+          var divUserResults = $(document.createElement('div.render-user-search-results'));
             res.forEach(function(data,i) {
-              renderUserResults(data, i);
+              var renderUserContent = '<div id="dialog" title="Search Results:"><li class="hidden">' + data.id + '</li><h4>' + data.name + '</h4><div class="datepicker"></div><script>$(".datepicker").datepicker({inline: true,});</script></div><button type="button" class="btn btn-info" id="loan-book-to-user">Loan</button></div>';
+              divUserResults.append(renderUserContent);
+            });
+            divUserResults.dialog();
+            $('#loan-book-to-user').click(function() {
+              divUserResults.remove();
+              divUserResults.empty();
+              divUserResults = $(document.createElement('div.render-user-search-results'));
+              var renderDueDate = '<div id="duedate-' + i + '" title="Select Due Date"></div>';
+              divUserResults.append(renderDueDate);
+              divUserResults.dialog();
+
+
+
+              // $.post(url + "users/" + userID + "loans/" + bookID, {dueDate: dDate})
+              //   .then(res => {
+              //     console.log(res);
+              //   });
             });
           });
           divResults.remove();
@@ -408,10 +420,7 @@ function lookUpBooktoLoan(qtype) {
       });
 
 
-      // $.post(url + "users/" + userID + "loans/" + bookID, {dueDate: dDate})
-      //   .then(res => {
-      //     console.log(res);
-      //   });
+
     }
 
     );
