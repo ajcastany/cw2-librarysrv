@@ -4,6 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var sassMiddleware = require('node-sass-middleware');
+var compression = require('compression');
+var helmet = require('helmet');
 const cors = require("cors");
 const db = require("./data");
 
@@ -28,6 +30,10 @@ var searchRouter = require("./routes/api/search");
 
 var app = express();
 
+// compress all routes
+app.use(compression());
+// Always wear a Helmet.
+app.use(helmet());
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
