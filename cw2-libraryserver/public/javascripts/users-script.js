@@ -368,8 +368,8 @@ function lookUpBooktoLoan(qtype) {
       "&title=" + encode + "&isbn=" + encodeISBN;
   console.log(searchQ);
 
-  function loanEvent(i){
-    $('#loanBook-' + i).click(function(userID, bookID, dDate) {
+  function loanEvent(i, bookID){
+    $('#loanBook-' + i).click(function() {
       console.log("click");
       var divResults = $(document.createElement('div'));
       divResults.append(
@@ -394,24 +394,33 @@ function lookUpBooktoLoan(qtype) {
           $.getJSON(url + "search?type=user&name=" + encode).then(res => {
           var divUserResults = $(document.createElement('div.render-user-search-results'));
             res.forEach(function(data,i) {
-              var renderUserContent = '<div id="dialog" title="Search Results:"><li class="hidden">' + data.id + '</li><h4>' + data.name + '</h4><div class="datepicker"></div><script>$(".datepicker").datepicker({inline: true,});</script></div><button type="button" class="btn btn-info" id="loan-book-to-user">Loan</button></div>';
+              var renderUserContent = '<div id="dialog" class="user-ID-Div" title="Search Results"><li class="hidden">' + data.id + '</li><h4>' + data.name + '</h4><div class="datepicker"></div><script>$(".datepicker").datepicker({inline: true, format: "dd-mm-yyyy"});</script></div><button type="button" class="btn btn-info" id="loan-book-to-user">Loan</button></div>';
               divUserResults.append(renderUserContent);
             });
             divUserResults.dialog();
+
             $('#loan-book-to-user').click(function() {
-              divUserResults.remove();
-              divUserResults.empty();
-              divUserResults = $(document.createElement('div.render-user-search-results'));
-              var renderDueDate = '<div id="duedate-' + i + '" title="Select Due Date"></div>';
-              divUserResults.append(renderDueDate);
-              divUserResults.dialog();
+              var date = $('.datepicker').val();
+              function toDate(dateStr) {
+                const [month, day, year] = dateStr.split("/");
+                return new Date(year, month - 1, day, 17, 30); // Half an hour after closing
+              }
+              var parseDate = toDate(date);
+              var userID = $('li.hidden').html();
+              console.log(bookID, userID);
+              $.post(url + "users/" + userID + "/loans/" + bookID, {dueDate: parseDate})
+                .then(res => {
+                  console.log(res);
+                });
+              // divUserResults.remove();
+              // divUserResults.empty();
+              // divUserResults = $(document.createElement('div.render-user-search-results'));
+              // var renderDueDate = '<div id="duedate-' + i + '" title="Select Due Date"></div>';
+              // divUserResults.append(renderDueDate);
+              // divUserResults.dialog();
 
 
 
-              // $.post(url + "users/" + userID + "loans/" + bookID, {dueDate: dDate})
-              //   .then(res => {
-              //     console.log(res);
-              //   });
             });
           });
           divResults.remove();
@@ -455,7 +464,7 @@ function lookUpBooktoLoan(qtype) {
               $('#results-' +i).append(
                 '<button type="button" id="loanBook-' + i + '" class="loan-book btn btn-info" data-toggle="modal" data-target="#searchUser-loan">Loan This Book</button>'
               );
-              loanEvent(i);
+              loanEvent(i, loanBookID);
             } else {
               // console.log(data[0].id);
               var userLoanID = data[0].id;
