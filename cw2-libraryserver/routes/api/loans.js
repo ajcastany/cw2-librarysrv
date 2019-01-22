@@ -17,10 +17,24 @@ router.get("/:BookId/books", function(req, res) {
       ret.json(loan, res);
     } else {
       console.log("fail");
-      res.end()
+      res.end();
     }
   });
-})
+});
+
+router.get("/:UserId/users", function(req, res){
+  db.Loan.all({
+    where:{UserId:req.params.UserId}
+  }).then(function(loan) {
+    if (loan) {
+      console.log("success");
+      ret.json(loan,res);
+    }else {
+      console.log("fail");
+      res.end();
+    }
+  });
+});
 
 router.get("/:loanID", function(req, res) {
     db.Loan.findByPk(req.params.loanID).then(function(loan) {

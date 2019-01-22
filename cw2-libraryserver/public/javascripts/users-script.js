@@ -81,11 +81,11 @@ function lookupMember(query){
         console.log(userName, userCode, memberType);
         // Create a stack with the results.
         if (query == memberType || query == " ") { $('.search-ul').append('<div class="card" id="results-' + i + '"' + '"></div>');
-        $('#results-' +i).append(
-          '<div class="card-body"><h4 class="card-title">' + userName + '</h4><h6 class="card-subtitle">' + memberType + '</h6><h5 class="card-title">Barcode: ' + userCode + '</h5></div>'
-        );} else if (data == []) {$('.results-output').append(
-          '<div class="card-body"><h4 class="card-title">Sorry!</h4><h5 class="card-title">No Results found!</h5></div>'
-        );}
+                                                   $('#results-' +i).append(
+                                                     '<div class="card-body"><h4 class="card-title">' + userName + '</h4><h6 class="card-subtitle">' + memberType + '</h6><h5 class="card-title">Barcode: ' + userCode + '</h5></div>'
+                                                   );} else if (data == []) {$('.results-output').append(
+                                                     '<div class="card-body"><h4 class="card-title">Sorry!</h4><h5 class="card-title">No Results found!</h5></div>'
+                                                   );}
       });
     });
 }
@@ -153,7 +153,7 @@ $('#add-user-button').click(function () {
         );
       }
 
-      );
+           );
   }
   else {
     console.log("not ok");
@@ -255,7 +255,7 @@ Update User Search functions
 ******************************************************************/
 
 function lookupUpdate(query){
-    var encode = encodeURIComponent($('#search-user').val());
+  var encode = encodeURIComponent($('#search-user').val());
   var searchQ = url + "search?type=" + query + "&name=" + encode;
   console.log(searchQ);
 
@@ -281,61 +281,61 @@ function lookupUpdate(query){
           scrollTop: $('.results-output').offset().top
         }, 700);
       });
-        $('input[type=checkbox]').change(function() {
-          if($(this).is(":checked")){
-            console.log($(this).length);
-            $(this).closest("div.card").addClass("blueBackground");
-            if ($('#update-button').length === 0){
-              $(this).closest("div.card").find('.card-body').append(
-                '<button type="button" id="update-button" class="btn btn-outline-success">Update</button>');
-            }
+      $('input[type=checkbox]').change(function() {
+        if($(this).is(":checked")){
+          console.log($(this).length);
+          $(this).closest("div.card").addClass("blueBackground");
+          if ($('#update-button').length === 0){
+            $(this).closest("div.card").find('.card-body').append(
+              '<button type="button" id="update-button" class="btn btn-outline-success">Update</button>');
+          }
 
-            // Swap elements
-            var updateName = $(this).closest('div.card').find('h4.card-title').html();
-            var updateBarcode = $(this).closest('div.card').find('h5.card-title').html();
-            var updateMember = $(this).closest('div.card').find('h6.card-subtitle').html();
+          // Swap elements
+          var updateName = $(this).closest('div.card').find('h4.card-title').html();
+          var updateBarcode = $(this).closest('div.card').find('h5.card-title').html();
+          var updateMember = $(this).closest('div.card').find('h6.card-subtitle').html();
+          var updatedID = $(this).closest('div.card').find('li.userID').html();
+          console.log(updateName);
+          console.log(updateBarcode);
+          // console.log(updateName, updateBarcode.slice(9), updateMember, updatedID);
+          $(this).closest('div.card').find('h4.card-title').replaceWith(
+            '<input class="form-control name" type="text" placeholder="' + updateName + '">' );
+          $(this).closest('div.card').find('h6.card-subtitle').replaceWith(
+            '<input class="form-control member" type="text" placeholder="' + updateMember + '">' );
+          $(this).closest('div.card').find('h5.card-title').replaceWith(
+            '<input class="form-control code" type="text" placeholder="' + updateBarcode.slice(9) + '">' );
+          // AddEventlistener
+          $('#update-button').click(function() {
+            var newName = $(this).closest("div.card").find('input.name').attr("placeholder");
+            var newCode = $('input.code').attr("placeholder");
+            var newMember = $('input.member').attr("placeholder");
             var updatedID = $(this).closest('div.card').find('li.userID').html();
-            console.log(updateName);
-            console.log(updateBarcode);
-            // console.log(updateName, updateBarcode.slice(9), updateMember, updatedID);
-            $(this).closest('div.card').find('h4.card-title').replaceWith(
-              '<input class="form-control name" type="text" placeholder="' + updateName + '">' );
-            $(this).closest('div.card').find('h6.card-subtitle').replaceWith(
-              '<input class="form-control member" type="text" placeholder="' + updateMember + '">' );
-$(this).closest('div.card').find('h5.card-title').replaceWith(
-  '<input class="form-control code" type="text" placeholder="' + updateBarcode.slice(9) + '">' );
-            // AddEventlistener
-            $('#update-button').click(function() {
-              var newName = $(this).closest("div.card").find('input.name').attr("placeholder");
-              var newCode = $('input.code').attr("placeholder");
-              var newMember = $('input.member').attr("placeholder");
-              var updatedID = $(this).closest('div.card').find('li.userID').html();
-              if ($("input.name").val() != "") { // is not empty
-                newName = $('input.name').val();
+            if ($("input.name").val() != "") { // is not empty
+              newName = $('input.name').val();
+            }
+            if ($("input.code").val() != "") { // is not empty)
+              newCode = $('input.code').val();
+            }
+            if ($('input.member').val() != ""){
+              newMember = $('input.member').val();
+            }
+            console.log(newName, newCode, newMember, updatedID);
+            $.ajax({
+              url: url + "users/" + updatedID,
+              method: "PUT",
+              data: {name: newName, barcode:newCode, memberType:newMember},
+              success: function(data) {
+                console.log(data);
+                alert("Updated entry ID: " + updatedID + ", Name: " + data.name + ", Barcode: "+ data.barcode +", " +  data.memberType);
+                location.reload();
               }
-              if ($("input.code").val() != "") { // is not empty)
-                newCode = $('input.code').val();
-              }
-              if ($('input.member').val() != ""){
-                newMember = $('input.member').val();
-              }
-              console.log(newName, newCode, newMember, updatedID);
-              $.ajax({
-                url: url + "users/" + updatedID,
-                method: "PUT",
-                data: {name: newName, barcode:newCode, memberType:newMember},
-                success: function(data) {
-                  console.log(data);
-                  alert("Updated entry ID: " + updatedID + ", Name: " + data.name + ", Barcode: "+ data.barcode +", " +  data.memberType);
-                  location.reload();
-                }
-              });
+            });
 
-              });
-          } else {
-            $(this).closest("div.card").removeClass("blueBackground");
-                 }
-        });
+          });
+        } else {
+          $(this).closest("div.card").removeClass("blueBackground");
+        }
+      });
 
     });
 }
@@ -392,7 +392,7 @@ function lookUpBooktoLoan(qtype) {
           divResults.remove();
         } else {
           $.getJSON(url + "search?type=user&name=" + encode).then(res => {
-          var divUserResults = $(document.createElement('div.render-user-search-results'));
+            var divUserResults = $(document.createElement('div.render-user-search-results'));
             res.forEach(function(data,i) {
               var renderUserContent = '<div id="dialog" class="user-ID-Div" title="Search Results"><li class="hidden">' + data.id + '</li><h4>' + data.name + '</h4><div class="datepicker"></div><script>$(".datepicker").datepicker({inline: true, format: "dd-mm-yyyy"});</script></div><button type="button" class="btn btn-info" id="loan-book-to-user">Loan</button></div>';
               divUserResults.append(renderUserContent);
@@ -418,21 +418,13 @@ function lookUpBooktoLoan(qtype) {
               // var renderDueDate = '<div id="duedate-' + i + '" title="Select Due Date"></div>';
               // divUserResults.append(renderDueDate);
               // divUserResults.dialog();
-
-
-
             });
           });
           divResults.remove();
         }
-
       });
-
-
-
     }
-
-    );
+                             );
   }
 
   fetch(searchQ, {
@@ -469,22 +461,27 @@ function lookUpBooktoLoan(qtype) {
               // console.log(data[0].id);
               var userLoanID = data[0].id;
               var dueDate = data[0].dueDate;
-              $('#results-' +i).append(
-                '<div class="loans-container d-flex"><p class="card-text alert alert-danger">Book on Loan. Due Date: ' + dueDate +'</p><button type="button" class="return-book btn btn-danger">Return This Book?</button><button type="button" class="extend-date btn btn-info">Extend due Date</button></div>'
-              );
-              $('.return-book').click(function() {
-                $.getJSON(url + "loans/" + userLoanID).then(res => {
-                  console.log(res);
-                  var returned = confirm("Book Returned by User: " + res.name);
-                  if (returned === true) {
-                    $.ajax({
-                      url: url + "loans/" + userLoanID,
-                      method: "DELETE",
-                      success: function() {
-                        alert("Book returned")
-                      }
-                    });
-                  }
+              var UserID = data[0].UserId;
+              $.getJSON(url + "users/" + UserID, function(res) {
+                var userNameforLoan =  String(res.name);
+
+                $('#results-' +i).append(
+                  '<div class="loans-container d-flex"><p class="card-text alert alert-danger">Book on Loan to: ' + String(userNameforLoan) + '. Due Date: ' + dueDate +'</p><button type="button" class="return-book btn btn-danger">Return This Book?</button><button type="button" class="extend-date btn btn-info">Extend due Date</button></div>'
+                );
+                $('.return-book').click(function() {
+                  $.getJSON(url + "loans/" + userLoanID).then(res => {
+                    console.log(res);
+                    var returned = confirm("Book Returned by User: " + userNameforLoan);
+                    if (returned === true) {
+                      $.ajax({
+                        url: url + "loans/" + userLoanID,
+                        method: "DELETE",
+                        success: function() {
+                          alert("Book returned");
+                        }
+                      });
+                    }
+                  });
                 });
               });
             }
@@ -492,6 +489,57 @@ function lookUpBooktoLoan(qtype) {
         });
       });
     });
+}
+
+/******************************************************************
+Loans Search User
+******************************************************************/
+
+function lookUpLoanUser(qtype){
+  var encode = encodeURIComponent($('#loans-search-user').val());
+  var re = /\d+/;
+  if (re.test(encode)) {var encodeBarCode = encode; encode = "";} else {
+    var encodeBarCode = "";
+  }
+  var searchQ = url + "search?type=" + qtype + "&name=" + encode + "&barcode=" + encodeBarCode;
+  console.log(searchQ);
+
+  fetch(searchQ, {
+    method: "GET",
+  })
+    .then(res => {
+      return res.json();
+    })
+    .then(response => {
+      $('.results-output').prepend('<h1 class="result-title">Results</h1>');
+      response.forEach(function(data, i) {
+        console.log(data);
+        var loanUserID = data.id;
+        var loanUserName = data.name;
+        var loanUserMember = data.memberType;
+        $('.search-ul').append('<div class="card" id="results-' + i +'"></div>');
+        $('#results-' +i).append(
+          '<div class="card-body"><h4 class="card-title">User: ' + loanUserName + '</h4><h6 class="card-subtitle">' + loanUserMember + '</h6><h5 class="card-title books-on-loan">Books on Loan: </h5><li class=loanbookid>' + loanUserID + '</li></div>'
+        );
+        $.getJSON(url + "loans/" + loanUserID + "/users", function(data) {
+          // if (data) {
+          //   $('#results-' + i).append(
+          //     '<p class="card-text">No books on Loan</p>'
+          //   );
+          // }
+          data.forEach(function(data, i) {
+            // console.log(data.id, data.UserId, data.BookId);
+            $.getJSON(url + "books/" + data.BookId + "?allEntities=true", function(data) {
+              console.log(data.title);
+                $('[id^=results-]').append(
+                            '<p class="card-text book-resul-t-' + i + '">' + data.title + '</p>',
+                );
+            });
+          });
+        });
+      });
+    });
+
 }
 
 /*****************************************************************
@@ -507,9 +555,11 @@ $("#search-loan-book").click(function() {
   if ($('#loans-title').val() || $('#loans-isbn').val()) {
     qtype = "book";
     lookUpBooktoLoan(qtype);
-  } else if ($('#loans-author')) {
-    console.log("Authors not implemented");
+  } else if ($('#loans-search-user')) {
+    qtype="user";
+    console.log("yas");
+    lookUpLoanUser(qtype);
   }
-})
+});
 
 // __EOF__
