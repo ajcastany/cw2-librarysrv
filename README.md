@@ -90,8 +90,8 @@ Search for an user and then *click* on the left hand side selection box.  Select
 You can visit this project [github.com](https://github.com/ajcastany/cw2-librarysrv).
 
 [add-user]: /readme-img/ponty-add-usr.png "Add User"
-[search-user]:/readme-img/ponty-search-usr.png "Search User"
-[search-barcode]:/readme-img/ponty-search-bar.png "Search barcode"
-[update-user]:/readme-img/ponty-update-usr.png "Update User"
-[update-user-after]:/readme-img/ponty-update-usr-after.png "Update User Alert"
-[delete-user]:/readme-img/ponty-delete-usr.png "Delete User"
+[search-user]: /readme-img/ponty-search-usr.png "Search User"
+[search-barcode]: /readme-img/ponty-search-bar.png "Search barcode"
+[update-user]: /readme-img/ponty-update-usr.png "Update User"
+[update-user-after]: /readme-img/ponty-update-usr-after.png "Update User Alert"
+[delete-user]: /readme-img/ponty-delete-usr.png "Delete User"
