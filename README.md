@@ -54,13 +54,17 @@ Type a search string and click on the Search button and the results will appear 
 ##  U3 - Update a User’s Name or Member Type
 [!alt][update-user]
 
-Search a User to update and *click* the left-hand select box.  The fields will change and become editable by the user.  Fields show their current values (in the database) if left blank it will send the same data.  Click Update to save changes to the database.
+Search a User to update and *click* the left-hand selection box.  The fields will change and become editable by the user.  Fields show their current values (in the database) if left blank it will send the same data.  Click Update to save changes to the database.
 
 [!alt][update-user-after]
 
 After the database has been written an alert box will show the entry just updated.
 
 #####  U4 - Remove a User
+
+[!alt][delete-user]
+
+Search for an user and then *click* on the left hand side selection box.  Selected Entry will turn red.  Click on the delete button to delete the entry selected.  A confirm message box will ask if the user want to delete the selected entry(ies).  If answered **Ok**, it will show another alert after every entry is deleted from the database.  If more than one entry is selected it will bulk delete them.
 
 #### Books:
 
@@ -90,3 +94,4 @@ You can visit this project [github.com](https://github.com/ajcastany/cw2-library
 [search-barcode]:/readme-img/ponty-search-bar.png "Search barcode"
 [update-user]:/readme-img/ponty-update-usr.png "Update User"
 [update-user-after]:/readme-img/ponty-update-usr-after.png "Update User Alert"
+[delete-user]:/readme-img/ponty-delete-usr.png "Delete User"
