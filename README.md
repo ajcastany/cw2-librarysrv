@@ -31,15 +31,25 @@ The initial routes provided has been moved to `/routes/api` while the .pug files
 
 #### Users:
 
-##### U1 - Add a new User to the Library system with the fields Name, Barcode and Member Type(Staff/Student)
+This functions are in `public/javascripts/user-script.js`.
+
+## U1 - Add a new User to the Library system with the fields Name, Barcode and Member Type(Staff/Student)
 
 ![alt text][add-user]
 
 Write down the new user's Name and Barcode, select from the list the member type (Staff or Student) and click the add button.  The entry added will appear bellow.
 
-#####  U2 - Get a User’s details from the Library system by searching on Name or Barcode
+##  U2 - Get a User’s details from the Library system by searching on Name or Barcode
 
-![alt]
+### Search by Name
+![alt][search-user]
+
+Type a search string and click on the Search button and the results will appear bellow.  If all fields are left empty, but either Staff or Student is selected, all Students or Staff members will be listed in the Results (details on ).
+
+### Search by Barcode
+![alt][search-barcode]
+
+Type a search string and click on the Search button and the results will appear bellow.
 
 #####  U3 - Update a User’s Name or Member Type
 #####  U4 - Remove a User
@@ -62,9 +72,12 @@ Write down the new user's Name and Barcode, select from the list the member type
 
 ## Known Bugs:
 
- - Error on deleteting book (cause unknown): XML Parsing Error: no element found Location: http://localhost:3000/api/books/15 Line Number 1, Column 1:
+ - Error on deleteting book (cause unknown): `XML Parsing Error: no element found Location: http://localhost:8000/api/books/15 Line Number 1, Column 1`
  - User has to wait a few seconds for the sqlite database to unlock when adding a book with more than one autor.  setTimeout has been added to the function, but does not seem to have any effect.
 
 You can visit this project [github.com](https://github.com/ajcastany/cw2-librarysrv).
 
 [add-user]: https://github.com/ajcastany/cw2-librarysrv/blob/master/readme-img/ponty-add-usr.png "Add User"
+
+[search-user]:https://github.com/ajcastany/cw2-librarysrv/blob/master/readme-img/ponty-search-usr.png "Search User"
+[search-barcode]:/readme-img/ponty-search-bar.png "Search barcode"
