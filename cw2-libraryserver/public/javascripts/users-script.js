@@ -389,6 +389,8 @@ function lookUpBooktoLoan(qtype) {
         }).then( res => {
           divExtend.remove();
           $('[id^=results-]').remove();
+          alert("Due Date extented");
+          location.reload();
         });
       });
     });
