@@ -33,7 +33,7 @@ The initial routes provided has been moved to `/routes/api` while the .pug files
 
 ##### U1 - Add a new User to the Library system with the fields Name, Barcode and Member Type(Staff/Student)
 
-![alt text](/readme-img/ponty-add-usr)
+![alt text](https://github.com/ajcastany/cw2-librarysrv/blob/master/readme-img/ponty-add-usr.png"Add User")
 
 #####  U2 - Get a User’s details from the Library system by searching on Name or Barcode
 #####  U3 - Update a User’s Name or Member Type
