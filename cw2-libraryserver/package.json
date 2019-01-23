@@ -1,6 +1,6 @@
 {
   "name": "cw2-libraryserver",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "engines": {
     "node": "11.6.0"
   },
