@@ -35,7 +35,7 @@ This functions are in `public/javascripts/user-script.js`.
 
 ## U1 - Add a new User to the Library system with the fields Name, Barcode and Member Type(Staff/Student)
 
-![alt text][user]
+![alt text][add-user]
 
 Write down the new user's Name and Barcode, select from the list the member type (Staff or Student) and click the add button.  The entry added will appear bellow.
 
@@ -52,17 +52,17 @@ Type a search string and click on the Search button and the results will appear 
 Type a search string and click on the Search button and the results will appear bellow.
 
 ##  U3 - Update a User’s Name or Member Type
-[!alt](./readme-img/ponty-update-usr.png "Update User")
+![alt][update-user]
 
 Search a User to update and *click* the left-hand selection box.  The fields will change and become editable by the user.  Fields show their current values (in the database) if left blank it will send the same data.  Click Update to save changes to the database.
 
-[!alt](./readme-img/ponty-update-usr-after.png "Update User Alert")
+![alt][update-user-after]
 
 After the database has been written an alert box will show the entry just updated.
 
 #####  U4 - Remove a User
 
-[!alt][delete-user]
+![alt][delete-user]
 
 Search for an user and then *click* on the left hand side selection box.  Selected Entry will turn red.  Click on the delete button to delete the entry selected.  A confirm message box will ask if the user want to delete the selected entry(ies).  If answered **Ok**, it will show another alert after every entry is deleted from the database.  If more than one entry is selected it will bulk delete them.
 
@@ -92,4 +92,6 @@ You can visit this project [github.com](https://github.com/ajcastany/cw2-library
 [add-user]: /readme-img/ponty-add-usr.png "Add User"
 [search-user]: /readme-img/ponty-search-usr.png "Search User"
 [search-barcode]: /readme-img/ponty-search-bar.png "Search barcode"
-<!-- [delete-user]: ./readme-img/ponty-delete-usr.png "Delete User" -->
+[update-user]: /readme-img/ponty-update-usr.png "Update User"
+[update-user-after]: /readme-img/ponty-update-usr-after.png "Update User Alert"
+[delete-user]: /readme-img/ponty-delete-usr.png "Delete User"
