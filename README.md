@@ -92,6 +92,4 @@ You can visit this project [github.com](https://github.com/ajcastany/cw2-library
 [add-user]: /readme-img/ponty-add-usr.png "Add User"
 [search-user]: /readme-img/ponty-search-usr.png "Search User"
 [search-barcode]: /readme-img/ponty-search-bar.png "Search barcode"
-[update-user]: 
-[update-user-after]: 
-[delete-user]: ./readme-img/ponty-delete-usr.png "Delete User"
+<!-- [delete-user]: ./readme-img/ponty-delete-usr.png "Delete User" -->
