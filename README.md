@@ -51,7 +51,15 @@ Type a search string and click on the Search button and the results will appear 
 
 Type a search string and click on the Search button and the results will appear bellow.
 
-#####  U3 - Update a User’s Name or Member Type
+##  U3 - Update a User’s Name or Member Type
+[!alt][update-user]
+
+Search a User to update and *click* the left-hand select box.  The fields will change and become editable by the user.  Fields show their current values (in the database) if left blank it will send the same data.  Click Update to save changes to the database.
+
+[!alt][update-user-after]
+
+After the database has been written an alert box will show the entry just updated.
+
 #####  U4 - Remove a User
 
 #### Books:
@@ -77,7 +85,8 @@ Type a search string and click on the Search button and the results will appear 
 
 You can visit this project [github.com](https://github.com/ajcastany/cw2-librarysrv).
 
-[add-user]: https://github.com/ajcastany/cw2-librarysrv/blob/master/readme-img/ponty-add-usr.png "Add User"
-
-[search-user]:https://github.com/ajcastany/cw2-librarysrv/blob/master/readme-img/ponty-search-usr.png "Search User"
+[add-user]: /readme-img/ponty-add-usr.png "Add User"
+[search-user]:/readme-img/ponty-search-usr.png "Search User"
 [search-barcode]:/readme-img/ponty-search-bar.png "Search barcode"
+[update-user]:/readme-img/ponty-update-usr.png "Update User"
+[update-user-after]:/readme-img/ponty-update-usr-after.png "Update User Alert"
