@@ -1,5 +1,5 @@
 "use strict";
-const url = "http://localhost:3000/api/";         // our API url;
+const url = "http://localhost:8000/api/";         // our API url;
 
 console.log("cript loaded");    // Debug info.  Yes, a cript.
 
@@ -73,7 +73,7 @@ $('#more-authors').click( function () {
 
 $('#add-button').click(function() {
   $(".add-status").empty();
-  var bookUrl = url + "books";                   // localhost:3000/api/
+  var bookUrl = url + "books";                   // localhost:8000/api/
   // Values from form.
   var addTitle = $('#add-book').val();
   var addIsbn = $('#add-isbn').val();
