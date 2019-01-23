@@ -368,6 +368,32 @@ function lookUpBooktoLoan(qtype) {
       "&title=" + encode + "&isbn=" + encodeISBN;
   console.log(searchQ);
 
+  function extendEvent(i, userLoanId){
+    $('.extend-date').click(function() {
+      console.log(userLoanId);
+      var divExtend = $(document.createElement('div.extend-event'));
+ var renderdateContent = '<div id="dialog" class="user-ID-Div" title="Extend due Date"><h4>New Due Date</h4><div class="datepicker"></div><script>$(".datepicker").datepicker({inline: true, format: "dd-mm-yyyy"});</script></div><button type="button" class="btn btn-info" id="extend-due-date-btn">Update</button></div>';
+      divExtend.append(renderdateContent);
+      divExtend.dialog();
+      $('#extend-due-date-btn').click(function() {
+        var date = $('.datepicker').val();
+        function toDate(dateStr) {
+          const [month, day, year] = dateStr.split("/");
+          return new Date(year, month - 1, day, 17, 30); // Half an hour after closing
+        }
+        console.log(toDate(date));
+        $.ajax({
+          url: url + "loans/" + userLoanId,
+          method: "PUT",
+          data: {dueDate:date},
+        }).then( res => {
+          divExtend.remove();
+          $('[id^=results-]').remove();
+        });
+      });
+    });
+  }
+
   function loanEvent(i, bookID){
     $('#loanBook-' + i).click(function() {
       console.log("click");
@@ -411,6 +437,8 @@ function lookUpBooktoLoan(qtype) {
               $.post(url + "users/" + userID + "/loans/" + bookID, {dueDate: parseDate})
                 .then(res => {
                   console.log(res);
+                  divUserResults.remove();
+                  // $('[id^=results-]').remove();
                 });
               // divUserResults.remove();
               // divUserResults.empty();
@@ -466,23 +494,32 @@ function lookUpBooktoLoan(qtype) {
                 var userNameforLoan =  String(res.name);
 
                 $('#results-' +i).append(
-                  '<div class="loans-container d-flex"><p class="card-text alert alert-danger">Book on Loan to: ' + String(userNameforLoan) + '. Due Date: ' + dueDate +'</p><button type="button" class="return-book btn btn-danger">Return This Book?</button><button type="button" class="extend-date btn btn-info">Extend due Date</button></div>'
+                  '<div class="loans-container d-flex"><p class="card-text alert alert-danger">Book on Loan to: ' + String(userNameforLoan) + '. Due Date: ' + dueDate +'</p><p class="hidden">' + userLoanID + '</p><button type="button" id="return-book" class="return-book btn btn-danger">Return This Book?</button><button type="button" class="extend-date btn btn-info">Extend due Date</button></div>'
                 );
                 $('.return-book').click(function() {
+                  var loanID = $(this).closest('[id^=results-]').find('li.hidden').html();
+                  console.log(loanID);
                   $.getJSON(url + "loans/" + userLoanID).then(res => {
                     console.log(res);
-                    var returned = confirm("Book Returned by User: " + userNameforLoan);
+                    var returned = confirm("Return Book by User: " + userNameforLoan);
                     if (returned === true) {
                       $.ajax({
                         url: url + "loans/" + userLoanID,
                         method: "DELETE",
                         success: function() {
                           alert("Book returned");
+                          location.reload();
                         }
                       });
                     }
                   });
                 });
+                extendEvent(i, userLoanID);
+                // $('.extend-date').click(function() {
+                //   console.log("click");
+
+
+                // });
               });
             }
           });

@@ -10,7 +10,7 @@ To reduce deployment time, we(me) have chosen to use:
   * **pug**: as a view engine for the Express.js framework
   * **scss**: Not really needed, but it was prefferred over plain CSS for scalability, and $variables.
 
-This applicaton has been [deployed](http://c1868921.appspot.com/) to Google Cloud and it's fully functional, with the limitations that come from using sqlite3.
+This applicaton has been [deployed](http://c1868921.appspot.com/) to Google Cloud and it's fully functional.
 
 
 ## Functionality:
