@@ -33,9 +33,14 @@ The initial routes provided has been moved to `/routes/api` while the .pug files
 
 ##### U1 - Add a new User to the Library system with the fields Name, Barcode and Member Type(Staff/Student)
 
-![alt text](https://github.com/ajcastany/cw2-librarysrv/blob/master/readme-img/ponty-add-usr.png "Add User")
+![alt text][add-user]
+
+Write down the new user's Name and Barcode, select from the list the member type (Staff or Student) and click the add button.  The entry added will appear bellow.
 
 #####  U2 - Get a User’s details from the Library system by searching on Name or Barcode
+
+![alt]
+
 #####  U3 - Update a User’s Name or Member Type
 #####  U4 - Remove a User
 
@@ -61,3 +66,5 @@ The initial routes provided has been moved to `/routes/api` while the .pug files
  - User has to wait a few seconds for the sqlite database to unlock when adding a book with more than one autor.  setTimeout has been added to the function, but does not seem to have any effect.
 
 You can visit this project [github.com](https://github.com/ajcastany/cw2-librarysrv).
+
+[add-user]: https://github.com/ajcastany/cw2-librarysrv/blob/master/readme-img/ponty-add-usr.png "Add User"
