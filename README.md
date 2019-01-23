@@ -35,7 +35,7 @@ This functions are in `public/javascripts/user-script.js`.
 
 ## U1 - Add a new User to the Library system with the fields Name, Barcode and Member Type(Staff/Student)
 
-![alt text][add-user]
+![alt text](user])
 
 Write down the new user's Name and Barcode, select from the list the member type (Staff or Student) and click the add button.  The entry added will appear bellow.
 
@@ -52,11 +52,11 @@ Type a search string and click on the Search button and the results will appear 
 Type a search string and click on the Search button and the results will appear bellow.
 
 ##  U3 - Update a User’s Name or Member Type
-[!alt][update-user]
+[!alt](/readme-img/ponty-update-usr.png "Update User")
 
 Search a User to update and *click* the left-hand selection box.  The fields will change and become editable by the user.  Fields show their current values (in the database) if left blank it will send the same data.  Click Update to save changes to the database.
 
-[!alt][update-user-after]
+[!alt](/readme-img/ponty-update-usr-after.png "Update User Alert")
 
 After the database has been written an alert box will show the entry just updated.
 
@@ -92,6 +92,6 @@ You can visit this project [github.com](https://github.com/ajcastany/cw2-library
 [add-user]: /readme-img/ponty-add-usr.png "Add User"
 [search-user]: /readme-img/ponty-search-usr.png "Search User"
 [search-barcode]: /readme-img/ponty-search-bar.png "Search barcode"
-[update-user]: /readme-img/ponty-update-usr.png "Update User"
-[update-user-after]: /readme-img/ponty-update-usr-after.png "Update User Alert"
+[update-user]: 
+[update-user-after]: 
 [delete-user]: /readme-img/ponty-delete-usr.png "Delete User"
