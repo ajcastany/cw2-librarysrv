@@ -15,12 +15,14 @@
     "cors": "^2.8.5",
     "debug": "~2.6.9",
     "express": "~4.16.0",
+    "express-favicon": "^2.0.1",
     "helmet": "^3.15.0",
     "http-errors": "~1.6.2",
     "morgan": "~1.9.0",
     "node-sass-middleware": "^0.11.0",
     "pug": "^2.0.0-beta11",
     "sequelize": "^4.42.0",
+    "serve-favicon": "^2.5.0",
     "sqlite3": "^4.0.4"
   },
   "devDependencies": {

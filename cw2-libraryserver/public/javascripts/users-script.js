@@ -491,12 +491,28 @@ function lookUpBooktoLoan(qtype) {
               // console.log(data[0].id);
               var userLoanID = data[0].id;
               var dueDate = data[0].dueDate;
+              // var parsedDate = $.datepicker.formatDate('dd-M-yyyy', dueDate);
+              Date.prototype.toShortFormat = function() {
+                // From a post by user Ahmad on Stackoverflown.com: https://stackoverflow.com/questions/27480262/get-current-date-in-dd-mon-yyy-format-in-javascript-jquery on 14-Dec-2015, accessed on 20-Jan-2019
+
+                var month_names =["Jan","Feb","Mar",
+                                  "Apr","May","Jun",
+                                  "Jul","Aug","Sep",
+                                  "Oct","Nov","Dec"];
+                var day = this.getDate();
+                var month_index = this.getMonth();
+                var year = this.getFullYear();
+                return "" + day + " " + month_names[month_index] + " " + year;
+              };
+              // Now any Date object can be declared
+              var parseDate = new Date(dueDate);
+              var insertDate = parseDate.toShortFormat();
               var UserID = data[0].UserId;
               $.getJSON(url + "users/" + UserID, function(res) {
                 var userNameforLoan =  String(res.name);
 
                 $('#results-' +i).append(
-                  '<div class="loans-container d-flex"><p class="card-text alert alert-danger">Book on Loan to: ' + String(userNameforLoan) + '. Due Date: ' + dueDate +'</p><p class="hidden">' + userLoanID + '</p><button type="button" id="return-book" class="return-book btn btn-danger">Return This Book?</button><button type="button" class="extend-date btn btn-info">Extend due Date</button></div>'
+                  '<div class="loans-container d-flex"><p class="card-text alert alert-danger">Book on Loan to: ' + String(userNameforLoan) + '. Due Date: ' + insertDate +'</p><p class="hidden">' + userLoanID + '</p><button type="button" id="return-book" class="return-book btn btn-danger">Return This Book?</button><button type="button" class="extend-date btn btn-info">Extend due Date</button></div>'
                 );
                 $('.return-book').click(function() {
                   var loanID = $(this).closest('[id^=results-]').find('li.hidden').html();

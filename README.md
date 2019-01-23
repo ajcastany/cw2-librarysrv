@@ -15,7 +15,17 @@ This applicaton has been [deployed](http://c1868921.appspot.com/) to Google Clou
 
 ## Functionality:
 
+The server.js file is deprecated.  It has been merged with app.js to provide the API and the webserver for easy deployment.  CORS has been disabled as there is no Cross-Site referencing.
 
+The initial routes provided has been moved to `/routes/api` while the .pug files have been routed in `/routes/`.
+
+`/public/javascripts/` contains script.js and user-script.js.
+
+`/public/stylesheets/` contains the style.scss and the generated style.css.map
+
+`/views` contains the pug files used by Express view engine.
+
+`app.js` file contains the configuration for the Express.js framework, `compression` and `helmet` package were added, as well as `express-favicon` library.  Routes for the pug templates were also added.
 
 ### Compulsory
 
