@@ -25,14 +25,16 @@ The initial routes provided has been moved to `/routes/api` while the .pug files
 
 `/views` contains the pug files used by Express view engine.
 
-`app.js` file contains the configuration for the Express.js framework, `compression` and `helmet` package were added, as well as `express-favicon` library.  Routes for the pug templates were also added.
+`app.js` file contains the configuration for the Express.js framework, `compression` and `helmet` package were added for deployment, as well as `express-favicon` library.  Routes for the pug templates were also added.
 
 ### Compulsory
 
 #### Users:
 
-##### U1 - Add a new User to the Library system with the fields Name, Barcode and Member Type
-(Staff/Student).
+##### U1 - Add a new User to the Library system with the fields Name, Barcode and Member Type(Staff/Student)
+
+![alt text](/readme-img/ponty-add-usr)
+
 #####  U2 - Get a User’s details from the Library system by searching on Name or Barcode
 #####  U3 - Update a User’s Name or Member Type
 #####  U4 - Remove a User
