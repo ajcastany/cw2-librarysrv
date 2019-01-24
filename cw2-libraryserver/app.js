@@ -6,7 +6,7 @@ var logger = require('morgan');
 var sassMiddleware = require('node-sass-middleware');
 var compression = require('compression');
 var helmet = require('helmet');
-// const cors = require("cors");
+const cors = require("cors");
 const db = require("./data");
 var favicon = require("serve-favicon");
 
@@ -40,8 +40,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 //Uncomment following line after placing the favicon.ico
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-// app.use(cors());        /*From server.js*/       // NO CORS;
-// app.options("*", cors());
+app.use(cors());        /*From server.js*/       // NO CORS;
+app.options("*", cors());
 
 app.use(logger('dev'));
 app.use(express.json());
