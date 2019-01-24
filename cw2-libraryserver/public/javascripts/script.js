@@ -113,11 +113,11 @@ $('#add-button').click(function() {
             addAuthorBooks(response);
             alert("Added: " + response.name);
           });
-        }, 2000);
+        }, 1000);
       } else {
         setTimeout(function() {
           $.post(url + "authors/" + res[0].id + "/books", {bookTitle: addTitle, bookISBN: addIsbn});
-        }, 2000);
+        }, 1000);
       };
     });
     });;
@@ -158,10 +158,12 @@ $('#delete-entry').click( function () {
 
   });
   function itemsLength() {
-    if (bookList > 0) {
+    if (bookList.length > 0) {
       return bookList.length;
-    } else if (authorList > 0) {return authorList.length;}
-  }
+    } else if (authorList.length > 0) {
+      return authorList.length;
+                               }};
+
   var deleteBookMsg = confirm("Are you sure you want to delete " + itemsLength() + " items?");
   if (deleteBookMsg == true) {
     bookList.forEach( function (bookID, i) {
@@ -174,21 +176,23 @@ $('#delete-entry').click( function () {
         }
       });
     });
-    authorList.forEach( function (authorID, i) {
-      console.log(authorID);    // Not implemented
-      $.ajax({
-        url: url + "authors/" + authorID,
-        type: 'DELETE',
-        success: function() {
-          console.log("Deleted author ID:" + authorID);
-          alert("Author Deleted");
-          location.reload();
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrown) {
-          console.log("Author not found");
-        }
-    });
-    });
+    if (authorList > 0) {
+      authorList.forEach( function (authorID, i) {
+        console.log(authorID);    // Not implemented
+        $.ajax({
+          url: url + "authors/" + authorID,
+          type: 'DELETE',
+          success: function() {
+            console.log("Deleted author ID:" + authorID);
+            alert("Author Deleted");
+            location.reload();
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+            console.log("Author not found");
+          }
+        });
+      });
+    }
   }
 });
 
@@ -197,7 +201,6 @@ $('#delete-entry').click( function () {
    ==================================================================
 
    The following is for /search page.  It contains functions and methods to list the books and authors.  If searched for a book title or isbn will also list the author, if the author named is looked up it will return the book associated with it's ID.
-
    --Method: "GET"
 
    /TODO: maximum of items listed per 'page'.
@@ -309,6 +312,12 @@ function lookupAuthor_del(qtype) {
             '<div class="input-group"><div class="input-group-prepend"><div class="input-group-text"><input type="checkbox" name="Delete" aria-label="Delete entries" class="checkbox-del"></div></div><div class="card-body"><h4 class="card-title">' + authorName + '</h4><h6 class="card-subtitle">Author</h6><h5 class="card-title">Book(s): </h5></div>',
             '<li class="aid">' + authorID + '</li>',
           );
+          $('input[type=checkbox]').change(function() {
+            if($(this).is(":checked")){
+              $(this).closest("div.card").addClass("redBackground");
+            } else {              $(this).closest("div.card").removeClass("redBackground");
+                   }
+          });
           bookList.forEach( function ( books, e) {
             // console.log(i, books.title);
             $('#results-' + i + " .card-body").append(
@@ -336,9 +345,9 @@ function lookupAuthor_del(qtype) {
     });
   }
 
-// ******************************************************************
-// Delete addEventListener
-// ******************************************************************
+/****************************************************************
+Delete addEventListener
+******************************************************************/
 
 $('#search-del-button').click(function () {
   $(".search-ul").empty();

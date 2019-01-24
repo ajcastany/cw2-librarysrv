@@ -68,6 +68,8 @@ Search for an user and then *click* on the left hand side selection box.  Select
 
 ## Books:
 
+Books functions are located in script.js file.  Users and Loans functions are in user-scripts.js file.
+
 ### B1 - Add a new Book to the Library system with the fields Title, ISBN, Authors.
 
 ![alt][add-book]
@@ -84,23 +86,50 @@ Added Books to the database.
 
 ![alt][add-book-search]
 
-As showed before, searching by title works.  Searching by isbn and by authors are implemented:
+As showed before, searching by title works, and the results are scrolled down automatically.  Searching by isbn and by authors are implemented:
 
 ![alt][search-isbn]
 
 ![alt][search-author]
 
-
-
-
+At the end of script.js there is in the comments my many attempts at rendering results and trying out promises.  Because this section was the first I attempted to do, it's somewhat too long, and certain functions added extra complexity (instead of ?queryAll, use a $.Deferred object to query the Authors table using `localhost:port/api/search?type=authors&...`.  This was done as a preparation for the challenges ahead, specially the ones in the loans section.
 
 ### B3 - Remove a Book
+
+Delete **User** functions were a rewrite of this function.
+
+![alt][delete-book]
+
+It offers the same functionality.  It will bulk delete the entries.  The Authors are not automatically deleted, because the system checks if the author exists in the database before adding it and if it does exist it just adds the entry to author_books table. ([script.js:133][scriptjs] contains the order of calling for the Delete Entry functions.), so there is some utility in having to remove them manually.  This functionality has been included:
+
+![alt][delete-author]
+
+Clicking on **Delete** will show a confirm box, asking for confirmation for deletion, if answered OK removes the selected author from the database.
 
 ## Loans:
 
 ### L1 - Loan a Book to a User (if it is not already out on Loan), specifying the Due Date
+
+![alt][loan-to-user]
+
+Search Title or ISBN implemented.  Click on the **Loan This Book** button on the book you want to loan, then search for the user (search user by barcode is not working):
+
+![alt][loan-search-user]
+
+Select the date for the loan on the calendar and click on loan.  The book will be registered as on loan.
+
+![alt][select-date]
+
+It is **Impossible** to loan a book to a user if the book is already on loan, see [L3 - Get the User currently borrowing a Book](#L3---Get-the-User-currently-borrowing-a-Book), 
+
+
+
 ### L2 - Get a list of a User’s current Loans
+
+
 ### L3 - Get the User currently borrowing a Book
+
+
 
 ## Extended
 
@@ -113,6 +142,8 @@ As showed before, searching by title works.  Searching by isbn and by authors ar
 
 You can visit this project [github.com](https://github.com/ajcastany/cw2-librarysrv).
 
+[scriptjs]: /cw2-libraryserver/public/javascripts/script.js
+[userscriptjs]: /cw2-libraryserver/public/javascripts/user-script.js
 [add-user]: /readme-img/ponty-add-usr.png "Add User"
 [search-user]: /readme-img/ponty-search-usr.png "Search User"
 [search-barcode]: /readme-img/ponty-search-bar.png "Search barcode"
@@ -123,3 +154,7 @@ You can visit this project [github.com](https://github.com/ajcastany/cw2-library
 [add-book-search]: /readme-img/ponty-add-book-search.png "Add Book Search"
 [search-isbn]: /readme-img/ponty-search-isbn.png "Search ISBN"
 [search-author]: /readme-img/ponty-search-author.png "Search Author"
+[delete-book]:  /readme-img/ponty-delete-author.png "Delete Author"
+[loan-to-user]: /readme-img/ponty-loan-to-user.png "Loan to User"
+[loan-search-user]:/readme-img/ponty-loan-search-user.png "Loan: Search User to Loan"
+[select-date]: /readme-img/ponty-select-date.png "Select Date"

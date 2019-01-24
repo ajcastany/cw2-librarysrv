@@ -409,17 +409,40 @@ function lookUpBooktoLoan(qtype) {
       $('#search-user-loan-btn').click(function() {
         var searchQ = $('#user-or-barcode').val();
         var encode = encodeURIComponent(searchQ);
-        var reBarcode =  /^\d{6}$/;        // 6 digits.
-
-        if (reBarcode.test(encode)) {
-          $.getJSON(url + "search?type=user&barcode=" + encode).then(res => {
+        var re = /\d+/;
+        if (re.test(encode)) {var encodeBarCode = encode; encode = "";} else {
+          var encodeBarCode = "";
+        }
+        if (!encode) {
+          $.getJSON(url + "search?type=user&name=" + encode + "&barcode=" + encodeBarCode).then(res => {
             res.forEach(function(data, i) {
-              // renderUserResults(data, i);
+              var divUserResults = $(document.createElement('div.render-user-search-results'));
+            res.forEach(function(data,i) {
+              var renderUserContent = '<div id="dialog" class="user-ID-Div" title="Search Results"><li class="hidden">' + data.id + '</li><h4>' + data.name + '</h4><div class="datepicker"></div><script>$(".datepicker").datepicker({inline: true, format: "dd-mm-yyyy"});</script></div><button type="button" class="btn btn-info" id="loan-book-to-user">Loan</button></div>';
+              divUserResults.append(renderUserContent);
+            });
+            divUserResults.dialog();
+
+            $('#loan-book-to-user').click(function() {
+              var date = $('.datepicker').val();
+              function toDate(dateStr) {
+                const [month, day, year] = dateStr.split("/");
+                return new Date(year, month - 1, day, 17, 30); // Half an hour after closing
+              }
+              var parseDate = toDate(date);
+              var userID = $('li.hidden').html();
+              console.log(bookID, userID);
+              $.post(url + "users/" + userID + "/loans/" + bookID, {dueDate: parseDate})
+                .then(res => {
+                  console.log(res);
+                  divUserResults.remove();
+                });
+            });
             });
           });
           divResults.remove();
         } else {
-          $.getJSON(url + "search?type=user&name=" + encode).then(res => {
+          $.getJSON(url + "search?type=user&name=" + encode + "&barcode=" + encodeBarCode).then(res => {
             var divUserResults = $(document.createElement('div.render-user-search-results'));
             res.forEach(function(data,i) {
               var renderUserContent = '<div id="dialog" class="user-ID-Div" title="Search Results"><li class="hidden">' + data.id + '</li><h4>' + data.name + '</h4><div class="datepicker"></div><script>$(".datepicker").datepicker({inline: true, format: "dd-mm-yyyy"});</script></div><button type="button" class="btn btn-info" id="loan-book-to-user">Loan</button></div>';
@@ -556,6 +579,7 @@ function lookUpLoanUser(qtype){
   if (re.test(encode)) {var encodeBarCode = encode; encode = "";} else {
     var encodeBarCode = "";
   }
+  console.log(encode, encodeBarCode);
   var searchQ = url + "search?type=" + qtype + "&name=" + encode + "&barcode=" + encodeBarCode;
   console.log(searchQ);
 
@@ -612,7 +636,6 @@ $("#search-loan-book").click(function() {
     lookUpBooktoLoan(qtype);
   } else if ($('#loans-search-user')) {
     qtype="user";
-    console.log("yas");
     lookUpLoanUser(qtype);
   }
 });
