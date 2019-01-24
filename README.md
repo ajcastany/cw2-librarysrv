@@ -82,6 +82,16 @@ Added Books to the database.
 
 ### B2 - Get a Book’s details by searching on Title
 
+![alt][add-book-search]
+
+As showed before, searching by title works.  Searching by isbn and by authors are implemented:
+
+![alt][search-isbn]
+
+![alt][search-author]
+
+
+
 
 
 ### B3 - Remove a Book
@@ -110,4 +120,6 @@ You can visit this project [github.com](https://github.com/ajcastany/cw2-library
 [update-user-after]: /readme-img/ponty-update-usr-after.png "Update User Alert"
 [delete-user]: /readme-img/ponty-delete-usr.png "Delete User"
 [add-book]:  /readme-img/ponty-add-book.png "Add Book"
-[add-book-search]: /readme-img/ponty-add-book-search.png "Add Book"
+[add-book-search]: /readme-img/ponty-add-book-search.png "Add Book Search"
+[search-isbn]: /readme-img/ponty-search-isbn.png "Search ISBN"
+[search-author]: /readme-img/ponty-search-author.png "Search Author"

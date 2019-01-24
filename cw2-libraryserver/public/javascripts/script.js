@@ -360,11 +360,11 @@ $('#search-del-button').click(function () {
 
 
 function lookupBook_3(qtype) {
-  var searchQ = url + "search?type=" + qtype +
-                    "&title=" +
-                    $('#search-book').val() +
-                    "&isbn=" +
-                    $('#search-isbn').val();
+  var encode = encodeURIComponent($('#search-book').val());
+  var encodeISBN = encodeURIComponent($('#search-isbn').val());
+  console.log(encodeISBN);
+  var searchQ = url + "search?type=" + qtype + "&title=" + encode + "&isbn=" + encodeISBN;
+  console.log(searchQ);
   // console.log(searchQ);
   fetch(searchQ, {
         method: 'get'
@@ -381,7 +381,7 @@ function lookupBook_3(qtype) {
           var bookTitle = data.title;
           var bookIsbn = data.isbn;
           var authorList = data.Authors;
-          console.log(bookID, bookTitle, i)
+          console.log(bookID, bookTitle, i);
           $('.search-ul').append('<div class="card" id="results-' + i + '"></div>');
           $('#results-' +i).append(
             '<div class="card-body"><h4 class="card-title">' + bookTitle + '</h4><h6 class="card-subtitle">ISBN: ' + bookIsbn + '</h6><h5 class="card-title">Author(s): </h5></div>'
@@ -473,7 +473,7 @@ $('#search-button').click(function () {
   $(".search-ul").empty();
   // TODO: Search by ISBN not implemented.
   var qtype;
-  if ($('#search-book').val()) {
+  if ($('#search-book').val() || $('#search-isbn').val()) {
     qtype = "book";
     lookupBook_3(qtype);
   } else if ($('#search-author').val()){
