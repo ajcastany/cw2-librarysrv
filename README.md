@@ -147,6 +147,10 @@ Clicking on return book will ask to confirm the user that's returning the book.
 
 Clicking on `Extend due date` will open the calendar.  Select a date and click `Extend`.  It will be added.  Search for the book again and the new date will appear next to the user.
 
+![alt][responsive]
+
+Responsive design thanks to Bootstrap.
+
 ## ChangeLog
 
 ## Known Bugs:
@@ -176,3 +180,4 @@ You can visit this project [github.com](https://github.com/ajcastany/cw2-library
 [book-loaned-list]: /readme-img/ponty-book-loaned-list.png "Books on Loan"
 [alert-returned]:  /readme-img/ponty-alert-returned.png "Alert returned Book"
 [extend-due-date]:  /readme-img/ponty-extend-due-date.png "Extend due date"
+[responsive]: /readme-img/ponty-responsive.png "Extend due date"
