@@ -145,6 +145,8 @@ Clicking on return book will ask to confirm the user that's returning the book.
 
 ![alt][extend-due-date]
 
+Clicking on `Extend due date` will open the calendar.  Select a date and click `Extend`.  It will be added.  Search for the book again and the new date will appear next to the user.
+
 ## ChangeLog
 
 ## Known Bugs:
