@@ -86,17 +86,16 @@ $('#add-button').click(function() {
   });
   function addnewAuthor(addAuthor) {
     $.post(url + "authors/", {name: addAuthor}).then(res => {
+      // alert("Author Added: " + res.name)
       return res;
     });
   }
 
   function addAuthorBooks(response){
-    setTimeout(function() {
-      $.post(url + "authors/" + response.id + "/books", {bookTitle: addTitle, bookISBN: addIsbn}).then(res => {
-        console.log(res);
-        return res;
-      });
-    }, 3000);
+    $.post(url + "authors/" + response.id + "/books", {bookTitle: addTitle, bookISBN: addIsbn}).then(res => {
+      return res;
+    });
+
 
   }
 
@@ -108,14 +107,17 @@ $('#add-button').click(function() {
     $.get(url + "search?type=author&name=" + encode).then(res => {
       console.log(res.length);
       if (res.length < 1) {
-        $.post(url + "authors/", {name: addAuthor}).then(response => {
-          console.log(response);
-          addAuthorBooks(response);
-          alert("Added: " + response.name);
-        });
+        setTimeout(function() {
+          $.post(url + "authors/", {name: addAuthor}).then(response => {
+            console.log(response);
+            addAuthorBooks(response);
+            alert("Added: " + response.name);
+          });
+        }, 2000);
       } else {
-        console.log(res[0]);
-        $.post(url + "authors/" + res[0].id + "/books", {bookTitle: addTitle, bookISBN: addIsbn});
+        setTimeout(function() {
+          $.post(url + "authors/" + res[0].id + "/books", {bookTitle: addTitle, bookISBN: addIsbn});
+        }, 2000);
       };
     });
     });;
@@ -168,7 +170,7 @@ $('#delete-entry').click( function () {
         url: url + "books/" + bookID,
         type: 'DELETE',
         success: function() {
-          console.log("Deleted book ID:" + bookID);
+          alert("Deleted book ID:" + bookID);
         }
       });
     });

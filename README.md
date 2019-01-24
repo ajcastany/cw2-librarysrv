@@ -51,7 +51,7 @@ Type a search string and click on the Search button and the results will appear 
 
 Type a search string and click on the Search button and the results will appear bellow.
 
-##  U3 - Update a User’s Name or Member Type
+###  U3 - Update a User’s Name or Member Type
 ![alt][update-user]
 
 Search a User to update and *click* the left-hand selection box.  The fields will change and become editable by the user.  Fields show their current values in the database as a placeholder in the input field; if left blank it will send the same data.  Click Update to save changes to the database.
@@ -60,15 +60,15 @@ Search a User to update and *click* the left-hand selection box.  The fields wil
 
 After the database has been written an alert box will show the entry just updated.
 
-#####  U4 - Remove a User
+###  U4 - Remove a User
 
 ![alt][delete-user]
 
 Search for an user and then *click* on the left hand side selection box.  Selected Entry will turn red.  Click on the delete button to delete the entry selected.  A confirm message box will ask if the user want to delete the selected entry(ies).  If answered **Ok**, it will show another alert after every entry is deleted from the database.  If more than one entry is selected it will bulk delete them.
 
-#### Books:
+## Books:
 
-##### B1 - Add a new Book to the Library system with the fields Title, ISBN, Authors.
+### B1 - Add a new Book to the Library system with the fields Title, ISBN, Authors.
 
 ![alt][add-book]
 
@@ -78,16 +78,19 @@ By default when it first loads this page only has one field for author.  By clic
 
 Added Books to the database.
 
-##### B2 - Get a Book’s details by searching on Title
-##### B3 - Remove a Book
+### B2 - Get a Book’s details by searching on Title
 
-### Loans:
 
-##### L1 - Loan a Book to a User (if it is not already out on Loan), specifying the Due Date
-##### L2 - Get a list of a User’s current Loans
-##### L3 - Get the User currently borrowing a Book
 
-### Extended
+### B3 - Remove a Book
+
+## Loans:
+
+### L1 - Loan a Book to a User (if it is not already out on Loan), specifying the Due Date
+### L2 - Get a list of a User’s current Loans
+### L3 - Get the User currently borrowing a Book
+
+## Extended
 
 ## ChangeLog
 
@@ -104,4 +107,5 @@ You can visit this project [github.com](https://github.com/ajcastany/cw2-library
 [update-user]: /readme-img/ponty-update-usr.png "Update User"
 [update-user-after]: /readme-img/ponty-update-usr-after.png "Update User Alert"
 [delete-user]: /readme-img/ponty-delete-usr.png "Delete User"
-[add-book]:  /readme-img/ponty-add-book.png "Delete User"
+[add-book]:  /readme-img/ponty-add-book.png "Add Book"
+[add-book-search]: /readme-img/ponty-add-book-search.png "Add Book"
