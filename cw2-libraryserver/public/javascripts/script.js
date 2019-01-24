@@ -66,7 +66,7 @@ $('#more-authors').click( function () {
   $(this).data("count", ++count);
   // console.log(count);                     // print the clicks.
   $('.author-list').append(
-    '<div class="d-flex flex-row"><div class="input-group-prepend"><span class="input-group-text" id="inputGroup-sizing">Author #' + (count + 1) + ':</span></div><input type="text" name="name" placeholder="Another Author" aria-label="Medium" aria-describedby="inputGroup-sizing-md" class="add-author-' + count + ' form control"></div>');
+    '<div class="d-flex flex-row"><div class="input-group-prepend"><span class="input-group-text">Author #' + (count + 1) + ':</span></div><input type="text" name="name" placeholder="Another Author" aria-label="Medium" aria-describedby="inputGroup-sizing-md" class="add-author-' + count + ' form control"></div>');
 })
 
 
