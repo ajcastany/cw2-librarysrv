@@ -54,7 +54,7 @@ Type a search string and click on the Search button and the results will appear 
 ###  U3 - Update a User’s Name or Member Type
 ![alt][update-user]
 
-Search a User to update and *click* the left-hand selection box.  The fields will change and become editable by the user.  Fields show their current values in the database as a placeholder in the input field; if left blank it will send the same data.  Click Update to save changes to the database.
+Search a User to update and *click* the left-hand selection box.  The fields will change and become editable by the user.  Fields show their current values in the database as a placeholder in the input field; if left blank it will send the same data.  Click Update to save changes to the database.  Only one user can be changed.  No bulk loading.
 
 ![alt][update-user-after]
 
