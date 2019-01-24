@@ -111,7 +111,7 @@ $('#add-button').click(function() {
         $.post(url + "authors/", {name: addAuthor}).then(response => {
           console.log(response);
           addAuthorBooks(response);
-          alert("finished loading");
+          alert("Added: " + response.name);
         });
       } else {
         console.log(res[0]);
@@ -179,6 +179,8 @@ $('#delete-entry').click( function () {
         type: 'DELETE',
         success: function() {
           console.log("Deleted author ID:" + authorID);
+          alert("Author Deleted");
+          location.reload();
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
           console.log("Author not found");

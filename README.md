@@ -54,7 +54,7 @@ Type a search string and click on the Search button and the results will appear 
 ##  U3 - Update a User’s Name or Member Type
 ![alt][update-user]
 
-Search a User to update and *click* the left-hand selection box.  The fields will change and become editable by the user.  Fields show their current values (in the database) if left blank it will send the same data.  Click Update to save changes to the database.
+Search a User to update and *click* the left-hand selection box.  The fields will change and become editable by the user.  Fields show their current values in the database as a placeholder in the input field; if left blank it will send the same data.  Click Update to save changes to the database.
 
 ![alt][update-user-after]
 
@@ -69,6 +69,15 @@ Search for an user and then *click* on the left hand side selection box.  Select
 #### Books:
 
 ##### B1 - Add a new Book to the Library system with the fields Title, ISBN, Authors.
+
+![alt][add-book]
+
+By default when it first loads this page only has one field for author.  By clicking on add another author will add another input field for the author.  Click on the add button to add the book to the Books table, add all the authors to Authors table, and then relate each on authors_books table.  The website will show an alert box with the name of the author just added.  This is added to prevent sqlite3 database from locking from concurrency.  Added books will appear if we run search.
+
+![alt][add-book-search]
+
+Added Books to the database.
+
 ##### B2 - Get a Book’s details by searching on Title
 ##### B3 - Remove a Book
 
@@ -95,3 +104,4 @@ You can visit this project [github.com](https://github.com/ajcastany/cw2-library
 [update-user]: /readme-img/ponty-update-usr.png "Update User"
 [update-user-after]: /readme-img/ponty-update-usr-after.png "Update User Alert"
 [delete-user]: /readme-img/ponty-delete-usr.png "Delete User"
+[add-book]:  /readme-img/ponty-add-book.png "Delete User"
