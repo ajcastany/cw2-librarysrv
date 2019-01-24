@@ -112,7 +112,7 @@ Clicking on **Delete** will show a confirm box, asking for confirmation for dele
 
 ![alt][loan-to-user]
 
-Search Title or ISBN implemented.  Click on the **Loan This Book** button on the book you want to loan, then search for the user (search user by barcode is not working):
+Search Title or ISBN implemented.  Click on the **Loan This Book** button on the book you want to loan, then search for the user name or barcode.
 
 ![alt][loan-search-user]
 
@@ -126,18 +126,30 @@ It is **Impossible** to loan a book to a user if the book is already on loan, se
 
 ### L2 - Get a list of a User’s current Loans
 
+![alt][get-loan-list]
+
+Search on a user name or barcode will return the list of books loaned by those users that match..
 
 ### L3 - Get the User currently borrowing a Book
 
+On book search, if the books are loaned:
 
+![alt][book-loaned-list]
 
-## Extended
+It shows the user borrowing the book, It will also allow the operator to return the book (deleting it from the loans table) or to extend the due date of the book on loan.
+**BUG**: If the user search returns more than one item, selecting a day and clicking on loan will update the entry for all user rendered by the app.  This behaviour has been solved in previous functions, but time constraints prevented its implementation here.
+
+![alt][alert-returned]
+
+Clicking on return book will ask to confirm the user that's returning the book.
+
+![alt][extend-due-date]
 
 ## ChangeLog
 
 ## Known Bugs:
 
- - Error on deleteting book (cause unknown): `XML Parsing Error: no element found Location: http://localhost:8000/api/books/15 Line Number 1, Column 1`
+ - Fix: Function has been refactored:  Error on deleteting book (cause unknown): `XML Parsing Error: no element found Location: http://localhost:8000/api/books/15 Line Number 1, Column 1`
  - User has to wait a few seconds for the sqlite database to unlock when adding a book with more than one autor.  setTimeout has been added to the function, but does not seem to have any effect.
 
 You can visit this project [github.com](https://github.com/ajcastany/cw2-librarysrv).
@@ -158,3 +170,7 @@ You can visit this project [github.com](https://github.com/ajcastany/cw2-library
 [loan-to-user]: /readme-img/ponty-loan-to-user.png "Loan to User"
 [loan-search-user]:/readme-img/ponty-loan-search-user.png "Loan: Search User to Loan"
 [select-date]: /readme-img/ponty-select-date.png "Select Date"
+[get-loan-list]: /readme-img/ponty-get-loan-list.png "Get Loan List"
+[book-loaned-list]: /readme-img/ponty-book-loaned-list.png "Books on Loan"
+[alert-returned]:  /readme-img/ponty-alert-returned.png "Alert returned Book"
+[extend-due-date]:  /readme-img/ponty-extend-due-date.png "Extend due date"
