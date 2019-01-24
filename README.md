@@ -74,6 +74,8 @@ Search for an user and then *click* on the left hand side selection box.  Select
 
 By default when it first loads this page only has one field for author.  By clicking on add another author will add another input field for the author.  Click on the add button to add the book to the Books table, add all the authors to Authors table, and then relate each on authors_books table.  The website will show an alert box with the name of the author just added.  This is added to prevent sqlite3 database from locking from concurrency.  Added books will appear if we run search.
 
+**BUG**: If the alert boxes are clicked too quickly, the sqlitedb will lock and the authors will not be written.
+
 ![alt][add-book-search]
 
 Added Books to the database.
