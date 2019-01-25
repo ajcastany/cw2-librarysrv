@@ -1,6 +1,6 @@
 "use strict";
 
-const url = "http://localhost:8000/api/";
+const url = "https://c1868921.appspot.com/api";
 
 console.log("users-script loaded");
 
