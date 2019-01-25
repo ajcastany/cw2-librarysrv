@@ -1,5 +1,5 @@
 "use strict";
-const url = "http://localhost:8000/api/";         // our API url;
+const url = "http://c1868921.appspot.com/api/";         // our API url;
 
 console.log("cript loaded");    // Debug info.  Yes, a cript.
 
